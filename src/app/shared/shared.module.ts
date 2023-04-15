@@ -9,6 +9,7 @@ import { SkeletonLoadingComponent } from './components/skeleton-loading/skeleton
 import { CardComponent } from './components/card/card.component';
 import { AboutComponent } from './pages/about/about.component';
 import { PaginateComponent } from './components/paginate/paginate.component';
+import { MaterialModule } from '../material/material.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { PaginateComponent } from './components/paginate/paginate.component';
   ],
   imports: [
     CommonModule,
-    SharedRoutingModule
+    SharedRoutingModule,
+    MaterialModule
   ],
   exports: [
     NotFoundComponent,

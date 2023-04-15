@@ -1,1 +1,38 @@
-<p>header works!</p>
+<mat-drawer-container class="sidenav">
+    <mat-drawer #drawer mode="over" class="drawer">
+        
+        <div class="sidenav__drawer">
+            <h2 class="title">URARA</h2>
+
+            <section class="sidenav__drawer-nav">
+
+                <button mat-stroked-button>
+                    <h3>Catalogo</h3>
+                </button>
+
+            </section>
+        </div>
+
+    </mat-drawer>
+
+    <mat-drawer-content>
+
+        <header class="header">
+
+            <button mat-icon-button (click)="drawer.open()">
+                <mat-icon>menu</mat-icon>
+            </button>
+
+            <h1 hidden>URARA</h1>
+            <img class="header__img" src="https://i.ibb.co/3hc73dt/logo-urara.png" alt="Logo urara">
+
+            <button mat-icon-button>
+                <mat-icon>search</mat-icon>
+            </button>
+        </header>
+
+        <router-outlet></router-outlet>
+
+    </mat-drawer-content>
+    
+</mat-drawer-container>

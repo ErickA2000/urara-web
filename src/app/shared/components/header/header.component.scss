@@ -1,0 +1,41 @@
+@import 'src/_variables.scss';
+
+.sidenav{
+    background-color: white;
+    color: black;
+}
+
+.drawer {
+    background-color: $aqua;
+}
+
+.sidenav__drawer{
+    margin-left: 3rem;
+    margin-right: 3rem;
+    margin-top: 4rem;
+
+    .title{
+        font-size: 3rem;
+    }
+}
+
+
+
+.header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: $aqua;
+    color: white;
+    height: 5rem;
+
+    img{
+        width: 13rem;
+    }
+}
+
+button{
+    mat-icon {
+        transform: scale(2);
+    }
+}
