@@ -13,13 +13,25 @@
     margin-left: 3rem;
     margin-right: 3rem;
     margin-top: 4rem;
+    margin-bottom: 3rem;
 
     .title{
         font-size: 3rem;
     }
 }
 
+.divider {
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-top-color: black;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
 
+.sidenav__drawer-nav {
+    display: flex;
+    flex-direction: column;
+}
 
 .header{
     display: flex;
