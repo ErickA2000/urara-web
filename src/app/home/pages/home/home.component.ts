@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  imgSlider = ["assets/img/logo_urara.png", "assets/img/1273799.png", "assets/img/1273800.png", "assets/img/1273802.png"]
+  imgSlider = ["assets/img/logo_urara.png", "assets/img/1273799.png", "assets/img/1273800.png", "assets/img/1273802.png"];
+
+  constructor( ){}
 
   ngOnInit(): void {
+
+
   }
 
 }
