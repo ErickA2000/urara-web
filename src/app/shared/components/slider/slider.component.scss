@@ -1,0 +1,17 @@
+.custom-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  
+    &.custom-arrow-left {
+      left: 2.5%;
+    }
+  
+    &.custom-arrow-right {
+      right: 2.5%;
+    }
+  }
+
+.img{
+    height: 70%;
+}

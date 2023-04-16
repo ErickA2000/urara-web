@@ -11,6 +11,8 @@ import { AboutComponent } from './pages/about/about.component';
 import { PaginateComponent } from './components/paginate/paginate.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule } from '@angular/forms';
+import { SliderComponent } from './components/slider/slider.component';
+import { NgxGlideModule } from 'ngx-glide';
 
 
 @NgModule({
@@ -21,13 +23,16 @@ import { FormsModule } from '@angular/forms';
     SkeletonLoadingComponent,
     CardComponent,
     AboutComponent,
-    PaginateComponent
+    PaginateComponent,
+    
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    NgxGlideModule,
+    SliderComponent
   ],
   exports: [
     NotFoundComponent,
@@ -36,7 +41,8 @@ import { FormsModule } from '@angular/forms';
     SkeletonLoadingComponent,
     CardComponent,
     AboutComponent,
-    PaginateComponent
+    PaginateComponent,
+    SliderComponent
   ]
 })
 export class SharedModule { }

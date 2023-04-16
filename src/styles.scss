@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@glidejs/glide/src/assets/sass/glide.core.scss' as *;
+@use '@glidejs/glide/src/assets/sass/glide.theme.scss';
 
 @import 'themes.scss';
+
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Schoolbell', cursive; }

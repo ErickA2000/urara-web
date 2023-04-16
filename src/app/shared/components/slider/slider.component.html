@@ -1,0 +1,27 @@
+<ngx-glide #ngxGlide 
+    [autoplay]="5000"
+    [animationDuration]="400"
+    [arrowLeftTemplate]="arrowLeftTemplate"
+    [arrowRightTemplate]="arrowRightTemplate"
+    >
+    <ng-container *ngFor="let img of data">
+        <img class="img" [src]="img.link" [alt]="img.title">
+    </ng-container>
+
+</ngx-glide>
+
+<ng-template #arrowLeftTemplate>
+    <div class="custom-arrow custom-arrow-left">
+        <button mat-fab>
+            <mat-icon>chevron_left</mat-icon>
+        </button>        
+    </div>
+</ng-template>
+
+<ng-template #arrowRightTemplate>
+    <div class="custom-arrow custom-arrow-right">
+        <button mat-fab>
+            <mat-icon>chevron_right</mat-icon>
+        </button>
+    </div>
+</ng-template>
