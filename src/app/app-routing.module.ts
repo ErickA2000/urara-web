@@ -22,7 +22,7 @@ const routes: Routes = [
     component: NotFoundComponent
   },
   {
-    path: 'about',
+    path: 'abount',
     component: AboutComponent
   },
   {
