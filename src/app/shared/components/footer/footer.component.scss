@@ -1,13 +1,15 @@
 @import 'src/_variables.scss';
 
 .footer {
-    background-color: $aqua;
+    background-color: $backgroundHeader;
+    padding-bottom: 1rem;
 }
 
 .footer__top {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
+    justify-items: center;
 
 }
 
@@ -24,14 +26,15 @@
     }
 }
 
-.footer__img {
+.footer__img-logo {
     width: 13rem;
+    cursor: pointer;
 }
 
 .divider {
     border-top-width: 2px;
     border-top-style: solid;
-    border-top-color: black;
+    border-top-color: #FD62E4;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }

@@ -6,7 +6,7 @@
 }
 
 .drawer {
-    background-color: $aqua;
+    background-color: $backgroundHeader;
 }
 
 .sidenav__drawer{
@@ -37,7 +37,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: $aqua;
+    background-color: $backgroundHeader;
     color: white;
     height: 5rem;
 

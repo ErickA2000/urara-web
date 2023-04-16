@@ -1,0 +1,99 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$primary-aqua-palette: (
+    50:  #def6f4,
+    100: #ade8e3,
+    200: #71dad1,
+    300: #00cabd,
+    400: #00bdac,
+    500: #00af9b,
+    600: #00a18d,
+    700: #00907b,
+    800: #007f6c,
+    900: #00624d,
+    A100 : #d4fffa,
+    A200 : #a1fff4,
+    A400 : #6effee,
+    A700 : #55ffeb,
+
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$secundary-violet-palette: (
+    50: #ffe7fa,
+    100: #ffc2f2,
+    200: #ff96eb,
+    300: #fd62e3,
+    400: #f926dc,
+    500: #f000d1,
+    600: #df00cc,
+    700: #ca00c6,
+    800: #b700c1,
+    900: #9500b7,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffdbf7,
+    A700 : #ffc2f1,
+
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);      
+
+$light-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: mat.define-palette( $primary-aqua-palette, 300 ),
+            accent: mat.define-palette( $secundary-violet-palette, 300 )
+        ),
+        typography: mat.define-typography-config(),
+        density: 0
+    )
+);
+
+$dark-theme: mat.define-dark-theme(
+    (
+        color: (
+            primary: mat.define-palette( $primary-aqua-palette, 800 ),
+            accent: mat.define-palette( $secundary-violet-palette, 800 )
+        ),
+        typography: mat.define-typography-config(),
+        density: 0
+    )
+);
+
+@include mat.all-component-themes($light-theme);
+
+.dark-mode{
+    @include mat.all-component-colors($dark-theme);
+}

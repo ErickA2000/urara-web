@@ -10,6 +10,7 @@ import { CardComponent } from './components/card/card.component';
 import { AboutComponent } from './pages/about/about.component';
 import { PaginateComponent } from './components/paginate/paginate.component';
 import { MaterialModule } from '../material/material.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MaterialModule } from '../material/material.module';
   imports: [
     CommonModule,
     SharedRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   exports: [
     NotFoundComponent,
