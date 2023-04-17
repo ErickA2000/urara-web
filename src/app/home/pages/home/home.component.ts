@@ -8,6 +8,8 @@ import { IsliderData } from 'src/app/interfaces/shared/slider.interface';
 })
 export class HomeComponent implements OnInit {
 
+  linkBoxImg = "assets/img/home/1.png"
+
   imgSlider: IsliderData[] = [ 
     {
       link: "assets/img/logo_urara.png",
