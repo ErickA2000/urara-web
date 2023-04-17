@@ -1,0 +1,13 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.content__img {
+    position: relative;
+    height: 15rem;
+    width: 10rem;
+}

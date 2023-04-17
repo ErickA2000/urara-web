@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent {
-
+  pruebaImg = "assets/img/prueba_card.jpg";
 }

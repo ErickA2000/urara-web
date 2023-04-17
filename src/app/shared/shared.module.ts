@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -32,7 +33,8 @@ import { NgxGlideModule } from 'ngx-glide';
     MaterialModule,
     FormsModule,
     NgxGlideModule,
-    SliderComponent
+    SliderComponent,
+    NgOptimizedImage
   ],
   exports: [
     NotFoundComponent,
