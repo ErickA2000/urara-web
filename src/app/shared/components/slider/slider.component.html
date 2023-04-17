@@ -1,11 +1,27 @@
 <ngx-glide #ngxGlide 
-    [autoplay]="5000"
-    [animationDuration]="400"
+    [autoplay]="autoplay"
+    [animationDuration]="animationDuration"
     [arrowLeftTemplate]="arrowLeftTemplate"
     [arrowRightTemplate]="arrowRightTemplate"
+    [perView]="perView"
+    [gap]="gap"
+    [showBullets]="showBullets"
+    [rewind]="rewind"
     >
-    <ng-container *ngFor="let img of data">
-        <img class="img" [src]="img.link" [alt]="img.title">
+    <ng-container *ngIf="isImage">
+        <ng-container *ngFor="let img of data">
+            <img class="img" [src]="img.link" [alt]="img.title">
+        </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="isImage === false" >
+        <ng-container *ngFor="let content of data">
+            <mat-card class="card" (click)="open()">
+                <mat-card-content>
+                    <div class="content">{{content.title | titlecase}}</div>
+                </mat-card-content>
+            </mat-card>
+        </ng-container>
     </ng-container>
 
 </ngx-glide>

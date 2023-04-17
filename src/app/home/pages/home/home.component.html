@@ -15,7 +15,17 @@
       </div>
 
       <div class="content__categorias">
-            
+            <app-slider
+                  [data]="categorias"
+                  [isClickable]="true"
+                  [isImage]="false"
+                  
+                  [gap]="15"
+                  [showBullets]="false"
+                  [autoplay]="false"
+                  [rewind]="false"
+            >
+            </app-slider>
       </div>
 
 </main>

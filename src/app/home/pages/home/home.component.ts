@@ -29,11 +29,30 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  constructor( ){}
+  categorias: IsliderData[] = [ 
+    {
+      link: "niña",
+      title: "niña"
+    }, 
+    {
+      link: "niño",
+      title: "niño"
+    }, 
+    {
+      link: "dama",
+      title: "dama"
+    }, 
+    {
+      link: "caballero",
+      title: "caballero"
+    }
+  ];
+
+  constructor(  ){}
 
   ngOnInit(): void {
-
-
+    
   }
+
 
 }
