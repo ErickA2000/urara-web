@@ -39,8 +39,11 @@ export class SliderComponent implements OnInit {
   constructor( ){}
 
   ngOnInit(): void {
-    this.getScreenHeight = window.innerHeight;
-    this.getScreenWidth = window.innerWidth;
+    if( !this.isImage ){
+      this.getScreenHeight = window.innerHeight;
+      this.getScreenWidth = window.innerWidth;
+      this.changePerView();
+    }
   }
 
   open(){
@@ -52,13 +55,10 @@ export class SliderComponent implements OnInit {
 
   changePerView(){
     if( this.getScreenWidth <= 480){
-      console.log("1:", this.perView)
       this.perView = 1;
     }else if( this.getScreenWidth <= 900 ){
-      console.log("2:", this.perView)
       this.perView = 2;
     }else{
-      console.log("3:", this.perView)
       this.perView = 4;
     }
     
