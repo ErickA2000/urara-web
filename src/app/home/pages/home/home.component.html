@@ -32,7 +32,11 @@
       </div>
 
       <section class="content__new">
-
+            <h2>NUEVO</h2>
+            
+            <div class="content__new-content">
+                  <app-card *ngFor="let i of [1,2,3,4,5,6,7]" [data]="forCard"></app-card>
+            </div>
       </section>
 
 </main>

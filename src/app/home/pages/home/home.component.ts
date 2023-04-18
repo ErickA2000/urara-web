@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ICard } from 'src/app/interfaces/shared/card.interface';
 import { IsliderData } from 'src/app/interfaces/shared/slider.interface';
 
 @Component({
@@ -47,6 +48,14 @@ export class HomeComponent implements OnInit {
       title: "caballero"
     }
   ];
+
+  //tiene que ser un array
+  forCard: ICard = {
+    title: "prueba",
+    img: "assets/img/prueba_card.jpg",
+    ref: 1,
+    slug: "prueba"
+  }
 
   constructor(  ){}
 

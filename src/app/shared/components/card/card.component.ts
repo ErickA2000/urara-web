@@ -1,10 +1,34 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { ICard } from 'src/app/interfaces/shared/card.interface';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent {
-  pruebaImg = "assets/img/prueba_card.jpg";
+export class CardComponent implements AfterViewInit {
+
+  @ViewChild('asContentImg') contentImg!: ElementRef;
+  @Input() data!: ICard;
+  @Input() height!: number;
+  @Input() width!: number;
+
+  constructor( private renderer2: Renderer2 ){}
+
+  ngAfterViewInit(): void {
+      const asContentImg = this.contentImg.nativeElement;
+
+      if( this.height ){
+        this.renderer2.setStyle( asContentImg, 'height', `${this.height}rem` );
+      }else{
+        this.renderer2.setStyle( asContentImg, 'height', `25rem` );
+      }
+
+      if(  this.width ){
+        this.renderer2.setStyle( asContentImg, 'width', `${this.width}rem` );
+      }else{
+        this.renderer2.setStyle( asContentImg, 'width', `15rem` )
+      }
+  }
+
 }
