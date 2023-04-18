@@ -1,0 +1,61 @@
+main {
+    height: 100vh;
+}
+
+.img {
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+
+    img {
+        width: 90%;
+    }
+}
+
+.mision-vision {
+    display: flex;
+    justify-content: center;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    gap: 2rem;
+
+    .mision, .vision {
+        text-align: center;
+
+    }
+}
+
+@media (min-width: 600px) {
+    .mision-vision {
+        padding-left: 6rem;
+        padding-right: 6rem;
+    }
+}
+
+.p-text {
+    font-size: .8rem;
+}
+
+li {
+    font-size: .8rem;
+}
+
+@media (min-width: 600px) {
+    .p-text {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    li {
+        font-size: 1.5rem;
+    }
+}
+
+.objetivos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
