@@ -7,6 +7,7 @@ import { CardsComponent } from './components/cards/cards.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { SharedModule } from '../shared/shared.module';
+import { MaterialModule } from '../material/material.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     CatalogoRoutingModule,
-    SharedModule
+    SharedModule,
+    MaterialModule
   ]
 })
 export class CatalogoModule { }
