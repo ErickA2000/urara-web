@@ -6,6 +6,23 @@
 
         <mat-card-content>
             <h3>Categorias</h3>
+
+            <mat-form-field appearance="fill" class="formField">
+                <mat-select [formControl]="categorias" multiple>
+
+                    <mat-option *ngFor="let categoria of categoriasList" [value]="categoria.id">
+                        {{categoria.nombre | titlecase}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+
+
+            <h3>Descuento</h3>
+
+            <mat-checkbox [formControl]="descuento">Con descuento</mat-checkbox>
+
+
         </mat-card-content>
 
     </mat-card>

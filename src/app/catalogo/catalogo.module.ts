@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CatalogoRoutingModule } from './catalogo-routing.module';
 import { ProductsComponent } from './pages/products/products.component';
@@ -21,7 +22,9 @@ import { MaterialModule } from '../material/material.module';
     CommonModule,
     CatalogoRoutingModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CatalogoModule { }
