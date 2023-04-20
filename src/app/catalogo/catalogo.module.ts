@@ -9,6 +9,7 @@ import { FiltersComponent } from './components/filters/filters.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../material/material.module';
+import { BottonSheetFilterComponent } from './components/botton-sheet-filter/botton-sheet-filter.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { MaterialModule } from '../material/material.module';
     ProductsComponent,
     CardsComponent,
     FiltersComponent,
-    DetailsComponent
+    DetailsComponent,
+    BottonSheetFilterComponent
   ],
   imports: [
     CommonModule,
