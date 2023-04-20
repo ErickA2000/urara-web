@@ -1,1 +1,14 @@
-<p>details works!</p>
+<section>
+
+    <div>
+        <img [src]="actiImg" [alt]="prenda.nombre">
+        
+        <div>
+            <img *ngFor="let urImgl of prenda.imagenUrl" [src]="urImgl" [alt]="prenda.nombre">
+        </div>
+    </div>
+
+    <div></div>
+</section>
+
+<section></section>
