@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-filters',
@@ -8,8 +8,10 @@ import { FormControl } from '@angular/forms';
 })
 export class FiltersComponent {
 
-  categorias = new FormControl();
-  descuento = new FormControl();
+  filtrosForm = new FormGroup({
+    categorias: new FormControl(),
+    descuento: new FormControl(false)
+  })
 
   categoriasList = [
     {
@@ -23,7 +25,8 @@ export class FiltersComponent {
   ];
 
   prueba(){
-    console.log(this.descuento.value)
+    console.log(this.filtrosForm.value)
+
   }
 
 }

@@ -12,4 +12,23 @@
 .filters {
     float: left;
     width: 20%;
+    display: none;
+}
+
+@media (min-width: 900px) {
+    .filters {
+        display: block;
+    }
+}
+
+.filters__mobile {
+    padding-bottom: 3rem;
+    padding-left: 3rem;
+    display: block;
+}
+
+@media (min-width: 900px) {
+    .filters__mobile {
+        display: none;
+    }
 }

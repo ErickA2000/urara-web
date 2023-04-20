@@ -5,25 +5,34 @@
         </mat-card-header>
 
         <mat-card-content>
-            <h3>Categorias</h3>
 
-            <mat-form-field appearance="fill" class="formField">
-                <mat-select [formControl]="categorias" multiple>
+            <form [formGroup]="filtrosForm">
 
-                    <mat-option *ngFor="let categoria of categoriasList" [value]="categoria.id">
-                        {{categoria.nombre | titlecase}}
-                    </mat-option>
+                <h3>Categorias</h3>
+    
+                <mat-form-field appearance="fill" class="formField">
+                    <mat-select formControlName="categorias" multiple>
+    
+                        <mat-option *ngFor="let categoria of categoriasList" [value]="categoria.id">
+                            {{categoria.nombre | titlecase}}
+                        </mat-option>
+    
+                    </mat-select>
+                </mat-form-field>
+    
+    
+                <h3>Descuento</h3>
+    
+                <mat-checkbox formControlName="descuento">Con descuento</mat-checkbox>
 
-                </mat-select>
-            </mat-form-field>
-
-
-            <h3>Descuento</h3>
-
-            <mat-checkbox [formControl]="descuento">Con descuento</mat-checkbox>
+            </form>
 
 
         </mat-card-content>
+
+        <mat-card-actions>
+            <button class="btn" mat-raised-button color="accent" (click)="prueba()">Filtrar</button>
+        </mat-card-actions>
 
     </mat-card>
 </section>
