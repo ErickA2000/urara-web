@@ -1,14 +1,39 @@
-<section>
+<main class="mat-app-background">
 
-    <div>
-        <img [src]="actiImg" [alt]="prenda.nombre">
+    <div class="content">
+        <mat-card>
+            <mat-card-content>
+                <section class="content-images">
+                
+                    <div class="images">
+                        <div class="images__preview">
+                            <img class="images__preview-img" *ngFor="let urImgl of prenda.imagenUrl" [src]="urImgl" [alt]="prenda.nombre" 
+                                (click)="changeImg(urImgl)">
+                        </div>
+                
+                        <div class="images__view">
+                            <img class="images__view-img" [src]="actiImg" [alt]="prenda.nombre">
+                        </div>
+                        
+                    </div>
+                
+                    <div class="product">
+                        <h2>{{prenda.nombre | titlecase}}</h2>
+                
+                        <p *ngIf="prenda.descuento != 0" >Descuento: {{prenda.descuento}}%</p>
+                        <p>Estado: {{prenda.estado | titlecase}}</p>
+                    </div>
+                
+                </section>
         
-        <div>
-            <img *ngFor="let urImgl of prenda.imagenUrl" [src]="urImgl" [alt]="prenda.nombre">
-        </div>
+            </mat-card-content>
+        </mat-card>
+
     </div>
 
-    <div></div>
-</section>
+
+</main>
+
+
 
 <section></section>
