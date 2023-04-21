@@ -1,3 +1,5 @@
+@import 'src/_variables.scss';
+
 .content {
     padding-top: 5rem;
     padding-bottom: 5rem;
@@ -97,6 +99,15 @@
 
     p {
         font-size: 3vh;
+    }
+
+    .product__tcd {
+        background-color: $backgroundHeader;
+        border: 2px $violet solid;
+        border-radius: 2rem;
+        padding: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
     }
 
 

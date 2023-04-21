@@ -22,6 +22,15 @@
                 
                         <p *ngIf="prenda.descuento != 0" >Descuento: {{prenda.descuento}}%</p>
                         <p>Estado: {{prenda.estado | titlecase}}</p>
+
+                        <mat-divider></mat-divider>
+
+                        <div class="product__tcd" *ngFor="let tcd of prenda.tallasCantidadPrecio">
+                            <p>Precio: {{tcd.precio | currency: 'COP'}}</p>
+                            <p>Talla: {{tcd.talla | uppercase}}</p>
+                            <p>Disponibles: {{tcd.cantidad}}</p>
+                        </div>
+
                     </div>
                 
                 </section>
