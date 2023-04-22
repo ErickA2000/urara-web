@@ -1,1 +1,5 @@
-<p>snack-bar works!</p>
+<span matSnackBarLabel>{{message}}</span>
+
+<span matSnackBarActions>
+    <button mat-button color="accent" (click)="snackBarRef.dismissWithAction()">Cerrar</button>
+</span>

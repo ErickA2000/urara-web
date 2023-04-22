@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Iprenda } from '../../interfaces/prenda.interface';
 import { FormBuilder, Validators } from '@angular/forms';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Component({
   selector: 'app-details',
@@ -39,7 +40,7 @@ export class DetailsComponent implements OnInit {
     updatedAt: "2023-01-12T18:30:02.976+00:00"
   }
 
-  constructor( private fb: FormBuilder ){}
+  constructor( private fb: FormBuilder, private snackBarService: SnackBarService ){}
 
   productForm = this.fb.group({
     productID: [ this.prenda._id, [ Validators.required ] ],
@@ -78,14 +79,18 @@ export class DetailsComponent implements OnInit {
         quantityValue! += 1;
   
         this.productForm.get('tallasCantidadPrecio.cantidad')?.setValue(quantityValue!);
+      }else{
+        this.snackBarService.openSnackBar( "No se a seleccionado una talla" );
       }
 
 
+    }else{
+      this.snackBarService.openSnackBar( "Cantidad maxima alcanzada" );
     }
   }
 
   removeQuantity(){
-    if( this.productForm.get('tallasCantidadPrecio.cantidad')?.value! >= 1 ){
+    if( this.productForm.get('tallasCantidadPrecio.cantidad')?.value! > 1 ){
 
       if( this.productForm.get("tallasCantidadPrecio.talla")?.value != '' ){
         
@@ -93,9 +98,13 @@ export class DetailsComponent implements OnInit {
         quantityValue! -= 1;
   
         this.productForm.get('tallasCantidadPrecio.cantidad')?.setValue(quantityValue!);
+      }else{
+        this.snackBarService.openSnackBar( "No se a seleccionado una talla" );
       }
       
 
+    }else{
+      this.snackBarService.openSnackBar( "Cantiddad minima alcanzada" );
     }
   }
 
