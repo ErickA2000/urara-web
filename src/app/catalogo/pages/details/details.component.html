@@ -2,6 +2,11 @@
 
     <div class="content">
         <mat-card>
+
+            <mat-card-header>
+                <mat-card-title class="card-title">{{prenda.nombre | titlecase }}</mat-card-title>
+            </mat-card-header>
+
             <mat-card-content>
                 <section class="content-images">
                 
@@ -18,17 +23,54 @@
                     </div>
                 
                     <div class="product">
-                        <h2>{{prenda.nombre | titlecase}}</h2>
                 
                         <p *ngIf="prenda.descuento != 0" >Descuento: {{prenda.descuento}}%</p>
-                        <p>Estado: {{prenda.estado | titlecase}}</p>
+                        <p>{{prenda.estado | titlecase}}</p>
 
                         <mat-divider></mat-divider>
 
-                        <div class="product__tcd" *ngFor="let tcd of prenda.tallasCantidadPrecio">
-                            <p>Precio: {{tcd.precio | currency: 'COP'}}</p>
-                            <p>Talla: {{tcd.talla | uppercase}}</p>
-                            <p>Disponibles: {{tcd.cantidad}}</p>
+                        <div class="product__tcd">
+                            
+                            <form [formGroup]="productForm">
+                                
+                                <ng-container formGroupName="tallasCantidadPrecio">
+
+                                    <p>{{this.productForm.get('tallasCantidadPrecio.precio')?.value | currency: 'COP'}}</p>
+
+                                    <p>Seleccione talla</p>
+
+                                    <mat-button-toggle-group appearance="standard" formControlName="talla" >
+                                        <mat-button-toggle *ngFor="let tpc of prenda.tallasCantidadPrecio" 
+                                            [value]="tpc.talla" (click)="changeSize(tpc.talla)">
+                                            {{tpc.talla}}
+                                        </mat-button-toggle>
+                                    </mat-button-toggle-group>
+        
+                                    <div class="quantity">
+                                        <div class="quantity__product">
+                                            <button type="button" mat-icon-button color="accent" (click)="removeQuantity()">
+                                                <mat-icon>remove</mat-icon>
+                                            </button>
+        
+                                            <mat-form-field appearance="outline" class="quantity__product-form-field">
+                                                <input #cantidad type="number" matInput min="1" max="100" value="1" formControlName="cantidad">
+                                            </mat-form-field>
+        
+                                            <button type="button" mat-icon-button color="accent" (click)="addQuantity()">
+                                                <mat-icon>add</mat-icon>
+                                            </button>
+        
+                                        </div>
+        
+                                        <mat-hint>
+                                            Cantidad
+                                        </mat-hint>
+                                    </div>
+
+                                </ng-container>
+
+                            </form>
+
                         </div>
 
                     </div>
@@ -42,7 +84,3 @@
 
 
 </main>
-
-
-
-<section></section>

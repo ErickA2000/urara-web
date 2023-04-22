@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Iprenda } from '../../interfaces/prenda.interface';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-details',
@@ -12,7 +13,7 @@ export class DetailsComponent implements OnInit {
 
   prenda: Iprenda = {
     _id: "aaaa",
-    nombre: "prueba",
+    nombre: "blusa de dama estilo de algo",
     referencia: 1,
     imagenUrl: ["assets/img/prueba_card.jpg", "assets/img/home/1.png"],
     descuento: 0,
@@ -38,12 +39,64 @@ export class DetailsComponent implements OnInit {
     updatedAt: "2023-01-12T18:30:02.976+00:00"
   }
 
+  constructor( private fb: FormBuilder ){}
+
+  productForm = this.fb.group({
+    productID: [ this.prenda._id, [ Validators.required ] ],
+    descuento: [ this.prenda.descuento, [ Validators.min(0), Validators.max(0) ] ],
+    tallasCantidadPrecio: this.fb.group({
+      talla: [ '', [ Validators.required ] ],
+      cantidad: [ 1, [ Validators.required, Validators.min(1), Validators.max(100), Validators.pattern(/^([0-9])*$/) ] ],
+      precio: [ 0 , [ Validators.required ]]
+    })
+  });
+
   ngOnInit(): void {
       this.actiImg = this.prenda.imagenUrl[0];
+      this.productForm.get("tallasCantidadPrecio.precio")?.setValue( this.prenda.tallasCantidadPrecio[0].precio );
   }
 
   changeImg( url: string ){
     this.actiImg = url;
+  }
+
+  changeSize( size: string ){
+    
+    for( let tcp of this.prenda.tallasCantidadPrecio ){
+      if( tcp.talla == size ){
+        this.productForm.get("tallasCantidadPrecio.precio")?.setValue(tcp.precio);
+      }
+    }
+  }
+
+  addQuantity(){
+    if( this.productForm.get('tallasCantidadPrecio.cantidad')?.value! <= 99 ){
+
+      if( this.productForm.get("tallasCantidadPrecio.talla")?.value != '' ){
+        
+        let quantityValue = this.productForm.get('tallasCantidadPrecio.cantidad')?.value;
+        quantityValue! += 1;
+  
+        this.productForm.get('tallasCantidadPrecio.cantidad')?.setValue(quantityValue!);
+      }
+
+
+    }
+  }
+
+  removeQuantity(){
+    if( this.productForm.get('tallasCantidadPrecio.cantidad')?.value! >= 1 ){
+
+      if( this.productForm.get("tallasCantidadPrecio.talla")?.value != '' ){
+        
+        let quantityValue = this.productForm.get('tallasCantidadPrecio.cantidad')?.value;
+        quantityValue! -= 1;
+  
+        this.productForm.get('tallasCantidadPrecio.cantidad')?.setValue(quantityValue!);
+      }
+      
+
+    }
   }
 
 }

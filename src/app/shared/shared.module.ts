@@ -14,6 +14,7 @@ import { MaterialModule } from '../material/material.module';
 import { FormsModule } from '@angular/forms';
 import { SliderComponent } from './components/slider/slider.component';
 import { NgxGlideModule } from 'ngx-glide';
+import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { NgxGlideModule } from 'ngx-glide';
     CardComponent,
     AboutComponent,
     PaginateComponent,
+    SnackBarComponent,
     
   ],
   imports: [
