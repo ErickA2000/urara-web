@@ -53,7 +53,8 @@
                                             </button>
         
                                             <mat-form-field appearance="outline" class="quantity__product-form-field">
-                                                <input #cantidad type="number" matInput min="1" max="100" value="1" formControlName="cantidad">
+                                                <input #cantidad type="number" matInput [min]="this.minQuantity" [max]="this.maxQuantity" value="1" 
+                                                    formControlName="cantidad" (change)="verifyQuantityInInput($event)">
                                             </mat-form-field>
         
                                             <button type="button" mat-icon-button color="accent" (click)="addQuantity()">
@@ -63,7 +64,7 @@
                                         </div>
         
                                         <mat-hint>
-                                            Cantidad
+                                            Cantidad {{ this.productForm.get("tallasCantidadPrecio.cantidad")?.value }}/{{ stock }}
                                         </mat-hint>
                                     </div>
 
