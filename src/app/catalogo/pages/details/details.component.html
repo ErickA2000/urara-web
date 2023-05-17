@@ -83,6 +83,22 @@
             </mat-card-content>
         </mat-card>
 
+        <mat-card class="cardcategorias">
+            <mat-card-header>
+                <mat-card-title class="cardcategorias__title">Categorias</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+                <mat-chip-listbox>
+                    <mat-chip-option color="accent" *ngFor="let categoria of prenda.categoria" (click)="selectCategoria(categoria)">
+                        {{ categoria.nombre | titlecase }}
+                    </mat-chip-option>
+                </mat-chip-listbox>
+
+            </mat-card-content>
+        </mat-card>
+
     </div>
 
 

@@ -5,7 +5,7 @@ export interface Iprenda{
     imagenUrl: string[],
     descripcion: string,
     tallasCantidadPrecio: tallaCantidadPrecio[],
-    categoria: categoria[],
+    categoria: Icategoria[],
     descuento: number,
     slug: string,
     estado: string,
@@ -19,7 +19,7 @@ export interface tallaCantidadPrecio{
     precio: number
 }
 
-interface categoria{
+export interface Icategoria{
     _id: string, 
     nombre: string
 }

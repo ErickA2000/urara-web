@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Iprenda } from '../../interfaces/prenda.interface';
+import { Icategoria, Iprenda } from '../../interfaces/prenda.interface';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -23,6 +24,10 @@ export class DetailsComponent implements OnInit {
     categoria: [ {
       _id: "aaaa",
       nombre: "niña"
+    },
+    {
+      _id: "aaasss",
+      nombre: "blusas"
     } ],
     slug: "prueba",
     tallasCantidadPrecio: [{
@@ -44,7 +49,7 @@ export class DetailsComponent implements OnInit {
   minQuantity: number = 1;
   maxQuantity: number = 100;
 
-  constructor( private fb: FormBuilder, private snackBarService: SnackBarService ){}
+  constructor( private fb: FormBuilder, private snackBarService: SnackBarService, private router: Router ){}
 
   productForm = this.fb.group({
     productID: [ this.prenda._id, [ Validators.required ] ],
@@ -139,6 +144,10 @@ export class DetailsComponent implements OnInit {
     }else{
       this.snackBarService.openSnackBar( "Cantiddad minima alcanzada" );
     }
+  }
+
+  selectCategoria( categoria: Icategoria){
+    
   }
 
 }
