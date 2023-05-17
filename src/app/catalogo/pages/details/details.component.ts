@@ -80,8 +80,20 @@ export class DetailsComponent implements OnInit {
 
   }
 
-  verifyQuantityInInput( value: any ){
-    console.log(value)
+  verifyQuantityInInput( value: number ){
+    
+    if( !this.productForm.get("tallasCantidadPrecio.talla")?.value ){
+      this.snackBarService.openSnackBar("No se a seleccionado una talla");
+    }
+
+    for( let tcp of this.prenda.tallasCantidadPrecio ){
+      if( tcp.talla == this.productForm.get("tallasCantidadPrecio.talla")?.value ){
+        if( value > tcp.cantidad ){
+          this.snackBarService.openSnackBar("La cantidad es mayor a la disponible");
+          this.productForm.setErrors({ quantityOverflow: true });
+        }
+      }
+    }
   }
 
   addQuantity(){

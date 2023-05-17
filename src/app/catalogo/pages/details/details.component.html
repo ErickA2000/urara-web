@@ -54,7 +54,7 @@
         
                                             <mat-form-field appearance="outline" class="quantity__product-form-field">
                                                 <input #cantidad type="number" matInput [min]="this.minQuantity" [max]="this.maxQuantity" value="1" 
-                                                    formControlName="cantidad" (change)="verifyQuantityInInput($event)">
+                                                    formControlName="cantidad" (ngModelChange)="verifyQuantityInInput($event)">
                                             </mat-form-field>
         
                                             <button type="button" mat-icon-button color="accent" (click)="addQuantity()">
@@ -69,6 +69,8 @@
                                     </div>
 
                                 </ng-container>
+
+                                <button class="product__tcd-btn" mat-raised-button color="primary" [disabled]="!productForm.valid">Agregar a carrito</button>
 
                             </form>
 
