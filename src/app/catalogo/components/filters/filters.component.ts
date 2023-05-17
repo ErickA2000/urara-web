@@ -9,7 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class FiltersComponent {
 
   filtrosForm = new FormGroup({
-    categorias: new FormControl(),
+    categoria: new FormControl(),
     descuento: new FormControl(false)
   })
 

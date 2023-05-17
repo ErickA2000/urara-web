@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ICard } from 'src/app/interfaces/shared/card.interface';
 
 @Component({
@@ -7,11 +7,7 @@ import { ICard } from 'src/app/interfaces/shared/card.interface';
   styleUrls: ['./cards.component.scss']
 })
 export class CardsComponent {
-  //tiene que ser un array
-  forCard: ICard = {
-    title: "prueba",
-    img: "assets/img/prueba_card.jpg",
-    ref: 1,
-    slug: "prueba"
-  }
+
+  @Input() products!: ICard;
+
 }

@@ -11,7 +11,7 @@
                 <h3>Categorias</h3>
     
                 <mat-form-field appearance="fill" class="formField">
-                    <mat-select formControlName="categorias" multiple>
+                    <mat-select formControlName="categoria">
     
                         <mat-option *ngFor="let categoria of categoriasList" [value]="categoria.id">
                             {{categoria.nombre | titlecase}}

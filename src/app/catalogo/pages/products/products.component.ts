@@ -1,14 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ICard } from 'src/app/interfaces/shared/card.interface';
 import { BottonSheetFilterComponent } from '../../components/botton-sheet-filter/botton-sheet-filter.component';
+import { Router, UrlTree } from '@angular/router';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit{
+
+  urlTre!: UrlTree;
+
   //tiene que ser un array
   forCard: ICard = {
     title: "prueba",
@@ -17,7 +21,20 @@ export class ProductsComponent {
     slug: "prueba"
   }
 
-  constructor( private _bottomSheet: MatBottomSheet ){}
+  constructor( private _bottomSheet: MatBottomSheet, private router: Router ){}
+
+  ngOnInit(): void {
+    this.urlTre = this.router.parseUrl(this.router.url);
+
+    if( this.urlTre.queryParams ){
+
+      if( this.urlTre.queryParams['categoria'] ){
+        console.log(this.urlTre.queryParams['categoria']);
+        //Aqui ejecutar metodo para consultar prendas por categoria
+      }
+    }
+
+  }
 
   openBottomSheet(){
     this._bottomSheet.open( BottonSheetFilterComponent, {
