@@ -1,5 +1,9 @@
 @import 'src/_variables.scss';
 
+.margin-top-card {
+    margin-top: 2rem;
+}
+
 .content {
     padding-top: 5rem;
     padding-bottom: 5rem;
@@ -26,8 +30,6 @@
     gap: 2rem;
 
     padding-top: 5rem;
-    // padding-left: 3rem;
-    // padding-right: 3rem;
 }
 
 @media (min-width: 600px) {
@@ -132,9 +134,16 @@
 }
 
 .cardcategorias{
-    margin-top: 2rem;
 
     .cardcategorias__title {
         font-size: 2vh;
+    }
+}
+
+.cardespesificaciones {
+    .descripcion{
+        p{
+            text-align: justify;
+        }
     }
 }
