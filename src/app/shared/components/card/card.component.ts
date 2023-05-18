@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICard } from 'src/app/interfaces/shared/card.interface';
 
 @Component({
@@ -13,7 +14,7 @@ export class CardComponent implements AfterViewInit {
   @Input() height!: number;
   @Input() width!: number;
 
-  constructor( private renderer2: Renderer2 ){}
+  constructor( private renderer2: Renderer2, private router: Router ){}
 
   ngAfterViewInit(): void {
       const asContentImg = this.contentImg.nativeElement;
@@ -29,6 +30,10 @@ export class CardComponent implements AfterViewInit {
       }else{
         this.renderer2.setStyle( asContentImg, 'width', `15rem` )
       }
+  }
+
+  openDetail( ref: number, slug: string ){
+    this.router.navigate(["/catalogo/product/detail", ref, slug]);
   }
 
 }
