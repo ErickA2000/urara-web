@@ -3,6 +3,7 @@ import { NgFor, NgIf, TitleCasePipe } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
 import { IsliderData } from 'src/app/interfaces/shared/slider.interface';
 import { NgxGlideComponent } from 'ngx-glide';
+import { Params, Router } from '@angular/router';
 
 
 @Component({
@@ -24,6 +25,8 @@ export class SliderComponent implements OnInit {
   @Input() data!: IsliderData[];
   @Input() isClickable: boolean = false;
   @Input() isImage: boolean = true;
+  @Input() routerName?: string;
+  @Input() nameQueryParam?: string;
 
   //Config slider
   @Input() autoplay: number | boolean = 5000;
@@ -36,7 +39,7 @@ export class SliderComponent implements OnInit {
   public getScreenWidth: any;
   public getScreenHeight: any;
   
-  constructor( ){}
+  constructor( private router: Router ){}
 
   ngOnInit(): void {
     if( !this.isImage ){
@@ -46,10 +49,21 @@ export class SliderComponent implements OnInit {
     }
   }
 
-  open(){
+  open( param: string ){
     if( this.isClickable ){
-      console.log("abrir")
+      if( this.routerName && this.nameQueryParam){
+        
+        if( this.nameQueryParam == "categoria" ){
+          this.router.navigate([`/${this.routerName}`], { 
+            queryParams: {
+              categoria: param
+            }
+          });
 
+        }
+
+      }
+      
     }
   }
 

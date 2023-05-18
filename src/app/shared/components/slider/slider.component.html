@@ -16,7 +16,7 @@
 
     <ng-container *ngIf="isImage === false" >
         <ng-container *ngFor="let content of data">
-            <mat-card class="card" (click)="open()">
+            <mat-card class="card" (click)="open( content.link)">
                 <mat-card-content>
                     <div class="content">{{content.title | titlecase}}</div>
                 </mat-card-content>

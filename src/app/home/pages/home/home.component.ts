@@ -32,19 +32,19 @@ export class HomeComponent implements OnInit {
 
   categorias: IsliderData[] = [ 
     {
-      link: "niña",
+      link: "aaaa",
       title: "niña"
     }, 
     {
-      link: "niño",
+      link: "bbb",
       title: "niño"
     }, 
     {
-      link: "dama",
+      link: "cccc",
       title: "dama"
     }, 
     {
-      link: "caballero",
+      link: "ddddd",
       title: "caballero"
     }
   ];
