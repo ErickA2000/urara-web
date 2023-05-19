@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Icategoria, Iprenda } from '../../interfaces/prenda.interface';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { Router } from '@angular/router';
+import { Platform } from '@angular/cdk/platform';
+import { isPlatformBrowser } from '@angular/common';
+import { scrollToTop } from 'src/app/utils/functions';
 
 @Component({
   selector: 'app-details',
@@ -49,7 +52,7 @@ export class DetailsComponent implements OnInit {
   minQuantity: number = 1;
   maxQuantity: number = 100;
 
-  constructor( private fb: FormBuilder, private snackBarService: SnackBarService, private router: Router ){}
+  constructor( private fb: FormBuilder, private snackBarService: SnackBarService, private router: Router, @Inject(PLATFORM_ID) private plataformID: Platform ){}
 
   productForm = this.fb.group({
     productID: [ this.prenda._id, [ Validators.required ] ],
@@ -62,6 +65,10 @@ export class DetailsComponent implements OnInit {
   });
 
   ngOnInit(): void {
+      if( isPlatformBrowser( this.plataformID ) ){
+        scrollToTop();
+      }
+
       this.actiImg = this.prenda.imagenUrl[0];
       this.productForm.get("tallasCantidadPrecio.precio")?.setValue( this.prenda.tallasCantidadPrecio[0].precio );
   }

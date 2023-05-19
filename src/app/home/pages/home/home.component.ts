@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Platform } from '@angular/cdk/platform';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ICard } from 'src/app/interfaces/shared/card.interface';
 import { IsliderData } from 'src/app/interfaces/shared/slider.interface';
+import { scrollToTop } from 'src/app/utils/functions';
 
 @Component({
   selector: 'app-home',
@@ -57,10 +60,12 @@ export class HomeComponent implements OnInit {
     slug: "prueba"
   }
 
-  constructor(  ){}
+  constructor( @Inject(PLATFORM_ID) private plataformID: Platform ){}
 
   ngOnInit(): void {
-    
+    if( isPlatformBrowser( this.plataformID ) ){
+      scrollToTop();
+    }
   }
 
 
