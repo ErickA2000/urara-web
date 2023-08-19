@@ -1,0 +1,24 @@
+<ng-container *ngFor="let product of products.productos" >
+    <div class="container-card">
+        <mat-card>
+            <mat-card-content>
+    
+                <div class="card">
+            
+                    <div class="card-img">
+                        <img [ngSrc]="product.productID.imagenUrl[0]" [alt]="product.productID.nombre" fill>
+                    </div>
+            
+                    <div class="card-content">
+                        <h2>{{product.productID.nombre | titlecase}}</h2>
+                        <p>Color: {{product.tallasCantidadPrecio.idColor?.nombre | titlecase}} | Talla: {{product.tallasCantidadPrecio.talla}}</p>
+                    </div>
+            
+                    <div></div>
+                </div>
+    
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</ng-container>

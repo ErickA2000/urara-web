@@ -26,6 +26,10 @@ const routes: Routes = [
     component: AboutComponent
   },
   {
+    path: 'cart',
+    loadChildren: () => import("./cart/cart.module").then( m => m.CartModule )
+  },
+  {
     path: '**',
     redirectTo: 'not-found'
   }
