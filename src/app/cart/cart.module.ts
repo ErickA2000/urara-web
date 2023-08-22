@@ -5,6 +5,7 @@ import { CartRoutingModule } from './cart-routing.module';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { ProductsComponent } from './components/products/products.component';
 import { MaterialModule } from '../material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -18,7 +19,8 @@ import { MaterialModule } from '../material/material.module';
     CommonModule,
     CartRoutingModule,
     NgOptimizedImage,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class CartModule { }

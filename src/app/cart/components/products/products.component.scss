@@ -3,10 +3,43 @@
 }
 
 .card{
+
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+
     .card-img{
         position: relative;
         height: 10rem;
         width: 8rem;
 
+        img{
+            border-radius: 1rem;
+        }
+    }
+
+    .card-price-quantity{
+        .quantity {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 1rem;
+        
+            .quantity__product {
+                display: flex;
+        
+                .quantity__product-form-field {
+                    width: 5rem;
+                }
+        
+                input[type=number]::-webkit-inner-spin-button,
+                input[type=number]::-webkit-outer-spin-button {
+                    -webkit-appearance: none;
+                }
+            }
+        
+        }
     }
 }
+

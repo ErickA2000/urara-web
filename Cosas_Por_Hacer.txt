@@ -1,1 +1,3 @@
 agregar animacio de entrada a los elementos html
+
+agregar a vista de detalle prenda el color

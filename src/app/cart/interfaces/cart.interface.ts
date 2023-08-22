@@ -18,7 +18,7 @@ interface Producto {
     tallasCantidadPrecio: TallasCantidadPrecio;
 }
 
-interface ProductID {
+export interface ProductID {
     _id:                  string;
     nombre:               string;
     imagenUrl:            string[];
