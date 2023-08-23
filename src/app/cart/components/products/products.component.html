@@ -1,29 +1,29 @@
 <form [formGroup]="productsForm">
 
     <ng-container formArrayName="productos">
-        <ng-container *ngFor="let productFor of getProduct.controls; let i = index" >
-            <!-- <ng-container [formGroup]="productFor"></ng-container> -->
-            <div class="container-card">
+        <ng-container *ngFor="let productForm of getProduct.controls; let i = index" >
+
+            <div class="container-card" [formGroupName]="i">
                 <mat-card>
                     <mat-card-content>
             
                         <div class="card">
                     
                             <div class="card-img">
-                                <!-- <img [ngSrc]="product.productID.imagenUrl[0]" [alt]="product.productID.nombre" fill> -->
+                                <img [ngSrc]="productForm.get('tempProduct.imagenUrl')?.value" [alt]="productForm.get('tempProduct.nombre')?.value" fill>
                             </div>
                     
                             <div class="card-content">
-                                <!-- <h2>{{product.productID.nombre | titlecase}}</h2> -->
-                                <!-- <p>Color: {{product.tallasCantidadPrecio.idColor?.nombre | titlecase}} | Talla: {{product.tallasCantidadPrecio.talla}}</p> -->
+                                <h2>{{productForm.get('tempProduct.nombre')?.value | titlecase}}</h2>
+                                <p>Color: {{productForm.get('tempProduct.color')?.value | titlecase}} | Talla: {{productForm.get('tallasCantidadPrecio.talla')?.value}}</p>
                             </div>
                     
                             <div class="card-price-quantity">
-                                <!-- <h2>{{product.tallasCantidadPrecio.precio | currency: 'COP'}}</h2> -->
+                                <h2>{{productForm.get('tallasCantidadPrecio.precio')?.value | currency: 'COP'}}</h2>
         
                                 <div class="quantity">
-                                    <div class="quantity__product">
-                                        <button type="button" mat-icon-button color="accent" (click)="removeQuantity()">
+                                    <div class="quantity__product" formGroupName="tallasCantidadPrecio">
+                                        <button type="button" mat-mini-fab color="accent" (click)="removeQuantity()">
                                             <mat-icon>remove</mat-icon>
                                         </button>
         
@@ -32,14 +32,14 @@
                                                 formControlName="cantidad" (ngModelChange)="verifyQuantityInInput($event)">
                                         </mat-form-field>
         
-                                        <button type="button" mat-icon-button color="accent" (click)="addQuantity()">
+                                        <button type="button" mat-mini-fab color="accent" (click)="addQuantity()">
                                             <mat-icon>add</mat-icon>
                                         </button>
         
                                     </div>
         
                                     <mat-hint>
-                                        <!-- Cantidad {{ this.productForm.get("tallasCantidadPrecio.cantidad")?.value }}/{{ stock }} -->
+                                        Cantidad {{ productForm.get("tallasCantidadPrecio.cantidad")?.value }}/{{ productForm.get('tempProduct.stockByColor')?.value }}
                                     </mat-hint>
                                 </div>
         

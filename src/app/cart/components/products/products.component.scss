@@ -28,6 +28,8 @@
         
             .quantity__product {
                 display: flex;
+                align-items: center;
+                gap: 0.5rem;
         
                 .quantity__product-form-field {
                     width: 5rem;

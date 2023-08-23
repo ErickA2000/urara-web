@@ -36,13 +36,13 @@ export class CartShoppingComponent {
               ]
             },
             {
-              talla: "4",
-              cantidad: 2,
+              talla: "10",
+              cantidad: 5,
               precio: 20000,
               colores: [
                 {
                   idColor: "64da83aca54b1f5b95de04c1",
-                  cantidad: 2
+                  cantidad: 5
                 }
               ]
             }
@@ -75,12 +75,12 @@ export class CartShoppingComponent {
           tallasCantidadPrecio: [
             {
               talla: "2",
-              cantidad: 2,
+              cantidad: 4,
               precio: 10000,
               colores: [
                 {
                   idColor: "64da83d3a54b1f5b95de04c7",
-                  cantidad: 2
+                  cantidad: 4
                 }
               ]
             },
