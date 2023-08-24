@@ -1,5 +1,7 @@
 export interface ItransferDataOrderSummary{
     productos: dataProduct[];
+    subtotal?: number;
+    total?: number;
 }
 
 interface dataProduct{

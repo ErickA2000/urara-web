@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ItransferDataOrderSummary } from 'src/app/shared/interfaces/transfer-data';
+import { DialogsService } from 'src/app/shared/services/dialogs.service';
 import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-local.service';
+import { PayMethodsComponent } from '../pay-methods/pay-methods.component';
 
 @Component({
   selector: 'app-order-summary',
@@ -10,7 +12,7 @@ import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-
 })
 export class OrderSummaryComponent implements OnInit, OnDestroy {
 
-  constructor( private transferDataLocalService: TransferDataLocalService ) { }
+  constructor( private transferDataLocalService: TransferDataLocalService, private dialogsService: DialogsService ) { }
 
   products!: ItransferDataOrderSummary;
   subtotal: number = 0;
@@ -42,4 +44,14 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
       this.$transferDataService.unsubscribe();
   }
+
+  openPayMethods(){
+    this.dialogsService.open( PayMethodsComponent, 
+      { ...this.products, 
+        subtotal: this.subtotal,
+        total: this.total
+      } 
+      )
+  }
+
 }

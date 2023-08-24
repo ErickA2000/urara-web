@@ -6,6 +6,7 @@ import { OrderSummaryComponent } from './components/order-summary/order-summary.
 import { ProductsComponent } from './components/products/products.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PayMethodsComponent } from './components/pay-methods/pay-methods.component';
 
 
 
@@ -13,7 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     CartShoppingComponent,
     OrderSummaryComponent,
-    ProductsComponent
+    ProductsComponent,
+    PayMethodsComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,32 @@
+h2{
+    text-align: center;
+}
+
+.content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+
+    .pay-method{
+        .pay-method__img{
+            width: 30vh;
+            background-color: #D9D9D9;
+            padding: 1rem;
+            border-radius: 1rem;
+            cursor: pointer;
+            opacity: 80%;
+            transition: all 0.5s ease-out;
+
+            img{
+                width: 100%;
+            }
+            
+        }
+
+        .pay-method__img:hover{
+            opacity: 100%;
+            transform: scale(1.1);
+        }
+    }
+}
