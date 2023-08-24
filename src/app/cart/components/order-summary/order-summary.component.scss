@@ -1,0 +1,19 @@
+.spinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-content{
+    .values{
+        display: flex;
+        gap: 3rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .btn{
+        background-color: #FD62E3;
+        width: 100%;
+    }
+}
