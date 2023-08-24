@@ -115,7 +115,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
               this.snackBarService.openSnackBar("La cantidad solicitada es mayor a la ofrecida");
             } else {
               control.get('tallasCantidadPrecio.cantidad')?.setValue(valueQuantity);
-              //Realizar enviar datos al componete de order summary
+              //Realizar enviar datos al componete de order summary y llamado a la api
             }
 
           } else {
@@ -144,7 +144,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
               this.snackBarService.openSnackBar("La cantidad solicitada es menor a la ofrecida");
             } else {
               control.get('tallasCantidadPrecio.cantidad')?.setValue(valueQuantity);
-              //Realizar enviar datos al componete de order summary
+              //Realizar enviar datos al componete de order summary y llamado a la api
             }
 
           } else {
@@ -172,24 +172,24 @@ export class ProductsComponent implements OnInit, OnDestroy {
           if (valueQuantity < 1) {
 
             control.get('cantidad')?.setValue(1);
-            //Realizar enviar datos al componete de order summary
+            //Realizar enviar datos al componete de order summary y llamado a la api
             this.snackBarService.openSnackBar("La cantidad solicitada es menor a la ofrecida");
 
           } else if(valueQuantity > quantityStock){
 
             control.get('cantidad')?.setValue(quantityStock);
-            //Realizar enviar datos al componete de order summary
+            //Realizar enviar datos al componete de order summary y llamado a la api
             this.snackBarService.openSnackBar("La cantidad solicitada es mayor a la ofrecida");
 
           }
           else {
             control.get('cantidad')?.setValue(valueQuantity);
-            //Realizar enviar datos al componete de order summary
+            //Realizar enviar datos al componete de order summary y llamado a la api
           }
   
         } else {
           control.get('cantidad')?.setValue(1);
-          //Realizar enviar datos al componete de order summary
+          //Realizar enviar datos al componete de order summary y llamado a la api
           this.snackBarService.openSnackBar("Cantidad limite alcanzada");
         }
       }
@@ -200,7 +200,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   removeProduct( index: number ){
     this.getProduct.removeAt(index);
 
-    //Realizar enviar datos al componete de order summary
+    //Realizar enviar datos al componete de order summary y llamado a la api
   }
 
 }
