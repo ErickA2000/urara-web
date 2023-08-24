@@ -28,8 +28,8 @@
                                         </button>
         
                                         <mat-form-field appearance="outline" class="quantity__product-form-field">
-                                            <input #cantidad type="number" matInput [min]="this.minQuantity" [max]="this.maxQuantity" value="1" 
-                                                formControlName="cantidad" (ngModelChange)="verifyQuantityInInput($event, i, productForm.get('tempProduct.stockByColor')?.value, productForm.get('tallasCantidadPrecio')!)">
+                                            <input #cantidad type="number" matInput [min]="this.minQuantity" [max]="this.maxQuantity" 
+                                                formControlName="cantidad" (change)="verifyQuantityInInput( productForm.get('tempProduct.stockByColor')?.value, productForm.get('tallasCantidadPrecio')!)">
                                         </mat-form-field>
         
                                         <button type="button" mat-mini-fab color="accent" (click)="addQuantity(i, productForm.get('tempProduct.stockByColor')?.value)">

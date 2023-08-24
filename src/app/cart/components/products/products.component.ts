@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ICart, ProductID } from '../../interfaces/cart.interface';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
@@ -8,7 +8,7 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
   @Input() products!: ICart;
 
   minQuantity: number = 1;
@@ -22,6 +22,8 @@ export class ProductsComponent implements OnInit {
     productos: this.fb.array([])
   });
 
+  timer: any;
+  delayValue = 500;
 
   get getProduct(): FormArray {
     return this.productsForm.controls["productos"] as FormArray;
@@ -59,6 +61,10 @@ export class ProductsComponent implements OnInit {
       })
     }
 
+  }
+
+  ngOnDestroy(): void {
+      clearTimeout(this.timer)
   }
 
   addProduct(product: IaddProduct) {
@@ -139,51 +145,40 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  verifyQuantityInInput(value: number, index: number, quantityStock: number, control: AbstractControl) {
-    console.log(value)
-    // if (control.dirty) {
-    //   console.log('on change')
-    //   if (control.get('cantidad')?.value > this.minQuantity && control.get('cantidad')?.value <= this.maxQuantity - 1) {
+  verifyQuantityInInput( quantityStock: number, control: AbstractControl) {
+    
+    clearTimeout(this.timer);
 
-    //     const valueQuantity = value;
+    this.timer = setTimeout(() => {
+      
+      if (control.dirty) {
+        
+        if (control.get('cantidad')?.value > this.minQuantity && control.get('cantidad')?.value <= this.maxQuantity - 1) {
+  
+          const valueQuantity = control.get('cantidad')?.value;
+  
+          if (valueQuantity < 1) {
 
-    //     if (valueQuantity <= 0 || valueQuantity > quantityStock) {
-    //       this.snackBarService.openSnackBar("La cantidad solicitada es menor o mayor a la ofrecida");
-    //     } else {
-    //       control.get('cantidad')?.setValue(valueQuantity);
-    //     }
+            control.get('cantidad')?.setValue(1);
+            this.snackBarService.openSnackBar("La cantidad solicitada es menor a la ofrecida");
 
-    //   } else {
-    //     this.snackBarService.openSnackBar("Cantidad limite alcanzada");
-    //   }
-    // }
+          } else if(valueQuantity > quantityStock){
 
-    // let indiceRecorrido = 0;
+            control.get('cantidad')?.setValue(quantityStock);
+            this.snackBarService.openSnackBar("La cantidad solicitada es mayor a la ofrecida");
 
-    // for( let control of this.getProduct.controls ){
-    //   console.log('for')
-    //   if( indiceRecorrido === index ){
-    //     if( control instanceof FormGroup ){
-
-    //       if( control.get('tallasCantidadPrecio.cantidad')?.value > this.minQuantity && control.get('tallasCantidadPrecio.cantidad')?.value <= this.maxQuantity - 1 ){
-
-    //         // let valueQuantity = control.get('tallasCantidadPrecio.cantidad')?.value;
-    //         const valueQuantity = value;
-
-    //         if( valueQuantity <= 0 || valueQuantity > quantityStock ){
-    //           this.snackBarService.openSnackBar( "La cantidad solicitada es menor o mayor a la ofrecida" );
-    //         }else{
-    //           control.get('tallasCantidadPrecio.cantidad')?.setValue(valueQuantity);
-    //         }
-
-    //       }else{
-    //         this.snackBarService.openSnackBar( "Cantidad limite alcanzada" );
-    //       }
-
-    //     }
-    //   }
-    //   indiceRecorrido++;
-    // }
+          }
+          else {
+            control.get('cantidad')?.setValue(valueQuantity);
+          }
+  
+        } else {
+          control.get('cantidad')?.setValue(1);
+          this.snackBarService.openSnackBar("Cantidad limite alcanzada");
+        }
+      }
+    }, this.delayValue)
+    
   }
 
 }
