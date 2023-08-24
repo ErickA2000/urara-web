@@ -41,16 +41,27 @@
                                     <mat-hint>
                                         Cantidad {{ productForm.get("tallasCantidadPrecio.cantidad")?.value }}/{{ productForm.get('tempProduct.stockByColor')?.value }}
                                     </mat-hint>
+
                                 </div>
         
                             </div>
                         </div>
             
                     </mat-card-content>
+
+                    <mat-card-actions align="end">
+                        <button mat-button color="warn" (click)="removeProduct(i)">Eliminar</button>
+                    </mat-card-actions>
+
                 </mat-card>
             </div>
-        
+              
         </ng-container>
+
+        <ng-container *ngIf="getProduct.length == 0">
+            <p>No hay productos en el carrito</p>
+        </ng-container>
+
     </ng-container>
 
 </form>

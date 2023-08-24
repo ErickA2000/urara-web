@@ -160,25 +160,35 @@ export class ProductsComponent implements OnInit, OnDestroy {
           if (valueQuantity < 1) {
 
             control.get('cantidad')?.setValue(1);
+            //Realizar peticion a la api para cambiar cantidad de producto
             this.snackBarService.openSnackBar("La cantidad solicitada es menor a la ofrecida");
 
           } else if(valueQuantity > quantityStock){
 
             control.get('cantidad')?.setValue(quantityStock);
+            //Realizar peticion a la api para cambiar cantidad de producto
             this.snackBarService.openSnackBar("La cantidad solicitada es mayor a la ofrecida");
 
           }
           else {
             control.get('cantidad')?.setValue(valueQuantity);
+            //Realizar peticion a la api para cambiar cantidad de producto
           }
   
         } else {
           control.get('cantidad')?.setValue(1);
+          //Realizar peticion a la api para cambiar cantidad de producto
           this.snackBarService.openSnackBar("Cantidad limite alcanzada");
         }
       }
     }, this.delayValue)
     
+  }
+
+  removeProduct( index: number ){
+    this.getProduct.removeAt(index);
+
+    //Realizar peticion a la api para quitar producto
   }
 
 }
