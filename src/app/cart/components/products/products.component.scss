@@ -19,6 +19,32 @@
     }
 
     .card-price-quantity{
+
+        .price{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            .price__value{
+                h2{
+                    margin-bottom: 0;
+                }
+
+                p{
+                    margin: 0;
+                    text-decoration-line: line-through;
+                }
+            }
+
+            .discount{
+                background-color: #FD62E3;
+
+                p{
+                    margin: 10px;
+                }
+            }
+        }
+
         .quantity {
             display: flex;
             flex-direction: column;

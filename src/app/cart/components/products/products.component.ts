@@ -46,7 +46,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
       this.addProduct({
         productID: product.productID._id,
-        tempProduct: product.productID,
+        tempProduct: { ...product.productID, precio: product.tallasCantidadPrecio.precio },
         descuento: product.descuento,
         tallasCantidadPrecio: {
           talla: product.tallasCantidadPrecio.talla,
@@ -68,19 +68,29 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   addProduct(product: IaddProduct) {
+    let price: number = 0;
+    if( product.descuento != 0 ){
+      const valorAdescontar = product.tempProduct.precio * (product.descuento/100);
+      price = product.tempProduct.precio - valorAdescontar;
+
+    }else{
+      price = product.tempProduct.precio;
+    }
+
     this.productForm = this.fb.group({
       productID: [product.productID, [Validators.required]],
       tempProduct: this.fb.group({
         nombre: [product.tempProduct.nombre],
         imagenUrl: [product.tempProduct.imagenUrl[0]],
         color: [product.tempColor.nombre],
-        stockByColor: [product.tempColor.cantidad]
+        stockByColor: [product.tempColor.cantidad],
+        precio: [product.tempProduct.precio]
       }),
       descuento: [product.descuento, [Validators.min(0), Validators.max(100)]],
       tallasCantidadPrecio: this.fb.group({
         talla: [product.tallasCantidadPrecio.talla, [Validators.required]],
         cantidad: [product.tallasCantidadPrecio.cantidad, [Validators.required, Validators.min(this.minQuantity), Validators.max(this.maxQuantity), Validators.pattern(/^([0-9])*$/)]],
-        precio: [product.tallasCantidadPrecio.precio, [Validators.required]],
+        precio: [price, [Validators.required]],
         idColor: [product.tallasCantidadPrecio.idColor]
       })
     });
@@ -105,6 +115,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
               this.snackBarService.openSnackBar("La cantidad solicitada es mayor a la ofrecida");
             } else {
               control.get('tallasCantidadPrecio.cantidad')?.setValue(valueQuantity);
+              //Realizar enviar datos al componete de order summary
             }
 
           } else {
@@ -133,6 +144,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
               this.snackBarService.openSnackBar("La cantidad solicitada es menor a la ofrecida");
             } else {
               control.get('tallasCantidadPrecio.cantidad')?.setValue(valueQuantity);
+              //Realizar enviar datos al componete de order summary
             }
 
           } else {
@@ -160,24 +172,24 @@ export class ProductsComponent implements OnInit, OnDestroy {
           if (valueQuantity < 1) {
 
             control.get('cantidad')?.setValue(1);
-            //Realizar peticion a la api para cambiar cantidad de producto
+            //Realizar enviar datos al componete de order summary
             this.snackBarService.openSnackBar("La cantidad solicitada es menor a la ofrecida");
 
           } else if(valueQuantity > quantityStock){
 
             control.get('cantidad')?.setValue(quantityStock);
-            //Realizar peticion a la api para cambiar cantidad de producto
+            //Realizar enviar datos al componete de order summary
             this.snackBarService.openSnackBar("La cantidad solicitada es mayor a la ofrecida");
 
           }
           else {
             control.get('cantidad')?.setValue(valueQuantity);
-            //Realizar peticion a la api para cambiar cantidad de producto
+            //Realizar enviar datos al componete de order summary
           }
   
         } else {
           control.get('cantidad')?.setValue(1);
-          //Realizar peticion a la api para cambiar cantidad de producto
+          //Realizar enviar datos al componete de order summary
           this.snackBarService.openSnackBar("Cantidad limite alcanzada");
         }
       }
@@ -188,14 +200,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
   removeProduct( index: number ){
     this.getProduct.removeAt(index);
 
-    //Realizar peticion a la api para quitar producto
+    //Realizar enviar datos al componete de order summary
   }
 
 }
 
 interface IaddProduct {
   productID: string;
-  tempProduct: ProductID;
+  tempProduct: ProductID & {
+    precio: number
+  };
   tempColor: {
     nombre: string;
     cantidad: number;

@@ -19,7 +19,16 @@
                             </div>
                     
                             <div class="card-price-quantity">
-                                <h2>{{productForm.get('tallasCantidadPrecio.precio')?.value | currency: 'COP'}}</h2>
+                                <div class="price">
+                                    <div class="price__value">
+                                        <h2>{{productForm.get('tallasCantidadPrecio.precio')?.value | currency: 'COP'}}</h2>
+                                        <p *ngIf="productForm.get('descuento')?.value != 0">{{productForm.get('tempProduct.precio')?.value | currency: 'COP'}}</p>
+                                    </div>
+
+                                    <div class="discount" *ngIf="productForm.get('descuento')?.value != 0">
+                                        <p>-{{productForm.get('descuento')?.value}}%</p>
+                                    </div>
+                                </div>
         
                                 <div class="quantity">
                                     <div class="quantity__product" formGroupName="tallasCantidadPrecio">
