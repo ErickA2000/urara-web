@@ -4,8 +4,19 @@
 
 .container{
     display: flex;
-    gap: 2rem;
-    justify-content: space-around;
+    flex-direction: column;
     margin-left: 3rem;
     margin-right: 3rem;
+
+    .order-summary{
+        margin-bottom: 2rem;
+    }
+}
+
+@media (min-width: 700px) {
+    .container{
+        flex-direction: row;
+        gap: 2rem;
+        justify-content: space-around;
+    }
 }
