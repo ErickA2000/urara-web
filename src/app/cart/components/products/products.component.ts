@@ -2,6 +2,8 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ICart, ProductID } from '../../interfaces/cart.interface';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
+import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-local.service';
+import { ItransferDataOrderSummary } from 'src/app/shared/interfaces/transfer-data';
 
 @Component({
   selector: 'app-products',
@@ -14,7 +16,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   minQuantity: number = 1;
   maxQuantity: number = 100;
 
-  constructor(private fb: FormBuilder, private snackBarService: SnackBarService) { }
+  constructor(private fb: FormBuilder, private snackBarService: SnackBarService, private transferDataLocalService: TransferDataLocalService ) { }
 
   private productForm!: FormGroup;
 
@@ -24,6 +26,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   timer: any;
   delayValue = 500;
+  timer2: any;
 
   get getProduct(): FormArray {
     return this.productsForm.controls["productos"] as FormArray;
@@ -61,10 +64,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
       })
     }
 
+    this.timer2 = setTimeout( () => {
+      this.transferData();
+    }, 2000);
+
   }
 
   ngOnDestroy(): void {
-      clearTimeout(this.timer)
+      clearTimeout(this.timer);
+      clearTimeout(this.timer2);
   }
 
   addProduct(product: IaddProduct) {
@@ -115,7 +123,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
               this.snackBarService.openSnackBar("La cantidad solicitada es mayor a la ofrecida");
             } else {
               control.get('tallasCantidadPrecio.cantidad')?.setValue(valueQuantity);
+
               //Realizar enviar datos al componete de order summary y llamado a la api
+              this.transferData();
             }
 
           } else {
@@ -127,6 +137,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       indiceRecorrido++;
     }
   }
+
   removeQuantity(index: number) {
     let indiceRecorrido = 0;
 
@@ -144,7 +155,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
               this.snackBarService.openSnackBar("La cantidad solicitada es menor a la ofrecida");
             } else {
               control.get('tallasCantidadPrecio.cantidad')?.setValue(valueQuantity);
+
               //Realizar enviar datos al componete de order summary y llamado a la api
+              this.transferData();
             }
 
           } else {
@@ -173,23 +186,27 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
             control.get('cantidad')?.setValue(1);
             //Realizar enviar datos al componete de order summary y llamado a la api
+            this.transferData();
             this.snackBarService.openSnackBar("La cantidad solicitada es menor a la ofrecida");
 
           } else if(valueQuantity > quantityStock){
 
             control.get('cantidad')?.setValue(quantityStock);
             //Realizar enviar datos al componete de order summary y llamado a la api
+            this.transferData();
             this.snackBarService.openSnackBar("La cantidad solicitada es mayor a la ofrecida");
 
           }
           else {
             control.get('cantidad')?.setValue(valueQuantity);
             //Realizar enviar datos al componete de order summary y llamado a la api
+            this.transferData();
           }
   
         } else {
           control.get('cantidad')?.setValue(1);
           //Realizar enviar datos al componete de order summary y llamado a la api
+          this.transferData();
           this.snackBarService.openSnackBar("Cantidad limite alcanzada");
         }
       }
@@ -201,6 +218,19 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.getProduct.removeAt(index);
 
     //Realizar enviar datos al componete de order summary y llamado a la api
+    this.transferData();
+  }
+
+  private transferData(){
+    for( let control of this.getProduct.controls ){
+      control.get("tempProduct")?.disable();
+    }
+    
+    this.transferDataLocalService.transferDataOrderSummary.emit(this.productsForm.value as ItransferDataOrderSummary);
+
+    for( let control of this.getProduct.controls ){
+      control.get("tempProduct")?.enable();
+    }
   }
 
 }
