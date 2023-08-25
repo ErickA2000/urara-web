@@ -45,6 +45,19 @@
                                             {{tpc.talla}}
                                         </mat-button-toggle>
                                     </mat-button-toggle-group>
+
+                                    <p>Seleccione un color</p>
+
+                                    <mat-button-toggle-group appearance="standard" formControlName="idColor"  [ngClass]="isColorsMany ? 'toggle-group-column' : 'toggle-group-row'">
+                                        <mat-button-toggle *ngFor="let color of coloresPrenda" 
+                                            [value]="color.idColor._id">
+                                            
+                                            <div class="toggle-content">
+                                                <div class="toggle-content__color" [ngStyle]="{ 'background-color': color.idColor.hex}" ></div>
+                                                {{color.idColor.nombre | titlecase}}
+                                            </div>
+                                        </mat-button-toggle>
+                                    </mat-button-toggle-group>
         
                                     <div class="quantity">
                                         <div class="quantity__product">

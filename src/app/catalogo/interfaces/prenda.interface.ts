@@ -17,9 +17,24 @@ export interface tallaCantidadPrecio{
     talla: string,
     cantidad: number,
     precio: number
+    colores: Icolores[]
 }
 
 export interface Icategoria{
     _id: string, 
     nombre: string
+}
+
+export interface Icolores {
+    idColor:  Icolor;
+    cantidad: number;
+}
+
+interface Icolor {
+    _id:       string;
+    nombre:    string;
+    hex:       string;
+    createdAt?: Date;
+    updatedAt?: Date;
+    __v?:       number;
 }

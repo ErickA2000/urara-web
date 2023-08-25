@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { Icategoria, Iprenda } from '../../interfaces/prenda.interface';
+import { Icategoria, Icolores, Iprenda } from '../../interfaces/prenda.interface';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { Router } from '@angular/router';
@@ -34,23 +34,73 @@ export class DetailsComponent implements OnInit {
     } ],
     slug: "prueba",
     tallasCantidadPrecio: [{
-        cantidad: 2,
-        precio: 20000,
-        talla: "10"
-      },{
-        cantidad: 20,
-        precio: 25000,
-        talla: "16"
-      }
-    ],
+      talla: "32",
+      cantidad: 10,
+      precio: 50000,
+      colores: [
+        {
+          idColor: {
+            _id: "64dd1faeed3ee9e3b2de5ff7",
+            nombre: "Morado",
+            hex: "#e900fa"
+
+          },
+          cantidad: 10
+        }
+      ]
+    },
+    {
+      talla: "16",
+      cantidad: 20,
+      precio: 50000,
+      colores: [
+        {
+          idColor: {
+            _id: "64dd1faeed3ee9e3b2de5ff7",
+            nombre: "Morado",
+            hex: "#e900fa"
+
+          },
+          cantidad: 10
+        },{
+          idColor: {
+            _id: "64da83aca54b1f5b95de04c1",
+            nombre: "gris",
+            hex: "#808080"
+
+          },
+          cantidad: 10
+        },{
+          idColor: {
+            _id: "64da83d3a54b1f5b95de04c7",
+            nombre: "blanco",
+            hex: "#ffffff"
+
+          },
+          cantidad: 10
+        },{
+          idColor: {
+            _id: "64da83e1a54b1f5b95de04cd",
+            nombre: "negro",
+            hex: "#000000"
+
+          },
+          cantidad: 10
+        }
+      ]
+    }],
     estado: "disponible",
     createdAt: "2023-01-12T18:30:02.976+00:00",
     updatedAt: "2023-01-12T18:30:02.976+00:00"
   }
 
+  coloresPrenda!: Icolores[];
+
   stock: number = 0;
   minQuantity: number = 1;
   maxQuantity: number = 100;
+
+  isColorsMany: boolean = false;
 
   constructor( private fb: FormBuilder, private snackBarService: SnackBarService, private router: Router, @Inject(PLATFORM_ID) private plataformID: Platform ){}
 
@@ -60,7 +110,8 @@ export class DetailsComponent implements OnInit {
     tallasCantidadPrecio: this.fb.group({
       talla: [ '', [ Validators.required ] ],
       cantidad: [ 1, [ Validators.required, Validators.min(this.minQuantity), Validators.max(this.maxQuantity), Validators.pattern(/^([0-9])*$/) ] ],
-      precio: [ 0 , [ Validators.required ]]
+      precio: [ 0 , [ Validators.required ]],
+      idColor: [ '', [ Validators.required ] ]
     })
   });
 
@@ -82,7 +133,11 @@ export class DetailsComponent implements OnInit {
     for( let tcp of this.prenda.tallasCantidadPrecio ){
       if( tcp.talla == size ){
         this.productForm.get("tallasCantidadPrecio.precio")?.setValue(tcp.precio);
-        this.stock = tcp.cantidad;
+        // this.stock = tcp.cantidad;
+
+        this.coloresPrenda = tcp.colores;
+
+        if( this.coloresPrenda.length > 2 ) this.isColorsMany = true;
       }
     }
 
