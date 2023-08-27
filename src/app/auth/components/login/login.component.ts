@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+  logoUrara = "assets/img/logo_urara.png";
+
 }
