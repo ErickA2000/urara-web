@@ -36,7 +36,7 @@ export class DetailsComponent implements OnInit {
     tallasCantidadPrecio: [{
       talla: "32",
       cantidad: 10,
-      precio: 50000,
+      precio: 55000,
       colores: [
         {
           idColor: {
@@ -61,7 +61,7 @@ export class DetailsComponent implements OnInit {
             hex: "#e900fa"
 
           },
-          cantidad: 10
+          cantidad: 5
         },{
           idColor: {
             _id: "64da83aca54b1f5b95de04c1",
@@ -133,18 +133,39 @@ export class DetailsComponent implements OnInit {
     for( let tcp of this.prenda.tallasCantidadPrecio ){
       if( tcp.talla == size ){
         this.productForm.get("tallasCantidadPrecio.precio")?.setValue(tcp.precio);
-        // this.stock = tcp.cantidad;
 
         this.coloresPrenda = tcp.colores;
 
-        if( this.coloresPrenda.length > 2 ) this.isColorsMany = true;
+        if( this.coloresPrenda.length > 3 ){
+          this.isColorsMany = true;
+        }else{
+          this.isColorsMany = false;
+        }
+
+        this.productForm.get('tallasCantidadPrecio.idColor')?.setValue('');
+        this.productForm.get('tallasCantidadPrecio.cantidad')?.setValue(1);
+        this.stock = 0;
+
+      }
+    }
+
+    
+  }
+  
+  changeColor( idColor: string ){
+    
+    for( let color of this.coloresPrenda ){
+      
+      if( idColor === color.idColor._id ){
+        
+        this.productForm.get("tallasCantidadPrecio.idColor")?.setValue(idColor);
+        this.stock = color.cantidad;
       }
     }
 
     if( this.productForm.get("tallasCantidadPrecio.cantidad")?.value! > this.stock ){
       this.productForm.get("tallasCantidadPrecio.cantidad")?.setValue(this.stock);
     }
-
   }
 
   verifyQuantityInInput( value: number ){
@@ -152,10 +173,10 @@ export class DetailsComponent implements OnInit {
     if( !this.productForm.get("tallasCantidadPrecio.talla")?.value ){
       this.snackBarService.openSnackBar("No se a seleccionado una talla");
     }
-
-    for( let tcp of this.prenda.tallasCantidadPrecio ){
-      if( tcp.talla == this.productForm.get("tallasCantidadPrecio.talla")?.value ){
-        if( value > tcp.cantidad ){
+    
+    for( let color of this.coloresPrenda ){
+      if( color.idColor._id == this.productForm.get("tallasCantidadPrecio.idColor")?.value ){
+        if( value > color.cantidad ){
           this.snackBarService.openSnackBar("La cantidad es mayor a la disponible");
           this.productForm.setErrors({ quantityOverflow: true });
         }
@@ -215,6 +236,10 @@ export class DetailsComponent implements OnInit {
        } 
     });
     
+  }
+
+  addToCart(){
+    console.log("Add a product to cart:", this.productForm.value);
   }
 
 }

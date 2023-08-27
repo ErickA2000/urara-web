@@ -115,6 +115,14 @@
     }
 }
 
+.toggle-group-column{
+    flex-direction: column;
+}
+
+.toggle-group-row{
+    flex-direction: row;
+}
+
 .toggle-content{
     display: flex;
     align-items: center;
