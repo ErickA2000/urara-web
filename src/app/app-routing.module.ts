@@ -5,29 +5,21 @@ import { AboutComponent } from './shared/pages/about/about.component';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
+    path: "",
+    redirectTo: "site",
+    pathMatch: "full"
   },
   {
-    path: 'home',
-    loadChildren: () => import("./home/home.module").then( m => m.HomeModule )
+    path: 'site',
+    loadChildren: () => import("./site/site.module").then( m => m.SiteModule )
   },
   {
-    path: 'catalogo',
-    loadChildren: () => import("./catalogo/catalogo.module").then( m => m.CatalogoModule )
+    path: 'auth',
+    loadChildren: () => import("./auth/auth.module").then( m => m.AuthModule )
   },
   {
     path: 'not-found', 
     component: NotFoundComponent
-  },
-  {
-    path: 'abount',
-    component: AboutComponent
-  },
-  {
-    path: 'cart',
-    loadChildren: () => import("./cart/cart.module").then( m => m.CartModule )
   },
   {
     path: '**',
