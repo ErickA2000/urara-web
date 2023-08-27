@@ -18,16 +18,36 @@
         }
     }
 
+    .card-content{
+        h2{
+            font-size: 1em;
+        }
+
+        @media (min-width: 700px) {
+            h2{
+                font-size: 1.5em;
+            }
+        }
+    }
+
     .card-price-quantity{
 
         .price{
             display: flex;
             align-items: center;
             gap: 1rem;
+            flex-wrap: wrap;
 
             .price__value{
                 h2{
                     margin-bottom: 0;
+                    font-size: 1em;
+                }
+
+                @media (min-width: 700px) {
+                    h2{
+                        font-size: 1.5em;
+                    }
                 }
 
                 p{

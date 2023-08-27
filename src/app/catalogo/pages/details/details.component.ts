@@ -230,7 +230,7 @@ export class DetailsComponent implements OnInit {
   }
 
   selectCategoria( categoria: Icategoria){
-    this.router.navigate(["/catalogo"], { 
+    this.router.navigate(["/site/catalogo"], { 
       queryParams: { 
         categoria: categoria._id
        } 

@@ -12,6 +12,8 @@ export class NotFoundComponent implements OnInit{
 
   constructor( @Inject(PLATFORM_ID) private plataformID: Platform ){}
 
+  logoUrara = "assets/img/logo_urara.png"
+
   ngOnInit(): void {
       if( isPlatformBrowser( this.plataformID ) ){
         scrollToTop();

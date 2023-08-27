@@ -66,7 +66,7 @@ export class CartShoppingComponent {
       {
         productID: {
           _id: "64dfc419cc2b5219b2263759",
-          nombre: "pruebas 2",
+          nombre: "pruebas 2 aaaaaaaaaaaaaaaa",
           imagenUrl: [
             "https://firebasestorage.googleapis.com/v0/b/urara-3fad9.appspot.com/o/ni%C3%B1a%2Fpruebas_1692386316499?alt=media&token=25a5e7bb-2e42-448d-b67b-7fec92eb171f",
             "https://firebasestorage.googleapis.com/v0/b/urara-3fad9.appspot.com/o/ni%C3%B1a%2Fpruebas_1692386320154?alt=media&token=0f689222-4579-481e-b1e0-f206b5991cd3",
@@ -103,7 +103,7 @@ export class CartShoppingComponent {
         tallasCantidadPrecio: {
           talla: "4",
           cantidad: 1,
-          precio: 20000,
+          precio: 2000000,
           idColor: {
             _id: "64da83aca54b1f5b95de04c1",
             nombre: "gris",

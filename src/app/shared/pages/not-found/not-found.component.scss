@@ -1,8 +1,19 @@
+.logo{
+    width: 30vh;
+    position: relative;
+    margin: 0 auto;
+    padding-top: 5rem;
+    cursor: pointer;
+
+    img{
+        width: 100%;
+    }
+}
+
 .not_found {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 10rem;
 
     .engranaje1, .engranaje2 {
         height: 100%;

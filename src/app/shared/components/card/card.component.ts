@@ -33,7 +33,7 @@ export class CardComponent implements AfterViewInit {
   }
 
   openDetail( ref: number, slug: string ){
-    this.router.navigate(["/catalogo/product/detail", ref, slug]);
+    this.router.navigate(["/site/catalogo/product/detail", ref, slug]);
   }
 
 }
