@@ -7,6 +7,9 @@ import { UpdateBasicInfoComponent } from './components/update-basic-info/update-
 import { UpdateContactInfoComponent } from './components/update-contact-info/update-contact-info.component';
 import { HomeSecurityComponent } from './pages/home-security/home-security.component';
 import { HomeMyBuysComponent } from './pages/home-my-buys/home-my-buys.component';
+import { SecurityComponent } from './components/security/security.component';
+import { TwofaComponent } from './components/securityMethods/twofa/twofa.component';
+import { DevicesComponent } from './components/devices/devices.component';
 
 const routes: Routes = [
   {
@@ -38,7 +41,21 @@ const routes: Routes = [
       },
       {
         path: "security",
-        component: HomeSecurityComponent
+        component: HomeSecurityComponent,
+        children: [
+          {
+            path: "",
+            component: SecurityComponent
+          },
+          {
+            path: "verify-2fa",
+            component: TwofaComponent
+          },
+          {
+            path: "devices",
+            component: DevicesComponent
+          }
+        ]
       },
       {
         path: "my-buys",

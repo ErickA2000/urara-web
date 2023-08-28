@@ -10,6 +10,9 @@ import { UpdateContactInfoComponent } from './components/update-contact-info/upd
 import { MaterialModule } from '../material/material.module';
 import { HomeSecurityComponent } from './pages/home-security/home-security.component';
 import { HomeMyBuysComponent } from './pages/home-my-buys/home-my-buys.component';
+import { SecurityComponent } from './components/security/security.component';
+import { TwofaComponent } from './components/securityMethods/twofa/twofa.component';
+import { DevicesComponent } from './components/devices/devices.component';
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import { HomeMyBuysComponent } from './pages/home-my-buys/home-my-buys.component
     UpdateBasicInfoComponent,
     UpdateContactInfoComponent,
     HomeSecurityComponent,
-    HomeMyBuysComponent
+    HomeMyBuysComponent,
+    SecurityComponent,
+    TwofaComponent,
+    DevicesComponent
   ],
   imports: [
     CommonModule,
