@@ -26,6 +26,10 @@ const routes: Routes = [
         loadChildren: () => import("../cart/cart.module").then( m => m.CartModule )
       },
       {
+        path: 'account',
+        loadChildren: () => import("../account/account.module").then( m => m.AccountModule )
+      },
+      {
         path: 'abount',
         component: AboutComponent
       }

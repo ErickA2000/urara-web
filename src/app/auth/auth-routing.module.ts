@@ -5,6 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ForgetPassComponent } from './components/forget-pass/forget-pass.component';
 import { Verify2faComponent } from './components/verify2fa/verify2fa.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ConfirmAccountComponent } from './pages/confirm-account/confirm-account.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
         component: Verify2faComponent
       }
     ]
+  },
+  {
+    path: "confirm/:token",
+    component: ConfirmAccountComponent
   }
 ];
 

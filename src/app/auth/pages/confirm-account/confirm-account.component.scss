@@ -1,0 +1,23 @@
+.container{
+    min-height: 100vh;
+
+    .logo{
+        width: 30vh;
+        margin: 0 auto;
+        padding-top: 5rem;
+
+        a img{
+            width: 100%;
+        }
+    }
+
+    .content{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        .content__icon{
+            width: 30vh;
+        }
+    }
+}

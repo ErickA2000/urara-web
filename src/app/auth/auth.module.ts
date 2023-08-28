@@ -9,6 +9,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Verify2faComponent } from './components/verify2fa/verify2fa.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ConfirmAccountComponent } from './pages/confirm-account/confirm-account.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { RegisterComponent } from './components/register/register.component';
     ForgetPassComponent,
     HomeComponent,
     Verify2faComponent,
-    RegisterComponent
+    RegisterComponent,
+    ConfirmAccountComponent
   ],
   imports: [
     CommonModule,
