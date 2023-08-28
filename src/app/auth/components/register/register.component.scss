@@ -1,0 +1,17 @@
+.content-auth__form{
+    width: 35vh;
+
+    mat-form-field{
+        width: 100%;
+    }
+
+    .telefono{
+        display: flex;
+        gap: .5rem;
+        width: 100%;
+
+        .prefijo{
+            width: 10rem;
+        }
+    }
+}

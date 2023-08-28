@@ -1,1 +1,55 @@
-<p>register works!</p>
+<div class="content-auth">
+    <h2>Registrarse</h2>
+    <form class="content-auth__form" [formGroup]="registerForm">
+
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput type="text" formControlName="nombre">
+        </mat-form-field>
+
+        <div class="telefono" formGroupName="telefono">
+            <mat-form-field class="prefijo">
+                <mat-label>Prefijo</mat-label>
+                <mat-select formControlName="codigo_area">
+                    <mat-option *ngFor="let prefijo of prefijos" [value]="prefijo">{{prefijo}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field>
+                <mat-label>Número celular</mat-label>
+                <input matInput type="text" formControlName="numero">
+            </mat-form-field>
+        </div>
+
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput type="text" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Nombre de usuario</mat-label>
+            <input matInput type="text" formControlName="username">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" formControlName="clave">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Confirmar contraseña</mat-label>
+            <input matInput type="password" formControlName="confirmarClave">
+            <mat-error *ngIf="validateConfirmPass()">La contraseña no coincide</mat-error>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="terminos">Acepto términos y condiciones</mat-checkbox>
+
+        <button type="button" mat-raised-button color="primary" [disabled]="!registerForm.valid"
+            (click)="register()">
+            Registrarse
+        </button>
+
+        <p>¿Ya tiene una cuenta? <a routerLink="/auth/login">Inicie sesión</a></p>
+
+    </form>
+</div>
