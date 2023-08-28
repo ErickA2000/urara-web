@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,5 +9,7 @@ import { Component } from '@angular/core';
 export class LoginComponent {
 
   logoUrara = "assets/img/logo_urara.png";
+
+  constructor( private fb: FormBuilder ) {}
 
 }
