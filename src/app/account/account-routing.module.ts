@@ -5,6 +5,8 @@ import { HomePersonalInfoComponent } from './pages/home-personal-info/home-perso
 import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
 import { UpdateBasicInfoComponent } from './components/update-basic-info/update-basic-info.component';
 import { UpdateContactInfoComponent } from './components/update-contact-info/update-contact-info.component';
+import { HomeSecurityComponent } from './pages/home-security/home-security.component';
+import { HomeMyBuysComponent } from './pages/home-my-buys/home-my-buys.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,14 @@ const routes: Routes = [
             component: UpdateContactInfoComponent
           }
         ]
+      },
+      {
+        path: "security",
+        component: HomeSecurityComponent
+      },
+      {
+        path: "my-buys",
+        component: HomeMyBuysComponent
       }
     ]
   }

@@ -8,6 +8,8 @@ import { PersonalInfoComponent } from './components/personal-info/personal-info.
 import { UpdateBasicInfoComponent } from './components/update-basic-info/update-basic-info.component';
 import { UpdateContactInfoComponent } from './components/update-contact-info/update-contact-info.component';
 import { MaterialModule } from '../material/material.module';
+import { HomeSecurityComponent } from './pages/home-security/home-security.component';
+import { HomeMyBuysComponent } from './pages/home-my-buys/home-my-buys.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { MaterialModule } from '../material/material.module';
     HomePersonalInfoComponent,
     PersonalInfoComponent,
     UpdateBasicInfoComponent,
-    UpdateContactInfoComponent
+    UpdateContactInfoComponent,
+    HomeSecurityComponent,
+    HomeMyBuysComponent
   ],
   imports: [
     CommonModule,
