@@ -1,0 +1,24 @@
+@import 'src/_variables.scss';
+
+.active{
+    background-color: $violet;
+}
+
+.account-content{
+    display: flex;
+    gap: 2rem;
+    margin-right: 3rem;
+    margin-left: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    .account-content__btns{
+        display: flex;
+        flex-direction: column;
+
+        .btn{
+            display: flex;
+            justify-content: left;
+        }
+    }
+}

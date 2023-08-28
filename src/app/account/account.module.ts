@@ -7,6 +7,7 @@ import { HomePersonalInfoComponent } from './pages/home-personal-info/home-perso
 import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
 import { UpdateBasicInfoComponent } from './components/update-basic-info/update-basic-info.component';
 import { UpdateContactInfoComponent } from './components/update-contact-info/update-contact-info.component';
+import { MaterialModule } from '../material/material.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { UpdateContactInfoComponent } from './components/update-contact-info/upd
   ],
   imports: [
     CommonModule,
-    AccountRoutingModule
+    AccountRoutingModule,
+    MaterialModule
   ]
 })
 export class AccountModule { }
