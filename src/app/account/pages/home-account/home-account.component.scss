@@ -7,10 +7,11 @@
 .account-content{
     display: flex;
     gap: 2rem;
-    margin-right: 3rem;
-    margin-left: 3rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    padding-right: 3rem;
+    padding-left: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    min-height: 100vh;
 
     .account-content__btns{
         display: flex;
@@ -21,4 +22,8 @@
             justify-content: left;
         }
     }
+}
+
+.content{
+    width: 100%;
 }

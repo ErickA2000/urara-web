@@ -1,1 +1,68 @@
-<p>personal-info works!</p>
+<div class="content-personal-info">
+    <h2>Información personal</h2>
+
+    <section class="vh-100 mb-2">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Información básica</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+                <div class="info">
+                    <p class="title">Nombre</p>
+                    <p class="value">Erick Wladimir Arevalo Navarro</p>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div class="info">
+                    <p class="title">Nombre de usuario</p>
+                    <p class="value">erickare</p>
+                </div>
+
+                <mat-divider></mat-divider>
+
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+                <button mat-raised-button color="primary" routerLink="/site/account/personal-info/update-basic-info">
+                    Actualizar
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </section>
+
+    <section class="vh-100 mb-2">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Información de contacto</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+                <div class="info">
+                    <p class="title">Email</p>
+                    <p class="value">erick@gmail.com</p>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div class="info">
+                    <p class="title">Teléfono</p>
+                    <p class="value">+57 3124567890</p>
+                </div>
+
+                <mat-divider></mat-divider>
+
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+                <button mat-raised-button color="primary" routerLink="/site/account/personal-info/update-contact-info">
+                    Actualizar
+                </button>
+            </mat-card-actions>
+        </mat-card>
+
+    </section>
+</div>

@@ -1,0 +1,19 @@
+.content-personal-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .title{
+        opacity: 70%;
+    }
+}
+
+.mb-2{
+    margin-bottom: 2rem;
+}
