@@ -8,8 +8,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent {
 
-  logoUrara = "assets/img/logo_urara.png";
-
   constructor( private fb: FormBuilder ) {}
 
   loginForm: FormGroup = this.fb.group({
