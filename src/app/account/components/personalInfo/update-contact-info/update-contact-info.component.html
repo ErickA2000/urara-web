@@ -1,1 +1,62 @@
-<p>update-contact-info works!</p>
+<div class="content-right-account">
+
+    <section class="content-title">
+        <button mat-icon-button (click)="back()">
+            <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <h2>Modificar información de contacto</h2>
+    </section>
+
+    <section class="vh-100">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Información de contacto</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+                <form class="form-update-in-account" [formGroup]="updateForm">
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input type="text" matInput formControlName="email">
+                    </mat-form-field>
+
+                    <div>
+                        <section>
+                            <p>Teléfono</p>
+                        </section>
+
+                        <section class="input-telefono" formGroupName="telefono">
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Prefijo</mat-label>
+                                <mat-select formControlName="codigo_area">
+                                    <mat-option *ngFor="let prefijo of prefijos" [value]="prefijo.prefijo">
+                                        {{prefijo.pais | titlecase}} {{prefijo.prefijo}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+        
+                            <mat-form-field appearance="outline" class="numero">
+                                <mat-label>Número</mat-label>
+                                <input type="text" matInput formControlName="numero">
+                            </mat-form-field>
+                        </section>
+
+                    </div>
+                </form>
+
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+                <button mat-raised-button color="primary" [disabled]="!updateForm.valid"
+                    (click)="save()">
+                    <mat-icon>save</mat-icon>
+                    Guardar
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </section>
+
+</div>
