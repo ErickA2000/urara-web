@@ -1,1 +1,51 @@
-<p>twofa works!</p>
+<div class="content-right-account">
+
+    <section class="content-title">
+        <button mat-icon-button (click)="back()">
+            <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <h2>Verificación en dos pasos</h2>
+    </section>
+
+    <section class="vh-100">
+        <mat-card>
+            <mat-card-content>
+
+                <div class="card-active-2fa">
+
+                    <p>La verificación en dos pasos está ACTIVADA desde el “FECHA”</p>
+                    <button mat-raised-button color="primary">
+                        Desactivar
+                    </button>
+
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <h3>Segundos pasos disponibles</h3>
+        <p>Al realizar un segundo paso después de introducir la contraseña, verificamos que eres tú quien ha iniciado sesión.</p>
+
+        <mat-divider></mat-divider>
+
+        <mat-card class="mt-2">
+            <mat-card-content>
+                
+                <div class="method-2fa">
+                    <section>
+                        <h3>Correo electronico</h3>
+                        <p>Llega un código de seis dígitos al correo electrónico de la cuenta después de ingresar la contraseña. Debe introducir el código cuando se solicite para poder acceder.</p>
+                    </section>
+
+                    <section>
+                        <mat-slide-toggle></mat-slide-toggle>
+                    </section>
+                </div>
+
+                <mat-divider></mat-divider>
+
+            </mat-card-content>
+        </mat-card>
+
+    </section>
+
+</div>
