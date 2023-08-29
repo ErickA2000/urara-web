@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DialogsService } from 'src/app/shared/services/dialogs.service';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @Component({
   selector: 'app-security',
@@ -7,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class SecurityComponent {
 
+  constructor( private dialogService: DialogsService ) { }
+
+  openDialogChangePass(){
+    this.dialogService.open( ChangePasswordComponent )
+  }
 }
