@@ -1,1 +1,44 @@
-<p>update-basic-info works!</p>
+<div class="content-right-account">
+
+    <section class="content-title">
+        <button mat-icon-button (click)="back()">
+            <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <h2>Modificar información básica</h2>
+    </section>
+
+    <section class="vh-100">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Información básica</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+                <form class="form" [formGroup]="updateForm">
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre</mat-label>
+                        <input type="text" matInput formControlName="nombre">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre de usuario</mat-label>
+                        <input type="text" matInput formControlName="username">
+                    </mat-form-field>
+
+                </form>
+
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+                <button mat-raised-button color="primary" [disabled]="!updateForm.valid" 
+                    (click)="save()">
+                    <mat-icon>save</mat-icon>
+                    Guardar
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </section>
+
+</div>

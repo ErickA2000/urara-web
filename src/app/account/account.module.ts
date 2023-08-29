@@ -16,6 +16,7 @@ import { DevicesComponent } from './components/security/devices/devices.componen
 import { MyBuysComponent } from './components/myBuys/my-buys/my-buys.component';
 import { BuysComponent } from './components/myBuys/buys/buys.component';
 import { PurchaseDetailComponent } from './components/myBuys/purchase-detail/purchase-detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { PurchaseDetailComponent } from './components/myBuys/purchase-detail/pur
   imports: [
     CommonModule,
     AccountRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class AccountModule { }
