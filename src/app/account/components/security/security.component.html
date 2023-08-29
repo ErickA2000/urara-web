@@ -1,1 +1,56 @@
-<p>security works!</p>
+<div class="content-right-account">
+    <h2>Seguridad</h2>
+
+    <section class="vh-100 mb-2">
+        <mat-card>
+
+            <mat-card-header>
+                <mat-card-title>Cómo inicias sesión</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+                <div class="info-card" routerLink="/site/account/security/verify-2fa">
+                    <p class="title">Verificación en dos pasos</p>
+                    <p class="value verify-state">
+                        <button mat-mini-fab>
+                            <mat-icon>done</mat-icon>
+                        </button>
+                        Activa
+                    </p>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div class="info-card">
+                    <p class="title">Contraseña</p>
+                    <p class="value">**************</p>
+                </div>
+
+                <mat-divider></mat-divider>
+            </mat-card-content>
+
+        </mat-card>
+    </section>
+
+    <section class="vh-100 mb-2">
+
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Tus dispositivos</mat-card-title>
+                <mat-card-subtitle>Dónde has iniciado sesión</mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                <div class="info-card">
+                    <p class="title sessions">
+                        <mat-icon>computer</mat-icon>
+                        1 sesiones en uno o varios ordenadores Linux
+                    </p>
+                    <p class="value">Linux</p>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+    </section>
+
+</div>

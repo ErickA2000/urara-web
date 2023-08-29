@@ -1,0 +1,18 @@
+.verify-state{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.info-card:hover{
+    background-color: #eeeeee;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    color: black;
+}
+
+.sessions{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

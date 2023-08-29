@@ -36,6 +36,20 @@ body { margin: 0; font-family: 'Nunito', sans-serif; }
 
 
 //INICIO estilos globales para la vista del contenido de cuenta
+.info-card{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .title{
+        opacity: 70%;
+    }
+}
+
+.mb-2{
+    margin-bottom: 2rem;
+}
+
 .content-right-account{
     display: flex;
     flex-direction: column;
