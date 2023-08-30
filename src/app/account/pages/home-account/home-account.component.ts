@@ -29,7 +29,6 @@ export class HomeAccountComponent {
   }
 
   route( route: string, link: string ) {
-    console.log(`/site/account/${route}`);
     this.activeLink = link;
     this.sharedMethodServi.changeRoute( `/site/account/${route}` );
   }

@@ -6,6 +6,7 @@
     display: flex;
     justify-content: space-around;
     gap: 1rem;
+    flex-direction: column;
     
     .type-device-and-sessions{
         display: flex;
@@ -40,5 +41,11 @@
             }
             
         }
+    }
+}
+
+@media (min-width: 700px) {
+    .content{
+        flex-direction: row;
     }
 }
