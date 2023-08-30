@@ -12,24 +12,53 @@
         <mat-card>
             <mat-card-content>
 
-                <section>
+                <div class="content">
 
-                    <div class="icon-device">
-                        <mat-icon>computer</mat-icon>
-                    </div>
-                        <p></p>
-                        <p></p>
-                        <p></p>
-                        <p></p>
-                        <p></p>
-                    <div>
+                    <section class="part-1 mb-2">
+    
+                        <div class="content">
 
-                    </div>
-                </section>
+                            <div class="icon-device">
+                                <mat-icon>computer</mat-icon>
+                            </div>
+        
+                            <div class="text-p">
+        
+                                <p>Linux</p>
+                                <p>Colombia</p>
+                                <p>Estado: Activa</p>
+                                <p class="check-active">
+                                    <mat-icon color="primary">check_circle</mat-icon>
+                                    Tu sesión en curso
+                                </p>
+                                <p>Primer inicio de sesión: 8 de agosto</p>
+                            </div>
 
-                <section></section>
+                        </div>
 
-                <section></section>
+                        <div class="btns">
+                            <button mat-raised-button color="accent">
+                                <mat-icon>logout</mat-icon>
+                                Cerrar sesión
+                            </button>
+                        </div>
+                        
+                    </section>
+    
+                    <mat-divider></mat-divider>
+
+                    <section class="mb-2">
+                        <h3>ACTIVIDAD RECIENTE</h3>
+                        <p>Colombia  "fecha"</p>
+                    </section>
+                    
+                    <mat-divider></mat-divider>
+
+                    <section class="mb-2">
+                        <h3>NAVEGADOR</h3>
+                        <p>Chrome</p>
+                    </section>
+                </div>
 
             </mat-card-content>
         </mat-card>

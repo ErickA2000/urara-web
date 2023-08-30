@@ -1,0 +1,30 @@
+mat-card{
+    margin-bottom: 2rem;
+}
+
+.content{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1rem;
+
+    .img{
+        width: 5rem;
+        height: 5rem;
+        background-color: black;
+    }
+
+    .detail{
+        p{
+            margin: 0;
+        }
+
+        .state{
+            color: green;
+        }
+
+        .opasity{
+            opacity: 70%;
+        }
+    }
+}

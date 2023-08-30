@@ -1,1 +1,31 @@
-<p>buys works!</p>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>8 de agosto</mat-card-title>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+
+        <div class="content" *ngFor="let e of [0,1]">
+
+            <section class="img">
+                 <img src="" alt="">
+            </section>
+
+            <section class="detail">
+                <p class="state">Entregado</p>
+                <p>Llegó el 10 de agosto</p>
+                <p class="opasity">Nombre del producto</p>
+                <p class="opasity">Cantidad: 2</p>
+            </section>
+        </div>
+
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+        <button mat-raised-button color="primary" routerLink="/site/account/my-buys/purchase-detail">
+            Ver compra
+        </button>
+    </mat-card-actions>
+</mat-card>
