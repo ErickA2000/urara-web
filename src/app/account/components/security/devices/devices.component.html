@@ -1,7 +1,7 @@
 <div class="content-right-account">
 
     <section class="content-title">
-        <button mat-icon-button>
+        <button mat-icon-button (click)="back()">
             <mat-icon>arrow_back_ios</mat-icon>
         </button>
         <h2>Tus dispositivos</h2>
@@ -9,7 +9,7 @@
 
     <section class="vh-100">
 
-        <mat-card>
+        <mat-card class="device devices-linux">
             <mat-card-content>
 
                 <div class="content">
@@ -26,6 +26,158 @@
                         <div class="detail-session__content">
                             <div class="info">
                                 <p>Linux</p>
+                                <p>Colombia</p>
+                                <p>Chrome</p>
+                                <p class="actual-session">
+                                    <mat-icon color="primary">check_circle</mat-icon>
+                                    Tu sesión actual
+                                </p>
+                            </div>
+                            <div>
+                                <button mat-icon-button>
+                                    <mat-icon>arrow_forward_ios</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </section>
+                </div>
+
+
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="device devices-windows">
+            <mat-card-content>
+
+                <div class="content">
+
+                    <section class="type-device-and-sessions">
+                        <div class="icon-device">
+                            <mat-icon>computer</mat-icon>
+                        </div>
+
+                        <p>1 sesiones en uno o varios ordenadores Windows</p>
+                    </section>
+    
+                    <section class="detail-session">
+                        <div class="detail-session__content">
+                            <div class="info">
+                                <p>Windows</p>
+                                <p>Colombia</p>
+                                <p>Chrome</p>
+                                <p class="actual-session">
+                                    <mat-icon color="primary">check_circle</mat-icon>
+                                    Tu sesión actual
+                                </p>
+                            </div>
+                            <div>
+                                <button mat-icon-button>
+                                    <mat-icon>arrow_forward_ios</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </section>
+                </div>
+
+
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="device devices-android">
+            <mat-card-content>
+
+                <div class="content">
+
+                    <section class="type-device-and-sessions">
+                        <div class="icon-device">
+                            <mat-icon>smartphone</mat-icon>
+                        </div>
+
+                        <p>1 sesiones en uno o varios teledonos Android</p>
+                    </section>
+    
+                    <section class="detail-session">
+                        <div class="detail-session__content">
+                            <div class="info">
+                                <p>Android</p>
+                                <p>Colombia</p>
+                                <p>Chrome</p>
+                                <p class="actual-session">
+                                    <mat-icon color="primary">check_circle</mat-icon>
+                                    Tu sesión actual
+                                </p>
+                            </div>
+                            <div>
+                                <button mat-icon-button>
+                                    <mat-icon>arrow_forward_ios</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </section>
+                </div>
+
+
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="device devices-macos">
+            <mat-card-content>
+
+                <div class="content">
+
+                    <section class="type-device-and-sessions">
+                        <div class="icon-device">
+                            <mat-icon>devices</mat-icon>
+                        </div>
+
+                        <p>1 sesiones en uno o varios ordenadores o teléfonos Apple</p>
+                    </section>
+    
+                    <section class="detail-session">
+                        <div class="detail-session__content">
+                            <div class="info">
+                                <p>Apple</p>
+                                <p>Colombia</p>
+                                <p>Chrome</p>
+                                <p class="actual-session">
+                                    <mat-icon color="primary">check_circle</mat-icon>
+                                    Tu sesión actual
+                                </p>
+                            </div>
+                            <div>
+                                <button mat-icon-button>
+                                    <mat-icon>arrow_forward_ios</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </section>
+                </div>
+
+
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="device devices-others">
+            <mat-card-content>
+
+                <div class="content">
+
+                    <section class="type-device-and-sessions">
+                        <div class="icon-device">
+                            <mat-icon>devices</mat-icon>
+                        </div>
+
+                        <p>1 sesiones en uno o varios dispositivo Other</p>
+                    </section>
+    
+                    <section class="detail-session">
+                        <div class="detail-session__content">
+                            <div class="info">
+                                <p>Other</p>
                                 <p>Colombia</p>
                                 <p>Chrome</p>
                                 <p class="actual-session">

@@ -12,6 +12,7 @@ import { TwofaComponent } from './components/security/securityMethods/twofa/twof
 import { DevicesComponent } from './components/security/devices/devices.component';
 import { MyBuysComponent } from './components/myBuys/my-buys/my-buys.component';
 import { PurchaseDetailComponent } from './components/myBuys/purchase-detail/purchase-detail.component';
+import { OneDeviceComponent } from './components/security/one-device/one-device.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
           {
             path: "devices",
             component: DevicesComponent
+          },
+          {
+            path: "device",
+            component: OneDeviceComponent
           }
         ]
       },
