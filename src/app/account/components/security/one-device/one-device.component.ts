@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SharedMethodsService } from 'src/app/shared/services/shared-methods.service';
 
 @Component({
   selector: 'app-one-device',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./one-device.component.scss']
 })
 export class OneDeviceComponent {
+
+  constructor( private sharedMethodService: SharedMethodsService ) { }
+
+  back(){
+    this.sharedMethodService.backRoute();
+  }
 
 }
