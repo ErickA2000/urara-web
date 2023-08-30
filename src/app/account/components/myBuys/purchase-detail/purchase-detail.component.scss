@@ -58,7 +58,7 @@
     .detail-pay-shipment{
         .title{
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             cursor: pointer;
             color: $violet;
         }

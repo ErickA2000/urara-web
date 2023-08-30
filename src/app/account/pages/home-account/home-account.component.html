@@ -23,9 +23,23 @@
             </button>
         </section>
 
-        <section class="content">
-            <router-outlet></router-outlet>
+        <section class="account-content__tabs-movile">
+
+            <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="nav">
+                
+                <a mat-tab-link *ngFor="let link of links"
+                    (click)="route( link.en, link.es )"
+                    [active]="activeLink == link.es">{{link.es | titlecase}}</a>
+
+            </nav>
+            <mat-tab-nav-panel #tabPanel>
+                <router-outlet></router-outlet>
+            </mat-tab-nav-panel>
         </section>
+
+        <!-- <section class="content">
+            <router-outlet></router-outlet>
+        </section> -->
     </div>
 
 </main>

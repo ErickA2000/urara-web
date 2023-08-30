@@ -14,7 +14,7 @@
     min-height: 100vh;
 
     .account-content__btns{
-        display: flex;
+        display: none;
         flex-direction: column;
 
         .btn{
@@ -22,8 +22,37 @@
             justify-content: left;
         }
     }
+
+    @media (min-width: 700px) {
+        .account-content__btns{
+            display: flex;
+        }
+    }
 }
 
 .content{
+    display: none;
     width: 100%;
+}
+
+@media (min-width: 700px) {
+    .content{
+        display: block;
+    }
+}
+
+.account-content__tabs-movile{
+    width: 100%;
+
+    display: block;
+    
+}
+
+@media (min-width: 700px) {
+    .account-content__tabs-movile{
+        .nav{
+            display: none;
+        }
+  
+    }
 }
