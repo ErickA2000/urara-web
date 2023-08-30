@@ -1,1 +1,129 @@
-<p>purchase-detail works!</p>
+<div class="content-right-account">
+
+    <section class="content-title">
+        <button mat-icon-button>
+            <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <h2>Detalles de la compra</h2>
+    </section>
+
+    <section class="vh-100">
+        <mat-card class="mb-2">
+            <mat-card-content >
+
+                <div class="product">
+                    <section class="detail">
+                        <p>Nombre producto</p>
+                        <p>Cantidad: 2</p>
+                    </section>
+
+                    <section class="img">
+                        <img src="" alt="">
+                    </section>
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="mb-2">
+            <mat-card-content>
+
+                <div class="purchase-detail">
+
+                    <section class="envio mb-2">
+                        <p class="state">Entregado</p>
+                        <p>Llegó el 10 de agosto</p>
+                        <p>Se entrego en "direccion"</p>
+                    </section>
+
+                    <mat-divider></mat-divider>
+
+                    <section class="detail">
+                        <h3>Detalle de la compra</h3>
+                        <p class="date-ref">8 de agosto | #0000000000000005</p>
+
+                        <mat-divider></mat-divider>
+
+                        <div class="prices">
+
+                            <section class="products position">
+                                <p class="opasity">Productos (1)</p>
+                                <p class="opasity">COP107,00.00</p>
+                            </section>
+
+                            <section class="shipment position">
+                                <p class="opasity">Envio</p>
+                                <p>Gratis</p>
+                            </section>
+
+                            <mat-divider></mat-divider>
+
+                            <section class="total position">
+                                <p>Total</p>
+                                <div class="total-price">
+                                    <p>COP107,000.00</p>
+                                    <p>Martercard Débito</p>
+                                </div>
+                            </section>
+                        </div>
+                    </section>
+
+                    <section class="detail-pay-shipment">
+                        <p class="title" (click)="activeDetailPyment()">
+                            Detalle de pago y envío
+                            <mat-icon>expand_more</mat-icon>
+                        </p>
+
+                        <div [ngClass]="_activatePaymentAndShipment ? 'detail-pay-shipment-open' : 'detail-pay-shipment-close'">
+                            <section>
+
+                                <h3>Pago</h3>
+                                <mat-card>
+                                    <mat-card-content>
+                                        
+                                        <div class="payment-shipment">
+                                            <section class="icon">
+                                                <mat-icon>attach_money</mat-icon>
+                                            </section>
+
+                                            <section class="data">
+                                                <p>COP107,000.00</p>
+                                                <p class="opasity">Martedcard Díbito</p>
+                                                <p class="opasity">8 de agosto</p>
+                                                <p>Pago aprobado</p>
+                                            </section>
+                                        </div>
+
+                                    </mat-card-content>
+                                </mat-card>
+                            </section>
+
+                            <section style="margin-bottom: 2rem;">
+                                <h3>Envío</h3>
+                                <mat-card>
+                                    <mat-card-content>
+                                        <div class="payment-shipment">
+                                            <section class="icon">
+                                                <mat-icon>local_shipping</mat-icon>
+                                            </section>
+
+                                            <section class="data">
+                                                <p>Manzana 44</p>
+                                                <p class="opasity">Cúcuta, Norte de Santander</p>
+                                                
+                                            </section>
+                                        </div>
+                                    </mat-card-content>
+                                </mat-card>
+                            </section>
+                        </div>
+
+                    </section>
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+
+    </section>
+
+</div>

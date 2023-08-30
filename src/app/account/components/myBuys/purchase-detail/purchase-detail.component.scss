@@ -1,0 +1,109 @@
+@import 'src/_variables.scss';
+
+.product{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .img{
+        width: 5rem;
+        height: 5rem;
+        background-color: black;
+        border-radius: 5rem;
+
+        img{
+            width: 100%;
+        }
+    }
+}
+
+.purchase-detail{
+    .envio{
+        p{
+            margin: 0;
+        }
+
+        .state{
+            color: green;
+        }
+    }
+
+    .detail{
+        .date-ref{
+            opacity: 70%;
+        }
+
+        .prices{
+            .position{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .total{
+
+                .total-price{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: end;
+
+                    p{
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .detail-pay-shipment{
+        .title{
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: $violet;
+        }
+
+        .payment-shipment{
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            .icon{
+                width: 5rem;
+                height: 5rem;
+                
+                mat-icon{
+                    width: 100%;
+                    height: 100%;
+                    font-size: 5rem;
+
+                }
+            }
+
+            .data{
+                p{
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+.opasity{
+    opacity: 70%;
+}
+
+.detail-pay-shipment-open{
+    overflow: hidden;
+    max-height: 100rem;
+    transition-property: all;
+    transition-duration: 1s;
+    transition-timing-function: ease;
+}
+
+.detail-pay-shipment-close{
+    overflow: hidden;
+    max-height: 0rem;
+    transition-property: all;
+    transition-duration: 1s;
+    transition-timing-function: ease;
+}

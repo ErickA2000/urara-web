@@ -3,7 +3,7 @@
 @use '@glidejs/glide/src/assets/sass/glide.theme.scss';
 
 @import 'themes.scss';
-
+@import '_variables.scss';
 
 
 html, body { height: 100%; }
@@ -11,6 +11,10 @@ body { margin: 0; font-family: 'Nunito', sans-serif; }
 
 .border-botton-sheet mat-bottom-sheet-container {
     border-radius: 2rem 2rem 0 0;
+}
+
+.bg-g{
+    background-color: $background;
 }
 
 //INICIO estilos globales para la vista del contenido de auth

@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./purchase-detail.component.scss']
 })
 export class PurchaseDetailComponent {
+  _activatePaymentAndShipment: boolean = false;
 
+  activeDetailPyment(){
+    this._activatePaymentAndShipment = !this._activatePaymentAndShipment;
+  }
 }
