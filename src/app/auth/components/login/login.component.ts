@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { DialogsService } from 'src/app/shared/services/dialogs.service';
+import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
 
-  constructor( private fb: FormBuilder, private authService: AuthService ) {}
+  constructor( private fb: FormBuilder, private authService: AuthService, private dialogService: DialogsService ) {}
 
   loginForm: FormGroup = this.fb.group({
     username: [ '', [ Validators.required ] ],
@@ -18,13 +20,18 @@ export class LoginComponent {
 
   login(){
 
+    this.dialogService.open( SpinnerComponent, { 
+      panelClass: [ 'no-background' ],
+      disableClose: true
+    })
+
     console.log(this.loginForm.value)
 
-    this.authService.login( this.loginForm.value ).subscribe( 
-      res => {
-        
-      }
-    )
+    // this.authService.login( this.loginForm.value ).subscribe( 
+    //   res => {
+
+    //   }
+    // )
 
   }
 

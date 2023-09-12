@@ -47,11 +47,13 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
 
   openPayMethods(){
     this.dialogsService.open( PayMethodsComponent, 
-      { ...this.products, 
-        subtotal: this.subtotal,
-        total: this.total
-      } 
-      )
+      {
+        data: { ...this.products, 
+          subtotal: this.subtotal,
+          total: this.total
+        }
+      }   
+    )
   }
 
 }

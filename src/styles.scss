@@ -17,6 +17,14 @@ body { margin: 0; font-family: 'Nunito', sans-serif; }
     background-color: $background;
 }
 
+//INICIO mat dialog container
+.no-background .mat-mdc-dialog-container .mdc-dialog__surface{
+   background-color: rgba(0, 0, 0, 0);
+   box-shadow: none;
+   overflow: hidden;
+}
+//FIN mat dialog container
+
 //INICIO estilos globales para la vista del contenido de auth
 .content-auth{
 
