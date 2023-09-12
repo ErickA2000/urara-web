@@ -9,7 +9,7 @@
             <input matInput type="text" formControlName="code">
         </mat-form-field>
 
-        <a (click)="resendCode()" [ngClass]="totalTime == 0 ? 'text-back' : 'text-red' ">
+        <a (click)="resendCode()" [ngClass]="totalTime == 0 ? 'text-black' : 'text-red' ">
         Reenviar código {{totalTime}}
         </a>
 
