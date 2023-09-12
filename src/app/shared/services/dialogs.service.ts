@@ -12,4 +12,8 @@ export class DialogsService {
   open( component: ComponentType<any>, config?: MatDialogConfig ){
     this.dialog.open( component, config );
   }
+
+  close(){
+    this.dialog.closeAll();
+  }
 }
