@@ -14,6 +14,9 @@ interface ImportMetaEnv {
   readonly NG_APP_URL_API: string;
   readonly NG_APP_URL_BACK: string;
   readonly NG_APP_PASS_ENCRYPT: string;
+  readonly NG_APP_IPINFO_URL: string;
+  readonly NG_APP_IPINFO_IP: string;
+  readonly NG_APP_IPINFO_TOKEN: string;
 }
 
 /*
