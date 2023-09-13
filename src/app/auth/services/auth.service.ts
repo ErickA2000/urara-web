@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { DeviceService } from './device.service';
 import { IResponse } from 'src/app/interfaces/global.interface';
 import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-local.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,8 @@ export class AuthService {
     return { ...this._user }
   }
 
-  constructor( private http: HttpClient, private deviceService: DeviceService, private transferDataLocalService: TransferDataLocalService ) { }
+  constructor( private http: HttpClient, private deviceService: DeviceService, private transferDataLocalService: TransferDataLocalService,
+    private router: Router ) { }
 
   register( dataRegister: IDataRegister ): Observable<IResponseLogin>{
     const url = `${this.baseUrl}/auth/registro`;
@@ -193,6 +195,7 @@ export class AuthService {
   logout(){
     this.inLogin.emit(false);
     localStorage.removeItem('token');
+    this.router.navigate(['/site/home']);
   }
 
 }
