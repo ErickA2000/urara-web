@@ -16,7 +16,7 @@ export class LoginComponent {
 
   constructor( private fb: FormBuilder, private authService: AuthService, private dialogService: DialogsService,
     private router: Router, private deviceService: DeviceService ) {
-      console.log(this.deviceService.createObjDevice(window.navigator.userAgent))
+      this.deviceService.createObjDevice(window.navigator.userAgent);
     }
 
   loginForm: FormGroup = this.fb.group({
@@ -43,16 +43,33 @@ export class LoginComponent {
               }
             });
             this.dialogService.close();
+
+          }else{
+            this.addDevice();
           }
 
         }else{
           this.dialogService.close();
-          alertSwal.messageError( "Error al iniciar sesión:" + res.message )
+          alertSwal.messageError( res.message || "Error al iniciar sesión" )
         }
 
       }
     )
 
+  }
+
+  private addDevice( ){
+    this.deviceService.addDevice().subscribe(
+      res => {
+        if( res.success ){
+          this.dialogService.close();
+          this.router.navigate(['/site/home']);
+        }else{
+          this.dialogService.close();
+          alertSwal.messageError( "Error al iniciar sesión " + res.message )
+        }
+      }
+    )
   }
 
 }

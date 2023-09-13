@@ -15,6 +15,7 @@ export class AuthService {
 
   private baseUrl: string = environment.API_URL;
   private _user!: IdataUser;
+  public token?: string;
 
   get user(){
     return { ...this._user }
@@ -29,7 +30,10 @@ export class AuthService {
     let credentialsEncrypt!: IcredencialesEncrypt;
     try {
       const encrypt = encryptAndDecrypt.encrypt( credenciales );
-      credentialsEncrypt.reqEncrypt = encrypt;
+      credentialsEncrypt = {
+        reqEncrypt: encrypt
+      };
+
     } catch (error) {
       alertSwal.messageError( "Error encrypt:" + error );
     }
@@ -40,7 +44,12 @@ export class AuthService {
           
           if( res.body?.success ){
 
-            localStorage.setItem( 'token', res.headers.get('token') || "" );
+            if( res.body.message === "verification_in_process" ){
+              this.token = res.headers.get('token') || undefined;
+            }else{
+              localStorage.setItem( 'token', res.headers.get('token') || "" );
+            }
+
 
             try {
               if( res.body.data ){
