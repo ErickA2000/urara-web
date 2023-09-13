@@ -140,4 +140,25 @@ export class AuthService {
       )
   }
 
+  resetPass( email: { email: string } ): Observable<IResponseLogin>{
+    const url = `${this.baseUrl}/auth/restablecerClave`;
+
+    try {
+      const encrypt = encryptAndDecrypt.encrypt( email );
+      const dataEncrypt: IcredencialesEncrypt = {
+        reqEncrypt: encrypt
+      };
+
+      return this.http.post<IResponseLogin>( url, dataEncrypt )
+        .pipe(
+          catchError( err => of(err.error) )
+        )
+
+    } catch (error: any) {
+      alertSwal.messageError("Error encrypt: " + error);
+
+      return of(error);
+    }
+  }
+
 }
