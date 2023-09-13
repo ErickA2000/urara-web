@@ -17,6 +17,11 @@
         "build": {
           "builder": "@ngx-env/builder:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "sweetalert2",
+              "bowser",
+              "crypto-js"
+            ],
             "outputPath": "dist/urara-web",
             "index": "src/index.html",
             "main": "src/main.ts",

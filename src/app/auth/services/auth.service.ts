@@ -130,4 +130,14 @@ export class AuthService {
         catchError( err => of(err.error) )
       )
   }
+
+  confirmAccount( token: string ): Observable<IResponseLogin>{
+    const url = `${this.baseUrl}/auth/confirm/${token}`;
+
+    return this.http.get<IResponseLogin>( url )
+      .pipe(
+        catchError( err => of(err.error) )
+      )
+  }
+
 }
