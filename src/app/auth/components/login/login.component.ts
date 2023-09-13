@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { DialogsService } from 'src/app/shared/services/dialogs.service';
-import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 import alertSwal from 'src/app/utils/alertSwal';
 import { Router } from '@angular/router';
 import { DeviceService } from '../../services/device.service';
@@ -26,10 +25,7 @@ export class LoginComponent {
 
   login(){
 
-    this.dialogService.open( SpinnerComponent, { 
-      panelClass: [ 'no-background' ],
-      disableClose: true
-    })
+    this.dialogService.openSpinner();
 
     this.authService.login( this.loginForm.value ).subscribe( 
       res => {

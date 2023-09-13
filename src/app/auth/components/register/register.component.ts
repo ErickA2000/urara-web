@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { DialogsService } from 'src/app/shared/services/dialogs.service';
 import { CustomValidator } from 'src/app/utils/custom.validators';
+import { AuthService } from '../../services/auth.service';
+import alertSwal from 'src/app/utils/alertSwal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +15,7 @@ export class RegisterComponent {
 
   prefijos = [ "+57" ];
 
-  constructor( private fb: FormBuilder ) { }
+  constructor( private fb: FormBuilder, private dialogService: DialogsService, private authService: AuthService, private router: Router ) { }
 
   registerForm: FormGroup = this.fb.group({
     nombre: [ "", [ Validators.required, Validators.minLength(3), Validators.pattern(/^[A-Za-z ]+$/) ] ],
@@ -42,8 +46,30 @@ export class RegisterComponent {
   }
 
   register(){
-    //encriptar objeto de formulario
-    console.log(this.registerForm.value)
+    
+    this.dialogService.openSpinner();
+
+    this.registerForm.get('confirmarClave')?.disable();
+    this.registerForm.get('terminos')?.disable();
+
+    this.authService.register( this.registerForm.value ).subscribe(
+      res => {
+        if( res.success ){
+
+          this.dialogService.close();
+          alertSwal.messageSuccess( "Registro", res.message || "" );
+          this.router.navigate(['/auth/login']);
+
+        }else{
+
+          this.dialogService.close();
+          alertSwal.messageError( res.message || "Problemas al registrar" );
+          this.registerForm.get('confirmarClave')?.enable();
+          this.registerForm.get('terminos')?.enable();
+        }
+      }
+    )
+
   }
 
 }
