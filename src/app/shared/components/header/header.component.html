@@ -46,25 +46,29 @@
                 </button>
 
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item routerLink="/auth/login">
-                        <mat-icon>login</mat-icon>
-                        <span>Ingresar</span>
-                    </button>
+                    <ng-container *ngIf="!inSesion">
+                        <button mat-menu-item routerLink="/auth/login">
+                            <mat-icon>login</mat-icon>
+                            <span>Ingresar</span>
+                        </button>
+    
+                        <button mat-menu-item routerLink="/auth/register">
+                            <mat-icon>add</mat-icon>
+                            <span>Registrarse</span>
+                        </button>
+                    </ng-container>
 
-                    <button mat-menu-item routerLink="/auth/register">
-                        <mat-icon>add</mat-icon>
-                        <span>Registrarse</span>
-                    </button>
-
-                    <button mat-menu-item routerLink="/site/account">
-                        <mat-icon>account_circle</mat-icon>
-                        <span>Cuenta</span>
-                    </button>
-
-                    <button mat-menu-item>
-                        <mat-icon>logout</mat-icon>
-                        <span>Cerrar Sesión</span>
-                    </button>
+                    <ng-container *ngIf="inSesion">
+                        <button mat-menu-item routerLink="/site/account">
+                            <mat-icon>account_circle</mat-icon>
+                            <span>Cuenta</span>
+                        </button>
+    
+                        <button mat-menu-item (click)="logout()">
+                            <mat-icon>logout</mat-icon>
+                            <span>Cerrar Sesión</span>
+                        </button>
+                    </ng-container>
 
                 </mat-menu>
 

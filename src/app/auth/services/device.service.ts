@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import encryptAndDecrypt from 'src/app/utils/encryptAndDecrypt';
+import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-local.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class DeviceService {
     return { ...this._device }
   }
 
-  constructor( private geoLocationService: GeolocationService, private authService: AuthService, private http: HttpClient ) { }
+  constructor( private geoLocationService: GeolocationService, private transferDataLocalService: TransferDataLocalService, private http: HttpClient ) { }
 
   public createObjDevice( userAgent: string ){
     const browser = Bowser.getParser( userAgent );
@@ -65,9 +66,9 @@ export class DeviceService {
     const url = `${this.baseUrl}/devices/add`;
     let headers: HttpHeaders;
 
-    if( this.authService.token ){
+    if( this.transferDataLocalService.token ){
       headers = new HttpHeaders()
-        .set( 'token', this.authService.token );
+        .set( 'token', this.transferDataLocalService.token );
     }else{
       headers = new HttpHeaders()
         .set('token', localStorage.getItem('token') || "");
@@ -89,5 +90,17 @@ export class DeviceService {
       return of(error)
     }
 
+  }
+
+  public verifyDevice(): Observable<IResponse>{
+    const url = `${this.baseUrl}/devices/verify`;
+
+    const headers = new HttpHeaders()
+      .set( 'token', localStorage.getItem('token') || "" );
+    
+    return this.http.get<IResponse>( url, { headers } )
+      .pipe(
+        catchError( err => of(err.error) )
+      )
   }
 }

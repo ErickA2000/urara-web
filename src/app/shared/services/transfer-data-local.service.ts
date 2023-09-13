@@ -8,5 +8,7 @@ export class TransferDataLocalService {
 
   @Output() transferDataOrderSummary: EventEmitter<ItransferDataOrderSummary> = new EventEmitter();
 
+  public token?: string;
+
   constructor() { }
 }

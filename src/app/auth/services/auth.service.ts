@@ -1,12 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { tap, map, catchError } from "rxjs/operators";
+import { tap, map, catchError, switchMap } from "rxjs/operators";
 import { IDataRegister, IResponseLogin, Icredenciales, IcredencialesEncrypt } from 'src/app/interfaces/auth/auth.interface';
 import { IdataUser } from 'src/app/interfaces/auth/user.interface';
 import alertSwal from 'src/app/utils/alertSwal';
 import encryptAndDecrypt from 'src/app/utils/encryptAndDecrypt';
 import { environment } from 'src/environments/environment';
+import { DeviceService } from './device.service';
+import { IResponse } from 'src/app/interfaces/global.interface';
+import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-local.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,7 @@ export class AuthService {
 
   private baseUrl: string = environment.API_URL;
   private _user!: IdataUser;
-  public token?: string;
+  public token_temp?: string;
 
   @Output() inLogin: EventEmitter<boolean> = new EventEmitter();
 
@@ -23,7 +26,7 @@ export class AuthService {
     return { ...this._user }
   }
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, private deviceService: DeviceService, private transferDataLocalService: TransferDataLocalService ) { }
 
   register( dataRegister: IDataRegister ): Observable<IResponseLogin>{
     const url = `${this.baseUrl}/auth/registro`;
@@ -67,7 +70,7 @@ export class AuthService {
           if( res.body?.success ){
 
             if( res.body.message === "verification_in_process" ){
-              this.token = res.headers.get('token') || undefined;
+              this.transferDataLocalService.token = res.headers.get('token') || undefined;
             }else{
               localStorage.setItem( 'token', res.headers.get('token') || "" );
             }
@@ -159,6 +162,37 @@ export class AuthService {
 
       return of(error);
     }
+  }
+
+  validateToken(): Observable<boolean>{
+    const url = `${this.baseUrl}/users/perfil`;
+
+    const headers = new HttpHeaders()
+      .set( 'token', localStorage.getItem('token') || "" );
+
+    return this.deviceService.verifyDevice()
+      .pipe(
+        switchMap( (resDevice: IResponse ) => this.http.get<IResponse>( url, { headers } )
+          .pipe( 
+            map( resUser => {
+              
+              if( !resDevice.success ){
+                return false;
+              }
+
+              return resUser.success
+
+            } ),
+            catchError( err => of(false) )
+          )
+          
+        )
+      )
+  }
+
+  logout(){
+    this.inLogin.emit(false);
+    localStorage.removeItem('token');
   }
 
 }
