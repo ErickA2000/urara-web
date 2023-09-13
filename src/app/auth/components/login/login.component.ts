@@ -63,6 +63,7 @@ export class LoginComponent {
       res => {
         if( res.success ){
           this.dialogService.close();
+          this.authService.inLogin.emit(true);
           this.router.navigate(['/site/home']);
         }else{
           this.dialogService.close();
