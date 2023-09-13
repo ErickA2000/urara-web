@@ -5,6 +5,7 @@ import { DialogsService } from 'src/app/shared/services/dialogs.service';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 import alertSwal from 'src/app/utils/alertSwal';
 import { Router } from '@angular/router';
+import { DeviceService } from '../../services/device.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,9 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   constructor( private fb: FormBuilder, private authService: AuthService, private dialogService: DialogsService,
-    private router: Router ) {}
+    private router: Router, private deviceService: DeviceService ) {
+      console.log(this.deviceService.createObjDevice(window.navigator.userAgent))
+    }
 
   loginForm: FormGroup = this.fb.group({
     username: [ '', [ Validators.required ] ],
