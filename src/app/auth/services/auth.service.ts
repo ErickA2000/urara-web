@@ -19,7 +19,6 @@ export class AuthService {
 
   private baseUrl: string = environment.API_URL;
   private _user!: IdataUser;
-  public token_temp?: string;
 
   @Output() inLogin: EventEmitter<boolean> = new EventEmitter();
 
@@ -180,6 +179,13 @@ export class AuthService {
               
               if( !resDevice.success ){
                 return false;
+              }
+
+              try {
+                const decrypt = encryptAndDecrypt.decrypt( resUser.data as string ) as IdataUser;
+                this._user = decrypt;
+              } catch (error) {
+                alertSwal.messageError( "Error decrypt:" + error );
               }
 
               return resUser.success

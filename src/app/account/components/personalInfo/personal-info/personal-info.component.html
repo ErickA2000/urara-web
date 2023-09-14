@@ -11,14 +11,14 @@
 
                 <div class="info-card">
                     <p class="title">Nombre</p>
-                    <p class="value">Erick Wladimir Arevalo Navarro</p>
+                    <p class="value">{{ dataUser?.nombre | titlecase }}</p>
                 </div>
 
                 <mat-divider></mat-divider>
 
                 <div class="info-card">
                     <p class="title">Nombre de usuario</p>
-                    <p class="value">erickare</p>
+                    <p class="value">{{ dataUser?.username }}</p>
                 </div>
 
                 <mat-divider></mat-divider>
@@ -43,14 +43,14 @@
 
                 <div class="info-card">
                     <p class="title">Email</p>
-                    <p class="value">erick@gmail.com</p>
+                    <p class="value">{{ dataUser?.email }}</p>
                 </div>
 
                 <mat-divider></mat-divider>
 
                 <div class="info-card">
                     <p class="title">Teléfono</p>
-                    <p class="value">+57 3124567890</p>
+                    <p class="value">{{ dataUser?.telefono?.codigo_area }} {{ dataUser?.telefono?.numero }}</p>
                 </div>
 
                 <mat-divider></mat-divider>
