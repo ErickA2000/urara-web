@@ -6,11 +6,13 @@ import { ForgetPassComponent } from './components/forget-pass/forget-pass.compon
 import { Verify2faComponent } from './components/verify2fa/verify2fa.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ConfirmAccountComponent } from './pages/confirm-account/confirm-account.component';
+import { inSesionGuard } from '../guards/in-sesion.guard';
 
 const routes: Routes = [
   {
     path: "",
     component: HomeComponent,
+    canActivate: [ inSesionGuard ],
     children: [
       {
         path: '',

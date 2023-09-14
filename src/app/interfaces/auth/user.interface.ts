@@ -12,6 +12,15 @@ export interface IdataUser{
     updatedAt?: string
 }
 
+export interface IDataUserOptional{
+    nombre?: string,
+    telefono?: telefono,
+    email?: string,
+    username?: string,
+    clave?: string,
+    verify2fa?: Iverify2fa
+}
+
 interface Iroles{
     _id: string,
     nombre: string
@@ -32,4 +41,9 @@ export interface Iverify2fa{
 export interface ImetodoVerify{
     tipo: string;
     estado: boolean
+}
+
+export interface IChangePassword{
+    claveAntigua: string;
+    claveNueva: string;
 }
