@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { IChangePassword, IDataUserOptional } from 'src/app/interfaces/auth/user.interface';
 import { IRequestEncrypt, IResponse } from 'src/app/interfaces/global.interface';
 import encryptAndDecrypt from 'src/app/utils/encryptAndDecrypt';
@@ -13,7 +14,7 @@ export class UserService {
 
   private baseUrl = environment.API_URL;
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, private authService: AuthService ) { }
 
   public updateData( data: IDataUserOptional ): Observable<IResponse>{
     const url = `${this.baseUrl}/users/update`;

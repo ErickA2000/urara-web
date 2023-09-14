@@ -8,43 +8,56 @@
     </section>
 
     <section class="vh-100">
-        <mat-card>
-            <mat-card-content>
 
-                <div class="card-active-2fa">
+        <form [formGroup]="formVerify2fa">
 
-                    <p>La verificación en dos pasos está ACTIVADA desde el “FECHA”</p>
-                    <button mat-raised-button color="primary">
-                        Desactivar
-                    </button>
+            <mat-card>
+                <mat-card-content>
+    
+                    <div class="card-active-2fa">
+    
+                        <p>La verificación en dos pasos está {{ stateVerify2fa.state | uppercase }} 
+                            <span *ngIf="stateVerify2fa.fechaActivacion">desde {{ stateVerify2fa.fechaActivacion | date: 'medium' }}</span>
+                        </p>
+                        <button mat-raised-button color="primary" (click)="enableOrDisableVerify2fa()">
+                            {{ stateVerify2fa.textBtn | titlecase }}
+                        </button>
+    
+                    </div>
+                </mat-card-content>
+            </mat-card>
+    
+            <h3>Segundos pasos disponibles</h3>
+            <p>Al realizar un segundo paso después de introducir la contraseña, verificamos que eres tú quien ha iniciado sesión.</p>
+    
+            <mat-divider></mat-divider>
+    
+            <mat-card class="mt-2">
+                <mat-card-content>
+                    <ng-container formArrayName="metodos">
+                        <ng-container *ngFor="let metodoForm of methods.controls; let i = index">
 
-                </div>
-            </mat-card-content>
-        </mat-card>
+                            <div class="method-2fa" [formGroup]="getMethodByIndex(i)">
+                                <section>
+                                    <h3>Correo electronico</h3>
+                                    <p>Llega un código de seis dígitos al correo electrónico de la cuenta después de ingresar la contraseña. Debe introducir el código cuando se solicite para poder acceder.</p>
+                                </section>
+            
+                                <section>
+                                    <mat-slide-toggle formControlName="estado"></mat-slide-toggle>
+                                </section>
+                            </div>
+            
+                            <mat-divider></mat-divider>
 
-        <h3>Segundos pasos disponibles</h3>
-        <p>Al realizar un segundo paso después de introducir la contraseña, verificamos que eres tú quien ha iniciado sesión.</p>
+                        </ng-container>
+                    </ng-container>
+    
+                </mat-card-content>
+            </mat-card>
 
-        <mat-divider></mat-divider>
+        </form>
 
-        <mat-card class="mt-2">
-            <mat-card-content>
-                
-                <div class="method-2fa">
-                    <section>
-                        <h3>Correo electronico</h3>
-                        <p>Llega un código de seis dígitos al correo electrónico de la cuenta después de ingresar la contraseña. Debe introducir el código cuando se solicite para poder acceder.</p>
-                    </section>
-
-                    <section>
-                        <mat-slide-toggle></mat-slide-toggle>
-                    </section>
-                </div>
-
-                <mat-divider></mat-divider>
-
-            </mat-card-content>
-        </mat-card>
 
     </section>
 

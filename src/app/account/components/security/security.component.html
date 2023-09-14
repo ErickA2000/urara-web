@@ -12,8 +12,8 @@
             <div class="info-card" routerLink="/site/account/security/verify-2fa">
                     <p class="title">Verificación en dos pasos</p>
                     <p class="value verify-state">
-                        <mat-icon color="primary">check_circle</mat-icon>
-                        Activa
+                        <mat-icon color="primary">{{ stateVerify2fa.icon }}</mat-icon>
+                        {{ stateVerify2fa.state | titlecase }}
                     </p>
                 </div>
 
