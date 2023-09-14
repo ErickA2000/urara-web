@@ -1,5 +1,6 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { ItransferDataOrderSummary } from '../interfaces/transfer-data';
+import { IdataUser } from 'src/app/interfaces/auth/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { ItransferDataOrderSummary } from '../interfaces/transfer-data';
 export class TransferDataLocalService {
 
   @Output() transferDataOrderSummary: EventEmitter<ItransferDataOrderSummary> = new EventEmitter();
+  @Output() dataUser: EventEmitter<IdataUser> = new EventEmitter();
 
   public token?: string;
 

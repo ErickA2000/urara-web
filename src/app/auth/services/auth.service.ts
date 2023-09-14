@@ -27,7 +27,12 @@ export class AuthService {
   }
 
   constructor( private http: HttpClient, private deviceService: DeviceService, private transferDataLocalService: TransferDataLocalService,
-    private router: Router ) { }
+    private router: Router ) {
+
+      this.transferDataLocalService.dataUser.subscribe(
+        user => this._user = user
+      );
+    }
 
   register( dataRegister: IDataRegister ): Observable<IResponseLogin>{
     const url = `${this.baseUrl}/auth/registro`;

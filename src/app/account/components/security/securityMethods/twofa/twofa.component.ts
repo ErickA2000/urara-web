@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/account/services/user.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { IdataUser, ImetodoVerify } from 'src/app/interfaces/auth/user.interface';
@@ -99,7 +99,6 @@ export class TwofaComponent implements OnInit, OnDestroy {
       }
     )
 
-    console.log(this.formVerify2fa.value)
   }
 
   private enableOrDisableMethod(){
