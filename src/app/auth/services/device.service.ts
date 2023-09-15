@@ -28,6 +28,12 @@ export class DeviceService {
   constructor( private geoLocationService: GeolocationService, private transferDataLocalService: TransferDataLocalService, private http: HttpClient ) { }
 
   public createObjDevice( userAgent: string ){
+
+    /**
+     * @description
+     * En el parametro recibe el userAgent
+     */
+
     const browser = Bowser.getParser( userAgent );
     const browserInfo = browser.getBrowser();
     const osInfo = browser.getOS();
