@@ -110,7 +110,6 @@ export class AuthService {
           res => {
 
             if( res.body?.success ){
-              
               localStorage.setItem( 'token', res.headers.get('token') || "" );
 
               try {
@@ -181,11 +180,11 @@ export class AuthService {
         switchMap( (resDevice: IResponse ) => this.http.get<IResponse>( url, { headers } )
           .pipe( 
             map( resUser => {
-              
+
               if( !resDevice.success ){
                 return false;
               }
-
+              
               try {
                 const decrypt = encryptAndDecrypt.decrypt( resUser.data as string ) as IdataUser;
                 this._user = decrypt;
@@ -196,7 +195,10 @@ export class AuthService {
               return resUser.success
 
             } ),
-            catchError( err => of(false) )
+            catchError( err => {
+              localStorage.removeItem('token');
+              return of(false)
+            } )
           )
           
         )

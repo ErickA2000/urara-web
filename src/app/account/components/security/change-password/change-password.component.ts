@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { UserService } from 'src/app/account/services/user.service';
+import { DialogsService } from 'src/app/shared/services/dialogs.service';
+import alertSwal from 'src/app/utils/alertSwal';
 import { CustomValidator } from 'src/app/utils/custom.validators';
 
 @Component({
@@ -9,10 +12,12 @@ import { CustomValidator } from 'src/app/utils/custom.validators';
 })
 export class ChangePasswordComponent {
 
-  constructor( private fb: FormBuilder  ) { }
+  constructor( private fb: FormBuilder, private dialogsService: DialogsService, private userService: UserService  ) { }
 
   changePassForm: FormGroup = this.fb.group({
-    clave: [ "", [ Validators.required, Validators.minLength(6),
+    claveAntigua: [ "", [ Validators.required, Validators.minLength(6), 
+      Validators.pattern(/^(?=[A-Za-z@_]+[0-9]{1,9}|[0-9]+[A-Za-z@_]{1,9})[A-Za-z0-9@_]{2,30}$/) ] ],
+    claveNueva: [ "", [ Validators.required, Validators.minLength(6),
       Validators.pattern(/^(?=[A-Za-z@_]+[0-9]{1,9}|[0-9]+[A-Za-z@_]{1,9})[A-Za-z0-9@_]{2,30}$/) ] ],
     confirmarClave: [ "", [ Validators.required, Validators.minLength(6),
       Validators.pattern(/^(?=[A-Za-z@_]+[0-9]{1,9}|[0-9]+[A-Za-z@_]{1,9})[A-Za-z0-9@_]{2,30}$/) ] ]
@@ -21,9 +26,9 @@ export class ChangePasswordComponent {
   validateConfirmPass(): boolean | null | undefined {
     let res!: ValidationErrors | null;
 
-    if( !this.changePassForm.get('clave')?.dirty && !this.changePassForm.get('confirmarClave')?.dirty ) return null;
+    if( !this.changePassForm.get('claveNueva')?.dirty && !this.changePassForm.get('confirmarClave')?.dirty ) return null;
 
-    res = CustomValidator.validateTwoValues(this.changePassForm.get('clave')?.value, 
+    res = CustomValidator.validateTwoValues(this.changePassForm.get('claveNueva')?.value, 
     this.changePassForm.get("confirmarClave")?.value);
 
     this.changePassForm.get('confirmarClave')?.setErrors(res);
@@ -33,9 +38,20 @@ export class ChangePasswordComponent {
   }
 
   saveChangePass(){
-    //encriptar objeto de formulario
+    this.dialogsService.openSpinner();
+    this.changePassForm.get('confirmarClave')?.disable();    
 
-    console.log(this.changePassForm.value)
+    this.userService.updatePassword( this.changePassForm.value ).subscribe(
+      res => {
+        if( res.success ){
+          this.dialogsService.close();
+          alertSwal.messageSuccess( "Cambio contraseña", res.message || "" );
+        }else{
+          this.dialogsService.close();
+          alertSwal.messageError( res.message || "Error al cambiar la contraseña" );
+        }
+      }
+    )
   }
 
 }

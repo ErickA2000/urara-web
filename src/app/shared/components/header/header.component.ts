@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         res => {
           this.inSesion = res;
           this.authService.inLogin.emit(res);
+          if( !res ) localStorage.removeItem('token');
         }
       )
 
