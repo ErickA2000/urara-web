@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as Bowser from 'bowser';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { IDevice } from 'src/app/interfaces/auth/device.interface';
 import { IRequestEncrypt, IResponse } from 'src/app/interfaces/global.interface';
 import { GeolocationService } from 'src/app/shared/services/geolocation.service';
 import listCountries from 'src/assets/listCountries.json';
 import { environment } from 'src/environments/environment';
-import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import encryptAndDecrypt from 'src/app/utils/encryptAndDecrypt';
 import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-local.service';
@@ -109,4 +108,61 @@ export class DeviceService {
         catchError( err => of(err.error) )
       )
   }
+
+  public getDevice(): Observable<IResponse>{
+    const url = `${this.baseUrl}/devices/this`;
+
+    const headers = new HttpHeaders()
+    .set( 'token', localStorage.getItem('token') || '' );
+
+    return this.http.get<IResponse>( url, { headers } )
+      .pipe(
+        tap( res => {
+
+          try {
+            const decrypt = encryptAndDecrypt.decrypt( res.data as string );
+            return res.data = decrypt;
+
+          } catch (error: any) {
+            return of("Algo va mal:" + error)
+          }
+        }),
+        catchError( err => of(err.error) )
+      )
+  }
+
+  public getDevices(): Observable<IResponse>{
+    const url = `${this.baseUrl}/devices/user`;
+
+    const headers = new HttpHeaders()
+    .set('token', localStorage.getItem('token') || "");
+
+    return this.http.get<IResponse>( url, { headers } )
+      .pipe(
+        catchError( err => of(err.error) )
+      )
+  }
+
+  public updateStateDevice( deviceID: string, state: IDevice ): Observable<IResponse>{
+    const url = `${this.baseUrl}/devices/update/${deviceID}`;
+
+    const headers = new HttpHeaders()
+    .set( 'token', localStorage.getItem('token') || "" );
+
+    try {
+      const encrypt = encryptAndDecrypt.encrypt( state );
+      const device: IRequestEncrypt = {
+        reqEncrypt: encrypt
+      };
+
+      return this.http.put<IResponse>( url, device, { headers } )
+        .pipe(
+          catchError( err => of(err.error) )
+        )
+
+    } catch (error:any) {
+      return of(error)
+    }
+  } 
+
 }

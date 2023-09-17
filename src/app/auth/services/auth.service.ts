@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, ObservableInput, of } from 'rxjs';
 import { tap, map, catchError, switchMap } from "rxjs/operators";
 import { IDataRegister, IResponseLogin, Icredenciales, IcredencialesEncrypt } from 'src/app/interfaces/auth/auth.interface';
 import { IdataUser } from 'src/app/interfaces/auth/user.interface';
@@ -11,6 +11,7 @@ import { DeviceService } from './device.service';
 import { IResponse } from 'src/app/interfaces/global.interface';
 import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-local.service';
 import { Router } from '@angular/router';
+import { IDevice } from 'src/app/interfaces/auth/device.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -206,6 +207,12 @@ export class AuthService {
   }
 
   logout(){
+
+    // return this.deviceService.getDevice()
+    //   .pipe(
+    //     switchMap( ( resDevice: IResponse )=> this.deviceService.updateStateDevice( resDevice.data['_id'], { estado: "inactiva", activa: false } ))
+    //   )
+
     this.inLogin.emit(false);
     localStorage.removeItem('token');
     this.router.navigate(['/site/home']);
