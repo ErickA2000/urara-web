@@ -139,6 +139,18 @@ export class DeviceService {
 
     return this.http.get<IResponse>( url, { headers } )
       .pipe(
+        tap( res => {
+
+          try {
+            const decrypt: IDevice[] = encryptAndDecrypt.decrypt( res.data as string );
+            return res.decryptData = decrypt;
+            
+            
+          } catch (error:any) {
+            return of( "Algo va mal:"+ error)
+          }
+
+        }),
         catchError( err => of(err.error) )
       )
   }

@@ -17,3 +17,11 @@ export interface IDeviceView extends IDevice{
     icon?: string;
     thisDevice?: boolean;
 }
+
+export interface ISortDevices{
+    linux?: IDeviceView[];
+    windows?: IDeviceView[];
+    android?: IDeviceView[];
+    ios?: IDeviceView[];
+    other?: IDeviceView[];
+}

@@ -39,12 +39,44 @@
             </mat-card-header>
 
             <mat-card-content>
-                <div class="info-card" routerLink="/site/account/security/devices">
+                <div class="info-card" routerLink="/site/account/security/devices" *ngIf="devicesSort?.linux?.length != 0">
                     <p class="title sessions">
                         <mat-icon>computer</mat-icon>
-                        1 sesiones en uno o varios ordenadores Linux
+                        {{ devicesSort?.linux?.length }} sesiones en uno o varios ordenadores Linux
                     </p>
                     <p class="value">Linux</p>
+                </div>
+
+                <div class="info-card" routerLink="/site/account/security/devices" *ngIf="devicesSort?.windows?.length != 0">
+                    <p class="title sessions">
+                        <mat-icon>computer</mat-icon>
+                        {{ devicesSort?.windows?.length }} sesiones en uno o varios ordenadores Windows
+                    </p>
+                    <p class="value">Windows</p>
+                </div>
+
+                <div class="info-card" routerLink="/site/account/security/devices" *ngIf="devicesSort?.android?.length != 0">
+                    <p class="title sessions">
+                        <mat-icon>smartphone</mat-icon>
+                        {{ devicesSort?.android?.length }} sesiones en uno o varios smartphone Android
+                    </p>
+                    <p class="value">Android</p>
+                </div>
+
+                <div class="info-card" routerLink="/site/account/security/devices" *ngIf="devicesSort?.ios?.length != 0">
+                    <p class="title sessions">
+                        <mat-icon>devices</mat-icon>
+                        {{ devicesSort?.ios?.length }} sesiones en uno o varios ordenadores Apple
+                    </p>
+                    <p class="value">Apple</p>
+                </div>
+
+                <div class="info-card" routerLink="/site/account/security/devices" *ngIf="devicesSort?.other?.length != 0">
+                    <p class="title sessions">
+                        <mat-icon>devices</mat-icon>
+                        {{ devicesSort?.other?.length }} sesiones en uno o varios dispositivos
+                    </p>
+                    <p class="value">Other</p>
                 </div>
             </mat-card-content>
         </mat-card>
