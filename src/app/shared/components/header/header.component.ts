@@ -2,6 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import alertSwal from 'src/app/utils/alertSwal';
 
 @Component({
   selector: 'app-header',
@@ -58,7 +59,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logout(){
-    this.authService.logout();
+    this.authService.logout().subscribe( res => {
+    
+      if( !res.success ){
+        alertSwal.messageError( res.message || "Error al cerrar sesión" );
+      }
+
+    } );
   }
 
 }

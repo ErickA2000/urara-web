@@ -11,7 +11,7 @@ import { DeviceService } from '../../services/device.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent{
 
   constructor( private fb: FormBuilder, private authService: AuthService, private dialogService: DialogsService,
     private router: Router, private deviceService: DeviceService ) {

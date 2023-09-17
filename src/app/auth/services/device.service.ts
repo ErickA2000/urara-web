@@ -120,8 +120,8 @@ export class DeviceService {
         tap( res => {
 
           try {
-            const decrypt = encryptAndDecrypt.decrypt( res.data as string );
-            return res.data = decrypt;
+            const decrypt: IDevice = encryptAndDecrypt.decrypt( res.data as string );
+            return res.decryptData = decrypt;
 
           } catch (error: any) {
             return of("Algo va mal:" + error)

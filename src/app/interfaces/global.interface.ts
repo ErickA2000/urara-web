@@ -1,7 +1,8 @@
 export interface IResponse{
     success: boolean,
     message?: string,
-    data?: string | Object
+    data?: string | object
+    decryptData?: any
 }
 
 export interface IRequestEncrypt {
