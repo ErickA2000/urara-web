@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { ISortDevices } from 'src/app/interfaces/auth/device.interface';
 import { SharedMethodsService } from 'src/app/shared/services/shared-methods.service';
+import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-local.service';
 
 @Component({
   selector: 'app-devices',
@@ -8,7 +10,9 @@ import { SharedMethodsService } from 'src/app/shared/services/shared-methods.ser
 })
 export class DevicesComponent {
 
-  constructor( private sharedMethodsServi: SharedMethodsService ) { }
+  constructor( private sharedMethodsServi: SharedMethodsService, private transferDataLocalService: TransferDataLocalService ) { }
+
+  public devices?: ISortDevices = this.transferDataLocalService.devices;
 
   back(){
     this.sharedMethodsServi.backRoute();

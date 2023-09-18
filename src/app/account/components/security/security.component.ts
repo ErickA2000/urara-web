@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { DeviceService } from 'src/app/auth/services/device.service';
 import { IDevice, IDeviceView, ISortDevices } from 'src/app/interfaces/auth/device.interface';
 import alertSwal from 'src/app/utils/alertSwal';
+import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-local.service';
 
 @Component({
   selector: 'app-security',
@@ -13,7 +14,8 @@ import alertSwal from 'src/app/utils/alertSwal';
 })
 export class SecurityComponent implements OnInit {
 
-  constructor( private dialogService: DialogsService, private authService: AuthService, private deviceService: DeviceService ) { }
+  constructor( private dialogService: DialogsService, private authService: AuthService, private deviceService: DeviceService,
+    private transferDataLocalService: TransferDataLocalService ) { }
 
   stateVerify2fa: {
     state: "activa" | "desactivado" | "",
@@ -113,7 +115,7 @@ export class SecurityComponent implements OnInit {
           }
 
           
-
+          this.transferDataLocalService.devices = this.devicesSort;
           this.dialogService.close();
 
         }

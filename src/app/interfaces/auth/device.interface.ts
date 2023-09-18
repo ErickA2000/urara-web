@@ -4,7 +4,7 @@ export interface IDevice{
     token?: string,
     estado: string,
     activa: boolean
-    dispositivo?: String,
+    dispositivo?: string,
     navegador?: string,
     ipv4?: string,
     ubicacion?: string,

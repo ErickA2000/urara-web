@@ -2,9 +2,14 @@
     margin-bottom: 2rem;
 }
 
+.container{
+    display: flex;
+    justify-content: center;
+}
+
 .content{
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     gap: 1rem;
     flex-direction: column;
     
