@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { ItransferDataOrderSummary } from '../interfaces/transfer-data';
 import { IdataUser } from 'src/app/interfaces/auth/user.interface';
-import { ISortDevices } from 'src/app/interfaces/auth/device.interface';
+import { IDeviceView, ISortDevices } from 'src/app/interfaces/auth/device.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,7 @@ export class TransferDataLocalService {
 
   public token?: string;
   public devices?: ISortDevices;
+  public device?: IDeviceView;
 
   constructor() { }
 }

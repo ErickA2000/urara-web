@@ -24,20 +24,20 @@
         
                             <div class="text-p">
         
-                                <p>Linux</p>
-                                <p>Colombia</p>
-                                <p>Estado: Activa</p>
-                                <p class="check-active">
+                                <p>{{ device?.dispositivo | titlecase }}</p>
+                                <p>{{ device?.ubicacion | titlecase }}</p>
+                                <p>Estado: {{ device?.estado | titlecase }}</p>
+                                <p class="check-active" *ngIf="device?.thisDevice">
                                     <mat-icon color="primary">check_circle</mat-icon>
                                     Tu sesión en curso
                                 </p>
-                                <p>Primer inicio de sesión: 8 de agosto</p>
+                                <p>Primer inicio de sesión: {{ device?.createdAt | date: 'medium' }}</p>
                             </div>
 
                         </div>
 
                         <div class="btns">
-                            <button mat-raised-button color="accent">
+                            <button mat-raised-button color="accent" *ngIf="!device?.thisDevice && device?.activa" (click)="logout()">
                                 <mat-icon>logout</mat-icon>
                                 Cerrar sesión
                             </button>
@@ -49,14 +49,14 @@
 
                     <section class="mb-2">
                         <h3>ACTIVIDAD RECIENTE</h3>
-                        <p>Colombia  "fecha"</p>
+                        <p>{{ device?.ubicacion | titlecase }}  {{ device?.updatedAt | date: 'medium' }}</p>
                     </section>
                     
                     <mat-divider></mat-divider>
 
                     <section class="mb-2">
                         <h3>NAVEGADOR</h3>
-                        <p>Chrome</p>
+                        <p>{{ device?.navegador | titlecase }}</p>
                     </section>
                 </div>
 
