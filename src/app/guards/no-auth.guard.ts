@@ -11,7 +11,15 @@ export const noAuthGuard: CanActivateFn = (route, state) => {
   return authService.validateToken()
     .pipe(
       tap(
-        valid => !valid ? router.navigate(['/auth/login']) : true
+        valid => {
+          if( !valid ){
+            console.log(valid)
+            router.navigateByUrl('auth')
+            return false
+          }else{
+            return true
+          }
+        }
       )
     );
 };

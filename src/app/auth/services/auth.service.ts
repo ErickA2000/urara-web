@@ -193,15 +193,20 @@ export class AuthService {
               }
 
               return resUser.success
-
+              
             } ),
             catchError( err => {
+              console.log("error validate", err)
               localStorage.removeItem('token');
               return of(false)
             } )
           )
           
-        )
+        ),
+        catchError( err => {
+          console.log("Error device:",err)
+          return of(false)
+        } )
       )
   }
 
