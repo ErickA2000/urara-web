@@ -13,7 +13,7 @@ export const noAuthGuard: CanActivateFn = (route, state) => {
       tap(
         valid => {
           if( !valid ){
-            console.log(valid)
+            localStorage.removeItem('token');
             router.navigateByUrl('auth')
             return false
           }else{

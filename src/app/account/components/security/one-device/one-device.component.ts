@@ -17,7 +17,7 @@ export class OneDeviceComponent implements OnInit{
   public device?: IDeviceView;
 
   constructor( private sharedMethodService: SharedMethodsService, private transferDataLocalService: TransferDataLocalService,
-    private dialogsService: DialogsService, private deviceService: DeviceService ) { }
+    private dialogsService: DialogsService, private deviceService: DeviceService, private sharedMethodsService: SharedMethodsService ) { }
 
   ngOnInit(): void {
     this.device = this.transferDataLocalService.device;
@@ -34,7 +34,8 @@ export class OneDeviceComponent implements OnInit{
         if( !res.success ){
           alertSwal.messageError( res.message || "Error al actualizar estado cuenta" )
         }else{
-          alertSwal.messageSuccess( "Cerrando sesión", res.message || "" )
+          alertSwal.messageSuccess( "Cerrando sesión", res.message || "" );
+          this.sharedMethodService.changeRoute( "/site/account/security" );
         }
 
     }
