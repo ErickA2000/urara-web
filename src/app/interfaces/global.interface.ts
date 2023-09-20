@@ -46,3 +46,20 @@ export enum ContinentEs {
     Oceanía = "Oceanía",
     África = "África",
 }
+
+export interface IPaginate {
+    length: number,
+    limit: number,
+    page: number,
+    totalPages: number,
+    hasPrevPage: boolean,
+    hasNextPage: boolean,
+    prevPage: number,
+    nextPage: number,
+    totalDocs: number,
+}
+
+export interface IPaginateQuery{
+    limit: number,
+    page: number
+}

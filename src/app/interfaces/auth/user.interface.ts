@@ -7,9 +7,19 @@ export interface IdataUser{
     clave?: string,
     emailverified: boolean,
     roles: [Iroles],
-    verify2fa: Iverify2fa
+    verify2fa: Iverify2fa,
+    direcciones: [Idireccion]
     createdAt?: string,
     updatedAt?: string
+}
+
+export interface Idireccion{
+    titulo?: string,
+    pais: string,
+    departamento: string,
+    ciudad: string,
+    direccion: string,
+    especificacionOpcional: string
 }
 
 export interface IDataUserOptional{

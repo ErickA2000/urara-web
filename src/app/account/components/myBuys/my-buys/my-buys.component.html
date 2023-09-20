@@ -2,7 +2,7 @@
     <h2>Mis compras</h2>
 
     <section class="vh-100 mb-2">
-        <app-buys *ngFor="let a of [0,1,2]"></app-buys>
+        <app-buys *ngFor="let buys of shopping" [shopping]="buys"></app-buys>
     </section>
     
 </div>

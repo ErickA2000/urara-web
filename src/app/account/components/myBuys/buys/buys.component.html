@@ -1,23 +1,23 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>8 de agosto</mat-card-title>
+        <mat-card-title>{{ shopping?.createdAt | date: 'medium' }}</mat-card-title>
     </mat-card-header>
 
     <mat-divider></mat-divider>
 
     <mat-card-content>
 
-        <div class="content" *ngFor="let e of [0,1]">
+        <div class="content" *ngFor="let product of shopping?.productos">
 
             <section class="img">
-                 <img src="" alt="">
+                 <img [src]="product.productID.imagenUrl[0]" [alt]="product.productID.nombre | titlecase">
             </section>
 
             <section class="detail">
-                <p class="state">Entregado</p>
-                <p>Llegó el 10 de agosto</p>
-                <p class="opasity">Nombre del producto</p>
-                <p class="opasity">Cantidad: 2</p>
+                <p class="state">{{ shopping?.idEnvio?.estado | titlecase}}</p>
+                <!-- <p>Llegó el 10 de agosto</p> -->
+                <p class="opasity">{{ product.productID.nombre | titlecase }}</p>
+                <p class="opasity">Cantidad: {{ product.tallasCantidadPrecio.cantidad }}</p>
             </section>
         </div>
 
