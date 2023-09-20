@@ -1,0 +1,22 @@
+.flex{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.mat-select{
+    width: 5rem;
+}
+
+.paginate{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+@media (min-width: 700px) {
+    .paginate{
+        display: flex;
+        flex-direction: row;
+    }
+}

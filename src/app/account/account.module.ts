@@ -19,6 +19,7 @@ import { PurchaseDetailComponent } from './components/myBuys/purchase-detail/pur
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChangePasswordComponent } from './components/security/change-password/change-password.component';
 import { OneDeviceComponent } from './components/security/one-device/one-device.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { OneDeviceComponent } from './components/security/one-device/one-device.
     CommonModule,
     AccountRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class AccountModule { }

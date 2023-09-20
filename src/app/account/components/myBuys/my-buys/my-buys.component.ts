@@ -20,7 +20,7 @@ export class MyBuysComponent implements OnInit, OnDestroy{
   constructor( private shoppingService: ShoppingService, private dialogsService: DialogsService, 
     private transferDataLocalService: TransferDataLocalService ){
 
-    this.getShopping( 1, 5 );
+    this.getShopping( 1, 2 );
   }
 
   ngOnInit(): void {
@@ -39,8 +39,7 @@ export class MyBuysComponent implements OnInit, OnDestroy{
     this.shoppingService.getAllShopping( page, limit ).subscribe(
       res => {
         const response = res as IResponseShopping;
-
-        console.log(response.data?.docs.reverse())
+        response.data?.docs.reverse()
 
         this.shopping = response.data?.docs;
 

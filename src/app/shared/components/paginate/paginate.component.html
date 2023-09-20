@@ -1,1 +1,31 @@
-<p>paginate works!</p>
+<section class="paginate flex">
+
+    <p>Total: {{ paginateOptions.totalDocs }}</p>
+
+    <div class="flex">
+        <label>Item por pagina:</label>
+
+        <mat-form-field appearance="outline" class="mat-select">
+            <mat-select value="5">
+                <mat-option *ngFor="let pageSize of pageSizeOptions" value="{{pageSize}}" (click)="getQuery( 1, pageSize )">{{pageSize}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="next&prev flex">
+        <p>Pagina {{ paginateOptions.page }} de {{ paginateOptions.totalPages }}</p>
+
+        <div>
+            <button mat-mini-fab [disabled]="!paginateOptions.hasPrevPage" (click)="getQuery( paginateOptions.prevPage, paginateOptions.limit)">
+                <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+        </div>
+
+        <div>
+            <button mat-mini-fab [disabled]="!paginateOptions.hasNextPage" (click)="getQuery( paginateOptions.nextPage, paginateOptions.limit)">
+                <mat-icon>arrow_forward_ios</mat-icon>
+            </button>
+        </div>
+    </div>
+
+</section>
