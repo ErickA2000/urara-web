@@ -8,22 +8,27 @@
     </section>
 
     <section class="vh-100">
-        <mat-card class="mb-2">
-            <mat-card-content >
 
-                <div class="product">
-                    <section class="detail">
-                        <p>Nombre producto</p>
-                        <p>Cantidad: 2</p>
-                    </section>
+        <ng-container *ngFor="let product of purchase?.productos">
 
-                    <section class="img">
-                        <img src="" alt="">
-                    </section>
-                </div>
+            <mat-card class="mb-2">
+                <mat-card-content >
+    
+                    <div class="product">
+                        <section class="detail">
+                            <p>{{ product.productID.nombre | titlecase }}</p>
+                            <p>Cantidad: {{ product.tallasCantidadPrecio.cantidad }}</p>
+                        </section>
+    
+                        <section class="img">
+                            <img [src]="product.productID.imagenUrl[0]" [alt]="product.productID.nombre | titlecase">
+                        </section>
+                    </div>
+    
+                </mat-card-content>
+            </mat-card>
 
-            </mat-card-content>
-        </mat-card>
+        </ng-container>
 
         <mat-card class="mb-2">
             <mat-card-content>
@@ -31,29 +36,32 @@
                 <div class="purchase-detail">
 
                     <section class="envio mb-2">
-                        <p class="state">Entregado</p>
-                        <p>Llegó el 10 de agosto</p>
-                        <p>Se entrego en "direccion"</p>
+                        <p class="state">{{ purchase?.idEnvio?.estado | titlecase }}</p>
+                        <!-- <p>Llegó el 10 de agosto</p> -->
+                        <p>Se entrego en {{ purchase?.direccionFacturacion?.direccion | titlecase}}, {{ purchase?.direccionFacturacion?.ciudad | titlecase}},
+                            {{ purchase?.direccionFacturacion?.departamento | titlecase}}, {{ purchase?.direccionFacturacion?.pais | titlecase}}
+                        </p>
                     </section>
 
                     <mat-divider></mat-divider>
 
                     <section class="detail">
                         <h3>Detalle de la compra</h3>
-                        <p class="date-ref">8 de agosto | #0000000000000005</p>
+                        <p class="date-ref">{{ purchase?.createdAt | date: 'medium' }} | #{{ purchase?.numFactura }}</p>
 
                         <mat-divider></mat-divider>
 
                         <div class="prices">
 
                             <section class="products position">
-                                <p class="opasity">Productos (1)</p>
-                                <p class="opasity">COP107,00.00</p>
+                                <p class="opasity">Productos ({{ purchase?.productos?.length }})</p>
+                                <p class="opasity">{{ purchase?.subtotal | currency: 'COP' }}</p>
                             </section>
 
                             <section class="shipment position">
                                 <p class="opasity">Envio</p>
-                                <p>Gratis</p>
+                                <p *ngIf="purchase?.idEnvio?.montoEnvio == 0">Gratis</p>
+                                <p *ngIf="purchase?.idEnvio?.montoEnvio != 0">{{ purchase?.idEnvio?.montoEnvio | currency: 'COP' }}</p>
                             </section>
 
                             <mat-divider></mat-divider>
@@ -61,8 +69,8 @@
                             <section class="total position">
                                 <p>Total</p>
                                 <div class="total-price">
-                                    <p>COP107,000.00</p>
-                                    <p>Martercard Débito</p>
+                                    <p>{{ purchase?.total | currency: 'COP' }}</p>
+                                    <p>{{ purchase?.idPago?.metodoPago | titlecase }}</p>
                                 </div>
                             </section>
                         </div>
@@ -87,10 +95,10 @@
                                             </section>
 
                                             <section class="data">
-                                                <p>COP107,000.00</p>
-                                                <p class="opasity">Martedcard Díbito</p>
-                                                <p class="opasity">8 de agosto</p>
-                                                <p>Pago aprobado</p>
+                                                <p>{{ purchase?.idPago?.monto | currency: 'COP' }}</p>
+                                                <p class="opasity">{{ purchase?.idPago?.metodoPago | titlecase }}</p>
+                                                <p class="opasity">{{ purchase?.idPago?.fechaPago | date: 'medium' }}</p>
+                                                <p>{{ purchase?.idPago?.estado | titlecase }}</p>
                                             </section>
                                         </div>
 
@@ -108,8 +116,11 @@
                                             </section>
 
                                             <section class="data">
-                                                <p>Manzana 44</p>
-                                                <p class="opasity">Cúcuta, Norte de Santander</p>
+                                                <p>{{ purchase?.direccionFacturacion?.direccion }}</p>
+                                                <p class="opasity"> {{ purchase?.direccionFacturacion?.ciudad | titlecase }}, 
+                                                    {{ purchase?.direccionFacturacion?.departamento | titlecase }}, 
+                                                    {{ purchase?.direccionFacturacion?.pais | titlecase }}
+                                                </p>
                                                 
                                             </section>
                                         </div>

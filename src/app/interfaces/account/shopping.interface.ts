@@ -40,6 +40,44 @@ export interface IShopping {
     updatedAt:            Date;
 }
 
+export interface IShoppingPopulate {
+    _id:                  string;
+    numFactura:           string;
+    cliente:              Cliente;
+    vendedor:             Cliente;
+    productos:            Producto[];
+    direccionFacturacion: Idireccion;
+    subtotal:             number;
+    descuento:            number;
+    iva:                  string;
+    iva_moneda:           number;
+    total:                number;
+    estado:               string;
+    isCambioEstado:       boolean;
+    idPago:               IDPago;
+    idEnvio:              IDEnvio;
+    __v:                  number;
+    createdAt:            Date;
+    updatedAt:            Date;
+}
+
+interface Cliente {
+    _id:    string;
+    nombre: string;
+}
+
+interface IDPago {
+    _id:          string;
+    idCliente:    string;
+    idServiPago:  string;
+    servicioPago: string;
+    estado:       string;
+    metodoPago:   string;
+    monto:        number;
+    __v:          number;
+    fechaPago:    Date;
+}
+
 interface IDEnvio {
     _id:             string;
     idCliente:       string;
@@ -60,6 +98,7 @@ interface ProductID {
     _id:       string;
     nombre:    string;
     imagenUrl: string[];
+    referencia?: string;
 }
 
 interface TallasCantidadPrecio {

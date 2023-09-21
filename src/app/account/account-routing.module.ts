@@ -73,7 +73,7 @@ const routes: Routes = [
             component: MyBuysComponent
           },
           {
-            path: "purchase-detail",
+            path: "purchase-detail/:compraID",
             component: PurchaseDetailComponent
           }
         ]

@@ -20,7 +20,7 @@ export class MyBuysComponent implements OnInit, OnDestroy{
   constructor( private shoppingService: ShoppingService, private dialogsService: DialogsService, 
     private transferDataLocalService: TransferDataLocalService ){
 
-    this.getShopping( 1, 2 );
+    this.getShopping( 1, 5 );
   }
 
   ngOnInit(): void {
@@ -38,24 +38,28 @@ export class MyBuysComponent implements OnInit, OnDestroy{
 
     this.shoppingService.getAllShopping( page, limit ).subscribe(
       res => {
-        const response = res as IResponseShopping;
-        response.data?.docs.reverse()
 
-        this.shopping = response.data?.docs;
+        if( res.success ){
+          
+          const response = res as IResponseShopping;
+  
+          this.shopping = response.data?.docs;
+  
+          this.paginateOptions = {
+            length: response.data?.totalDocs!,
+            limit: response.data?.limit!,
+            page: response.data?.page!,
+            totalPages: response.data?.totalPages!,
+            hasNextPage: response.data?.hasNextPage!,
+            hasPrevPage: response.data?.hasPrevPage!,
+            prevPage: response.data?.prevPage!,
+            nextPage: response.data?.nextPage!,
+            totalDocs: response.data?.totalDocs!
+          };
+  
+          this.transferDataLocalService.paginateOptions.emit(this.paginateOptions);
 
-        this.paginateOptions = {
-          length: response.data?.totalDocs!,
-          limit: response.data?.limit!,
-          page: response.data?.page!,
-          totalPages: response.data?.totalPages!,
-          hasNextPage: response.data?.hasNextPage!,
-          hasPrevPage: response.data?.hasPrevPage!,
-          prevPage: response.data?.prevPage!,
-          nextPage: response.data?.nextPage!,
-          totalDocs: response.data?.totalDocs!
-        };
-
-        this.transferDataLocalService.paginateOptions.emit(this.paginateOptions);
+        }
 
         this.dialogsService.close();
       }
