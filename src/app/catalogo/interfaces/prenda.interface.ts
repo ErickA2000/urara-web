@@ -1,7 +1,7 @@
 export interface Iprenda{
     _id: string,
     nombre: string,
-    referencia: number,
+    referencia: string,
     imagenUrl: string[],
     descripcion: string,
     tallasCantidadPrecio: tallaCantidadPrecio[],
@@ -9,8 +9,8 @@ export interface Iprenda{
     descuento: number,
     slug: string,
     estado: string,
-    createdAt: string,
-    updatedAt: string
+    createdAt: Date,
+    updatedAt: Date
 }
 
 export interface tallaCantidadPrecio{

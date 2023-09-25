@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
-import { IResponsePrenda } from 'src/app/interfaces/shared/prenda.interface';
+import { IResponseOnePrenda, IResponsePrenda } from 'src/app/interfaces/shared/prenda.interface';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -20,6 +20,15 @@ export class PrendaService {
     const url = `${this.baseUrl}/prendas/p?page=${page}&limit=${limit}&sort=${sort}`;
 
     return this.http.get<IResponsePrenda>( url )
+      .pipe(
+        catchError( err => of(err) )
+      )
+  }
+
+  getOne( ref: string ): Observable<IResponseOnePrenda>{
+    const url = `${this.baseUrl}/prendas/ref/${ref}`;
+
+    return this.http.get<IResponseOnePrenda>( url )
       .pipe(
         catchError( err => of(err) )
       )

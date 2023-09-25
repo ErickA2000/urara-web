@@ -4,6 +4,7 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ICard } from 'src/app/interfaces/shared/card.interface';
 import { IsliderData } from 'src/app/interfaces/shared/slider.interface';
 import { CategoriaService } from 'src/app/shared/services/categoria.service';
+import { DialogsService } from 'src/app/shared/services/dialogs.service';
 import { PrendaService } from 'src/app/shared/services/prenda.service';
 import { scrollToTop } from 'src/app/utils/functions';
 
@@ -40,7 +41,8 @@ export class HomeComponent implements OnInit {
   //tiene que ser un array
   forCard: ICard[] = [];
 
-  constructor( @Inject(PLATFORM_ID) private plataformID: Platform, private prendaService: PrendaService, private categoryService: CategoriaService ){}
+  constructor( @Inject(PLATFORM_ID) private plataformID: Platform, private prendaService: PrendaService, private categoryService: CategoriaService,
+    private dialogsService: DialogsService ){}
 
   ngOnInit(): void {
     if( isPlatformBrowser( this.plataformID ) ){
@@ -54,6 +56,8 @@ export class HomeComponent implements OnInit {
   }
 
   getNewPrendas( page: number, limit: number, sort?: string ){
+
+    this.dialogsService.openSpinner();
 
     this.prendaService.getPrendasPaginate( page, limit, sort ).subscribe( res => {
 
@@ -70,6 +74,7 @@ export class HomeComponent implements OnInit {
           this.forCard?.push(cart);
         }
 
+        this.dialogsService.close();
       }
 
     })

@@ -1,98 +1,26 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { Icategoria, Icolores, Iprenda } from '../../interfaces/prenda.interface';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Platform } from '@angular/cdk/platform';
 import { isPlatformBrowser } from '@angular/common';
 import { scrollToTop } from 'src/app/utils/functions';
+import { PrendaService } from 'src/app/shared/services/prenda.service';
+import { Iprenda2 } from 'src/app/interfaces/shared/prenda.interface';
+import { Subscription } from 'rxjs';
+import { DialogsService } from 'src/app/shared/services/dialogs.service';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnDestroy {
 
   actiImg!: string;
 
-  prenda: Iprenda = {
-    _id: "aaaa",
-    nombre: "blusa de dama estilo de algo",
-    referencia: 1,
-    imagenUrl: ["assets/img/prueba_card.jpg", "assets/img/home/1.png"],
-    descuento: 0,
-    descripcion: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae quod nostrum maxime temporibus, 
-                  labore esse in? Voluptatum quaerat, quis suscipit laudantium accusamus nisi quod ab quidem quia deleniti iusto sed.`,
-    categoria: [ {
-      _id: "aaaa",
-      nombre: "niña"
-    },
-    {
-      _id: "aaasss",
-      nombre: "blusas"
-    } ],
-    slug: "prueba",
-    tallasCantidadPrecio: [{
-      talla: "32",
-      cantidad: 10,
-      precio: 55000,
-      colores: [
-        {
-          idColor: {
-            _id: "64dd1faeed3ee9e3b2de5ff7",
-            nombre: "Morado",
-            hex: "#e900fa"
-
-          },
-          cantidad: 10
-        }
-      ]
-    },
-    {
-      talla: "16",
-      cantidad: 20,
-      precio: 50000,
-      colores: [
-        {
-          idColor: {
-            _id: "64dd1faeed3ee9e3b2de5ff7",
-            nombre: "Morado",
-            hex: "#e900fa"
-
-          },
-          cantidad: 5
-        },{
-          idColor: {
-            _id: "64da83aca54b1f5b95de04c1",
-            nombre: "gris",
-            hex: "#808080"
-
-          },
-          cantidad: 10
-        },{
-          idColor: {
-            _id: "64da83d3a54b1f5b95de04c7",
-            nombre: "blanco",
-            hex: "#ffffff"
-
-          },
-          cantidad: 10
-        },{
-          idColor: {
-            _id: "64da83e1a54b1f5b95de04cd",
-            nombre: "negro",
-            hex: "#000000"
-
-          },
-          cantidad: 10
-        }
-      ]
-    }],
-    estado: "disponible",
-    createdAt: "2023-01-12T18:30:02.976+00:00",
-    updatedAt: "2023-01-12T18:30:02.976+00:00"
-  }
+  prenda!: Iprenda;
 
   coloresPrenda!: Icolores[];
 
@@ -102,11 +30,15 @@ export class DetailsComponent implements OnInit {
 
   isColorsMany: boolean = false;
 
-  constructor( private fb: FormBuilder, private snackBarService: SnackBarService, private router: Router, @Inject(PLATFORM_ID) private plataformID: Platform ){}
+  private ref: string | null = "";
+  private $activatedRoute?: Subscription;
+
+  constructor( private fb: FormBuilder, private snackBarService: SnackBarService, private router: Router, @Inject(PLATFORM_ID) private plataformID: Platform,
+  private prendaService: PrendaService, private activatedRoute: ActivatedRoute, private dialogsService: DialogsService ){}
 
   productForm = this.fb.group({
-    productID: [ this.prenda._id, [ Validators.required ] ],
-    descuento: [ this.prenda.descuento, [ Validators.min(0), Validators.max(100) ] ],
+    productID: [ '', [ Validators.required ] ],
+    descuento: [ 0, [ Validators.min(0), Validators.max(100) ] ],
     tallasCantidadPrecio: this.fb.group({
       talla: [ '', [ Validators.required ] ],
       cantidad: [ 1, [ Validators.required, Validators.min(this.minQuantity), Validators.max(this.maxQuantity), Validators.pattern(/^([0-9])*$/) ] ],
@@ -116,12 +48,43 @@ export class DetailsComponent implements OnInit {
   });
 
   ngOnInit(): void {
-      if( isPlatformBrowser( this.plataformID ) ){
-        scrollToTop();
+    if( isPlatformBrowser( this.plataformID ) ){
+      scrollToTop();
+    }
+ 
+    this.$activatedRoute = this.activatedRoute.paramMap.subscribe( params => {
+      this.ref = params.get('ref');
+    })
+    
+    this.getOnePrenda(this.ref as string);
+
+  }
+
+  ngOnDestroy(): void {
+    this.$activatedRoute?.unsubscribe();
+  }
+
+  getOnePrenda( ref: string ){
+
+    this.dialogsService.openSpinner();
+
+    this.prendaService.getOne( ref ).subscribe( res => {
+
+      if( res.success ){
+
+        this.prenda = res.data!;
+
+        this.productForm.get('productID')?.setValue( res.data?._id || "" );
+        this.productForm.get('descuento')?.setValue( res.data?.descuento || 1 );
+
+        this.actiImg = this.prenda.imagenUrl[0];
+        this.productForm.get("tallasCantidadPrecio.precio")?.setValue( this.prenda.tallasCantidadPrecio[0].precio );
+
+        this.dialogsService.close();
       }
 
-      this.actiImg = this.prenda.imagenUrl[0];
-      this.productForm.get("tallasCantidadPrecio.precio")?.setValue( this.prenda.tallasCantidadPrecio[0].precio );
+    })
+
   }
 
   changeImg( url: string ){
@@ -232,7 +195,8 @@ export class DetailsComponent implements OnInit {
   selectCategoria( categoria: Icategoria){
     this.router.navigate(["/site/catalogo"], { 
       queryParams: { 
-        categoria: categoria._id
+        filter: "categoria",
+        value: categoria._id
        } 
     });
     

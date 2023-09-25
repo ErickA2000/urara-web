@@ -17,7 +17,7 @@ export class OneDeviceComponent implements OnInit{
   public device?: IDeviceView;
 
   constructor( private sharedMethodService: SharedMethodsService, private transferDataLocalService: TransferDataLocalService,
-    private dialogsService: DialogsService, private deviceService: DeviceService, private sharedMethodsService: SharedMethodsService ) { }
+    private dialogsService: DialogsService, private deviceService: DeviceService ) { }
 
   ngOnInit(): void {
     this.device = this.transferDataLocalService.device;
