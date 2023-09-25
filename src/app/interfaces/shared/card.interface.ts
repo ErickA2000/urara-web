@@ -1,6 +1,6 @@
 export interface ICard {
     title: string,
     img: string,
-    ref: number,
+    ref: string,
     slug: string
 }

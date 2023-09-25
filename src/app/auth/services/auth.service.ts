@@ -196,7 +196,7 @@ export class AuthService {
               
             } ),
             catchError( err => {
-              console.log("error validate", err)
+              console.log("error validate")
               localStorage.removeItem('token');
               return of(false)
             } )

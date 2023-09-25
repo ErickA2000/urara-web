@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit{
   forCard: ICard = {
     title: "prueba",
     img: "assets/img/prueba_card.jpg",
-    ref: 1,
+    ref: "1",
     slug: "prueba"
   }
 
