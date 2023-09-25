@@ -14,31 +14,45 @@
             </section>
       </div>
 
-      <div class="content__categorias">
+      <div class="content__categorias" >
 
-            <h2 class="content__categorias-title">CATEGORIAS</h2>
+            <div class="spinner" *ngIf="forCard.length == 0">
+                  <mat-spinner></mat-spinner>
+            </div>
 
-            <app-slider
-                  [data]="categorias"
-                  [isClickable]="true"
-                  [isImage]="false"
-                  [routerName]="'site/catalogo'"
-                  [nameQueryParam]="'categoria'"
-                  
-                  [gap]="15"
-                  [showBullets]="false"
-                  [autoplay]="false"
-                  [rewind]="false"
-            >
-            </app-slider>
+            <div class="content" *ngIf="categorias.length != 0">
+                  <h2 class="content__categorias-title">CATEGORIAS</h2>
+      
+                  <app-slider
+                        [data]="categorias"
+                        [isClickable]="true"
+                        [isImage]="false"
+                        [routerName]="'site/catalogo'"
+                        [nameQueryParam]="'categoria'"
+                        
+                        [gap]="15"
+                        [showBullets]="false"
+                        [autoplay]="false"
+                        [rewind]="false"
+                  >
+                  </app-slider>
+            </div>
       </div>
 
-      <section class="content__new">
-            <h2>NUEVO</h2>
+      <section class="content__new" >
             
-            <div class="content__new-content">
-                  <app-card *ngFor="let cart of forCard" [data]="cart"></app-card>
+            <div class="spinner" *ngIf="forCard.length == 0">
+                  <mat-spinner></mat-spinner>
             </div>
+
+            <ng-container *ngIf="forCard.length != 0">
+                  <h2>NUEVO</h2>
+                  
+                  <div class="content__new-content">
+                        <app-card *ngFor="let cart of forCard" [data]="cart"></app-card>
+                  </div>
+            </ng-container>
+
       </section>
 
 </main>

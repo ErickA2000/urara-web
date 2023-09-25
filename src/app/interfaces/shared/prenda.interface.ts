@@ -1,6 +1,6 @@
-export interface IResponsePrenda{
-    success: boolean;
-    message?: string;
+import { IRES } from "../global.interface";
+
+export interface IResponsePrenda extends IRES{
     data?: IData
 }
 

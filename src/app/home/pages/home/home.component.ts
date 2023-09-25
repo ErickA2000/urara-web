@@ -3,6 +3,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ICard } from 'src/app/interfaces/shared/card.interface';
 import { IsliderData } from 'src/app/interfaces/shared/slider.interface';
+import { CategoriaService } from 'src/app/shared/services/categoria.service';
 import { PrendaService } from 'src/app/shared/services/prenda.service';
 import { scrollToTop } from 'src/app/utils/functions';
 
@@ -34,29 +35,12 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  categorias: IsliderData[] = [ 
-    {
-      link: "aaaa",
-      title: "niña"
-    }, 
-    {
-      link: "bbb",
-      title: "niño"
-    }, 
-    {
-      link: "cccc",
-      title: "dama"
-    }, 
-    {
-      link: "ddddd",
-      title: "caballero"
-    }
-  ];
+  categorias: IsliderData[] = [];
 
   //tiene que ser un array
   forCard: ICard[] = [];
 
-  constructor( @Inject(PLATFORM_ID) private plataformID: Platform, private prendaService: PrendaService ){}
+  constructor( @Inject(PLATFORM_ID) private plataformID: Platform, private prendaService: PrendaService, private categoryService: CategoriaService ){}
 
   ngOnInit(): void {
     if( isPlatformBrowser( this.plataformID ) ){
@@ -64,6 +48,8 @@ export class HomeComponent implements OnInit {
     }
 
     this.getNewPrendas( 1, 10, "-createdAt" );
+
+    this.getAllCategorys();
 
   }
 
@@ -84,6 +70,26 @@ export class HomeComponent implements OnInit {
           this.forCard?.push(cart);
         }
 
+      }
+
+    })
+
+  }
+
+  getAllCategorys(){
+
+    this.categoryService.getCategorias().subscribe( res => {
+      
+      if( res.success ){
+
+        for( let categoria of res.data ){
+          const slider: IsliderData = {
+            link: categoria._id,
+            title: categoria.nombre
+          };
+
+          this.categorias.push(slider);
+        }
       }
 
     })

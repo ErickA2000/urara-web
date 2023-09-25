@@ -5,6 +5,11 @@ export interface IResponse{
     decryptData?: any
 }
 
+export interface IRES{
+    success: boolean;
+    message?: string
+}
+
 export interface IRequestEncrypt {
     reqEncrypt: string;
 }
