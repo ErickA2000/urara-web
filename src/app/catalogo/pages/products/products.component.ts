@@ -1,57 +1,64 @@
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ICard } from 'src/app/interfaces/shared/card.interface';
 import { BottonSheetFilterComponent } from '../../components/botton-sheet-filter/botton-sheet-filter.component';
-import { Router, UrlTree } from '@angular/router';
+import { ActivatedRoute, Router, UrlTree } from '@angular/router';
 import { Platform } from '@angular/cdk/platform';
 import { isPlatformBrowser } from '@angular/common';
 import { scrollToTop } from 'src/app/utils/functions';
 import { PrendaService } from 'src/app/shared/services/prenda.service';
 import { DialogsService } from 'src/app/shared/services/dialogs.service';
 import { FindOptions } from 'src/app/interfaces/shared/prenda.interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit{
+export class ProductsComponent implements OnInit, OnDestroy{
 
-  private urlTre!: UrlTree;
+  private $activatedRoute!: Subscription;
 
   //tiene que ser un array
   arrayCard: ICard[] = [];
 
-  constructor( private _bottomSheet: MatBottomSheet, private router: Router, @Inject(PLATFORM_ID) private plataformID: Platform,
-    private prendaService: PrendaService, private dialogsService: DialogsService ){}
+  constructor( private _bottomSheet: MatBottomSheet, @Inject(PLATFORM_ID) private plataformID: Platform,
+    private prendaService: PrendaService, private dialogsService: DialogsService, private activatedRoute: ActivatedRoute ){}
 
   ngOnInit(): void {
 
     if( isPlatformBrowser( this.plataformID ) ){
       scrollToTop();
     }
+    
+    this.$activatedRoute = this.activatedRoute.queryParams.subscribe( 
+      queryParams => {
 
-    this.urlTre = this.router.parseUrl(this.router.url);
-
-    if( this.urlTre.queryParams ){
-
-      if( this.urlTre.queryParams['filter'] ){
-
-        if( this.urlTre.queryParams['filter'] === "categoria" ){
-
-          this.getPrendasPaginate( 1, 20, undefined, { categoria: this.urlTre.queryParams['value'] } )
+        if( queryParams['filter'] ){
+  
+          if( queryParams['filter'] === "categoria" ){
+  
+            this.getPrendasPaginate( 1, 20, undefined, { categoria: queryParams['value'] } )
+          }
+    
+        }else{
+          this.getPrendasPaginate( 1, 20 );
         }
-
         
-      }else{
-        this.getPrendasPaginate( 1, 20 );
       }
-    }
+     )
 
+  }
+
+  ngOnDestroy(): void {
+    this.$activatedRoute.unsubscribe();
   }
 
   getPrendasPaginate( page: number, limit: number, sort?: string, find?: FindOptions ){
     this.dialogsService.openSpinner();
+
+    while( this.arrayCard.length > 0 ) this.arrayCard.pop();
 
     this.prendaService.getPrendasPaginate( page, limit, sort, find ).subscribe(
       res => {
