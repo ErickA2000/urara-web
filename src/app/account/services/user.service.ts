@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
-  private baseUrl = environment.API_URL;
+  private baseUrl = environment.API_URL + "/s0/api";
 
   constructor( private http: HttpClient, private transferDataLocalService: TransferDataLocalService ) { }
 

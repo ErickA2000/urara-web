@@ -64,14 +64,14 @@ export class HomeComponent implements OnInit {
       if( res.success ){
         
         for( let prenda of res.data?.docs! ){
-          const cart: ICard = {
+          const card: ICard = {
             title: prenda.nombre,
             img: prenda.imagenUrl[0],
             ref: prenda.referencia,
             slug: prenda.slug
           };
           
-          this.forCard?.push(cart);
+          this.forCard?.push(card);
         }
 
         this.dialogsService.close();

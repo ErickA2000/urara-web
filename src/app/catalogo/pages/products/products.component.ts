@@ -6,6 +6,9 @@ import { Router, UrlTree } from '@angular/router';
 import { Platform } from '@angular/cdk/platform';
 import { isPlatformBrowser } from '@angular/common';
 import { scrollToTop } from 'src/app/utils/functions';
+import { PrendaService } from 'src/app/shared/services/prenda.service';
+import { DialogsService } from 'src/app/shared/services/dialogs.service';
+import { FindOptions } from 'src/app/interfaces/shared/prenda.interface';
 
 @Component({
   selector: 'app-products',
@@ -14,17 +17,13 @@ import { scrollToTop } from 'src/app/utils/functions';
 })
 export class ProductsComponent implements OnInit{
 
-  urlTre!: UrlTree;
+  private urlTre!: UrlTree;
 
   //tiene que ser un array
-  forCard: ICard = {
-    title: "prueba",
-    img: "assets/img/prueba_card.jpg",
-    ref: "1",
-    slug: "prueba"
-  }
+  arrayCard: ICard[] = [];
 
-  constructor( private _bottomSheet: MatBottomSheet, private router: Router, @Inject(PLATFORM_ID) private plataformID: Platform ){}
+  constructor( private _bottomSheet: MatBottomSheet, private router: Router, @Inject(PLATFORM_ID) private plataformID: Platform,
+    private prendaService: PrendaService, private dialogsService: DialogsService ){}
 
   ngOnInit(): void {
 
@@ -36,13 +35,48 @@ export class ProductsComponent implements OnInit{
 
     if( this.urlTre.queryParams ){
 
-      if( this.urlTre.queryParams['categoria'] ){
-        console.log(this.urlTre.queryParams['categoria']);
-        //Aqui ejecutar metodo para consultar prendas por categoria
+      if( this.urlTre.queryParams['filter'] ){
+
+        if( this.urlTre.queryParams['filter'] === "categoria" ){
+
+          this.getPrendasPaginate( 1, 20, undefined, { categoria: this.urlTre.queryParams['value'] } )
+        }
+
+        
+      }else{
+        this.getPrendasPaginate( 1, 20 );
       }
     }
 
   }
+
+  getPrendasPaginate( page: number, limit: number, sort?: string, find?: FindOptions ){
+    this.dialogsService.openSpinner();
+
+    this.prendaService.getPrendasPaginate( page, limit, sort, find ).subscribe(
+      res => {
+
+        if( res.success ){
+
+          for( let prenda of res.data?.docs! ){
+            const card: ICard = {
+              title: prenda.nombre,
+              img: prenda.imagenUrl[0],
+              ref: prenda.referencia,
+              slug: prenda.slug
+            };
+
+            this.arrayCard.push(card);
+          }
+
+        }
+
+        this.dialogsService.close();
+      }
+    )
+  }
+
+  
 
   openBottomSheet(){
     this._bottomSheet.open( BottonSheetFilterComponent, {

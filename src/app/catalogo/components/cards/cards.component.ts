@@ -8,6 +8,6 @@ import { ICard } from 'src/app/interfaces/shared/card.interface';
 })
 export class CardsComponent {
 
-  @Input() products!: ICard;
+  @Input() products!: ICard[];
 
 }

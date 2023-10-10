@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
-import { IResponseOnePrenda, IResponsePrenda } from 'src/app/interfaces/shared/prenda.interface';
+import { FindOptions, IResponseOnePrenda, IResponsePrenda } from 'src/app/interfaces/shared/prenda.interface';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,15 +9,15 @@ import { environment } from 'src/environments/environment';
 })
 export class PrendaService {
 
-  private baseUrl = environment.API_URL;
+  private baseUrl = environment.API_URL + "/s2/api";
 
   constructor( private http: HttpClient ) { }
 
-  getPrendasPaginate( page: number, limit: number, sort?: string ): Observable<IResponsePrenda>{
+  getPrendasPaginate( page: number, limit: number, sort?: string, find?: FindOptions ): Observable<IResponsePrenda>{
     
     if( sort == undefined ) sort = "";
 
-    const url = `${this.baseUrl}/prendas/p?page=${page}&limit=${limit}&sort=${sort}`;
+    const url = `${this.baseUrl}/prendas/p?page=${page}&limit=${limit}&sort=${sort}&categoria=${find?.categoria}`;
 
     return this.http.get<IResponsePrenda>( url )
       .pipe(

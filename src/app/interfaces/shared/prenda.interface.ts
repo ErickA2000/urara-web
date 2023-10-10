@@ -85,3 +85,7 @@ interface IDColor {
     nombre: string;
     hex:    string;
 }
+
+export interface FindOptions{
+    categoria: string
+}

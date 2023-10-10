@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CategoriaService {
 
-  private baseUrl = environment.API_URL;
+  private baseUrl = environment.API_URL + "/s2/api";
 
   constructor( private http: HttpClient ) { }
 

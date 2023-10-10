@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ShoppingService {
 
-  private bateUrl = environment.API_URL;
+  private bateUrl = environment.API_URL + "/s3/api";
 
   constructor( private http: HttpClient ) { }
 

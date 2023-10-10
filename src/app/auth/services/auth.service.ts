@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private baseUrl: string = environment.API_URL;
+  private baseUrl: string = environment.API_URL + "/s0/api";
   private _user!: IdataUser;
 
   @Output() inLogin: EventEmitter<boolean> = new EventEmitter();

@@ -18,7 +18,7 @@ export class DeviceService {
 
   private countriesList = listCountries;
   private _device?: IDevice;
-  private baseUrl = environment.API_URL;
+  private baseUrl = environment.API_URL + "/s0/api";
 
   get device(){
     return { ...this._device }
