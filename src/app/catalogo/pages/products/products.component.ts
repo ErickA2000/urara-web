@@ -10,6 +10,8 @@ import { PrendaService } from 'src/app/shared/services/prenda.service';
 import { DialogsService } from 'src/app/shared/services/dialogs.service';
 import { FindOptions } from 'src/app/interfaces/shared/prenda.interface';
 import { Subscription } from 'rxjs';
+import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-local.service';
+import { IPaginate } from 'src/app/interfaces/global.interface';
 
 @Component({
   selector: 'app-products',
@@ -19,12 +21,16 @@ import { Subscription } from 'rxjs';
 export class ProductsComponent implements OnInit, OnDestroy{
 
   private $activatedRoute!: Subscription;
+  private $transferDataLocal!: Subscription;
+
+  private paginateOptions?: IPaginate;
 
   //tiene que ser un array
   arrayCard: ICard[] = [];
 
   constructor( private _bottomSheet: MatBottomSheet, @Inject(PLATFORM_ID) private plataformID: Platform,
-    private prendaService: PrendaService, private dialogsService: DialogsService, private activatedRoute: ActivatedRoute ){}
+    private prendaService: PrendaService, private dialogsService: DialogsService, private activatedRoute: ActivatedRoute,
+    private transferDataLocalService: TransferDataLocalService ){}
 
   ngOnInit(): void {
 
@@ -39,20 +45,27 @@ export class ProductsComponent implements OnInit, OnDestroy{
   
           if( queryParams['filter'] === "categoria" ){
   
-            this.getPrendasPaginate( 1, 20, undefined, { categoria: queryParams['value'] } )
+            this.getPrendasPaginate( 1, 25, undefined, { categoria: queryParams['value'] } )
           }
     
         }else{
-          this.getPrendasPaginate( 1, 20 );
+          this.getPrendasPaginate( 1, 25 );
         }
         
       }
-     )
+     );
+
+    this.$transferDataLocal = this.transferDataLocalService.queryPaginate.subscribe(
+      query => {
+        this.getPrendasPaginate( query.page, query.limit );
+      }
+    )
 
   }
 
   ngOnDestroy(): void {
     this.$activatedRoute.unsubscribe();
+    this.$transferDataLocal.unsubscribe();
   }
 
   getPrendasPaginate( page: number, limit: number, sort?: string, find?: FindOptions ){
@@ -75,6 +88,23 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
             this.arrayCard.push(card);
           }
+
+          this.paginateOptions = {
+            length: res.data?.totalDocs!,
+            limit: res.data?.limit!,
+            page: res.data?.page!,
+            totalPages: res.data?.totalPages!,
+            hasNextPage: res.data?.hasNextPage!,
+            hasPrevPage: res.data?.hasPrevPage!,
+            prevPage: res.data?.prevPage!,
+            nextPage: res.data?.nextPage!,
+            totalDocs: res.data?.totalDocs!
+          };
+
+          setTimeout(() => {
+
+            this.transferDataLocalService.paginateOptions.emit(this.paginateOptions);
+          }, 1000)
 
         }
 

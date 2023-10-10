@@ -14,11 +14,15 @@
         
         <div *ngIf="arrayCard.length != 0">
             <app-cards [products]="arrayCard"></app-cards>
+                 
         </div>
 
         <div *ngIf="arrayCard.length == 0">
             <h3>No se han encontrado productos</h3>
         </div>
+        
+        <app-paginate></app-paginate>
+        
 
     </div>
 

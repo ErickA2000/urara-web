@@ -6,7 +6,7 @@
         <label>Item por pagina:</label>
 
         <mat-form-field appearance="outline" class="mat-select">
-            <mat-select value="5">
+            <mat-select >
                 <mat-option *ngFor="let pageSize of pageSizeOptions" value="{{pageSize}}" (click)="getQuery( 1, pageSize )">{{pageSize}}</mat-option>
             </mat-select>
         </mat-form-field>
