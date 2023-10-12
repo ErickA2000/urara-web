@@ -87,5 +87,6 @@ interface IDColor {
 }
 
 export interface FindOptions{
-    categoria: string
+    categoria: string,
+    discount?: boolean
 }

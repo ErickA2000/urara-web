@@ -46,8 +46,8 @@ export class ProductsComponent implements OnInit, OnDestroy{
         if( queryParams['filter'] ){
   
           if( queryParams['filter'] === "categoria" ){
-  
-            this.getPrendasPaginate( 1, 25, undefined, { categoria: queryParams['value'] } )
+      
+            this.getPrendasPaginate( 1, 25, undefined, { categoria: queryParams['value'], discount: queryParams['discount'] } );
           }
     
         }else{
@@ -63,7 +63,7 @@ export class ProductsComponent implements OnInit, OnDestroy{
         if( queryParamss['filter'] ){
           if( queryParamss['filter'] === "categoria" ){
 
-            this.getPrendasPaginate( query.page, query.limit, undefined, { categoria: queryParamss['value'] } );
+            this.getPrendasPaginate( query.page, query.limit, undefined, { categoria: queryParamss['value'], discount: queryParamss['discount'] } );
           }
         }else{
           this.getPrendasPaginate( query.page, query.limit );

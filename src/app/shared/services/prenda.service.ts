@@ -17,7 +17,7 @@ export class PrendaService {
     
     if( sort == undefined ) sort = "";
 
-    const url = `${this.baseUrl}/prendas/p?page=${page}&limit=${limit}&sort=${sort}&categoria=${find?.categoria}`;
+    const url = `${this.baseUrl}/prendas/p?page=${page}&limit=${limit}&sort=${sort}&categoria=${find?.categoria}&discount=${find?.discount}`;
 
     return this.http.get<IResponsePrenda>( url )
       .pipe(
