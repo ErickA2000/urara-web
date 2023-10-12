@@ -1,3 +1,9 @@
+import { IRES } from "src/app/interfaces/global.interface";
+
+export interface ResponseCart extends IRES {
+    data?: ICart
+}
+
 export interface ICart {
     _id:       string;
     cliente:   Cliente;
@@ -47,4 +53,22 @@ interface colores {
     createdAt?: Date;
     updatedAt?: Date;
     __v:       number;
+}
+
+
+export interface AddCart {
+    productos: productos[]
+}
+
+interface productos {
+    productID: string;
+    descuento: number,
+    tallasCantidadPrecio: tallaCantidadPrecio
+}
+
+interface tallaCantidadPrecio {
+    talla:    string;
+    cantidad: number;
+    precio:   number;
+    idColor: string;
 }

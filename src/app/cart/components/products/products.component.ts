@@ -11,7 +11,7 @@ import { ItransferDataOrderSummary } from 'src/app/shared/interfaces/transfer-da
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
-  @Input() products!: ICart;
+  @Input() products?: ICart;
 
   minQuantity: number = 1;
   maxQuantity: number = 100;
@@ -33,35 +33,38 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    for (let product of this.products.productos) {
+    if( this.products ){
 
-      let stockColor: number = 0;
-      for (let tcp of product.productID.tallasCantidadPrecio) {
-
-        if (product.tallasCantidadPrecio.talla === tcp.talla) {
-          for (let color of tcp.colores!) {
-            if (color.idColor === product.tallasCantidadPrecio.idColor?._id) {
-              stockColor = color.cantidad;
+      for (let product of this.products.productos) {
+  
+        let stockColor: number = 0;
+        for (let tcp of product.productID.tallasCantidadPrecio) {
+  
+          if (product.tallasCantidadPrecio.talla === tcp.talla) {
+            for (let color of tcp.colores!) {
+              if (color.idColor === product.tallasCantidadPrecio.idColor?._id) {
+                stockColor = color.cantidad;
+              }
             }
           }
         }
+  
+        this.addProduct({
+          productID: product.productID._id,
+          tempProduct: { ...product.productID, precio: product.tallasCantidadPrecio.precio },
+          descuento: product.descuento,
+          tallasCantidadPrecio: {
+            talla: product.tallasCantidadPrecio.talla,
+            cantidad: product.tallasCantidadPrecio.cantidad,
+            precio: product.tallasCantidadPrecio.precio,
+            idColor: product.tallasCantidadPrecio.idColor?._id || ''
+          },
+          tempColor: {
+            nombre: product.tallasCantidadPrecio.idColor?.nombre || '',
+            cantidad: stockColor
+          }
+        })
       }
-
-      this.addProduct({
-        productID: product.productID._id,
-        tempProduct: { ...product.productID, precio: product.tallasCantidadPrecio.precio },
-        descuento: product.descuento,
-        tallasCantidadPrecio: {
-          talla: product.tallasCantidadPrecio.talla,
-          cantidad: product.tallasCantidadPrecio.cantidad,
-          precio: product.tallasCantidadPrecio.precio,
-          idColor: product.tallasCantidadPrecio.idColor?._id || ''
-        },
-        tempColor: {
-          nombre: product.tallasCantidadPrecio.idColor?.nombre || '',
-          cantidad: stockColor
-        }
-      })
     }
 
     this.timer2 = setTimeout( () => {
