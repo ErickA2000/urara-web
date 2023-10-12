@@ -1,28 +1,36 @@
-<main class="mat-app-background height-100">
+<main class="mat-app-background">
     
     <div class="content">
 
         <h2 class="content__title">CATALOGO</h2>
 
-        <aside class="filters">
-            <app-filters></app-filters>
-        </aside>
+        <section class="content__container">
+            
+            <section class="content__container-filters">
+                <aside class="filters">
+                    <app-filters></app-filters>
+                </aside>
+            
+                <section class="filters__mobile">
+                    <button mat-raised-button color="primary" (click)="openBottomSheet()">Filtrar</button>
+                </section>
+            </section>
     
-        <section class="filters__mobile">
-            <button mat-raised-button color="primary" (click)="openBottomSheet()">Filtrar</button>
-        </section>
-        
-        <div *ngIf="arrayCard.length != 0">
-            <app-cards [products]="arrayCard"></app-cards>
-                 
-        </div>
+            <section class="content__container-data">
 
-        <div *ngIf="arrayCard.length == 0">
-            <h3>No se han encontrado productos</h3>
-        </div>
+                <div *ngIf="arrayCard.length != 0">
+                    <app-cards [products]="arrayCard"></app-cards>
+                         
+                </div>
         
-        <app-paginate></app-paginate>
-        
+                <div *ngIf="arrayCard.length == 0" class="product-none">
+                    <h3>No se han encontrado productos</h3>
+                </div>
+                
+                <app-paginate></app-paginate>
+
+            </section>
+        </section>
 
     </div>
 

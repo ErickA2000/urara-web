@@ -5,6 +5,8 @@
 .content {
     padding-top: 3rem;
     padding-bottom: 3rem;
+    padding-left: 13%;
+    padding-right: 12%;
 }
 
 .content__title {
@@ -14,8 +16,7 @@
 }
 
 .filters {
-    float: left;
-    width: 20%;
+    width: 100%;
     display: none;
 }
 
@@ -34,5 +35,23 @@
 @media (min-width: 900px) {
     .filters__mobile {
         display: none;
+    }
+
+    .content__container{
+        flex-direction: row !important;
+        justify-content: space-evenly;
+    }
+}
+
+.content__container{
+    display: flex;
+    flex-direction: column;
+
+    .product-none{
+        text-align: center;
+    }
+
+    .content__container-data{
+        width: 100%;
     }
 }

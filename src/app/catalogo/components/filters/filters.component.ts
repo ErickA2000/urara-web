@@ -56,6 +56,11 @@ export class FiltersComponent implements OnInit{
     });
   }
 
+  clearFilter(){
+    this.router.navigate([]);
+    this.filtrosForm.reset();
+  }
+
 }
 
 interface ListCategory{

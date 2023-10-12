@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ICard } from 'src/app/interfaces/shared/card.interface';
 import { BottonSheetFilterComponent } from '../../components/botton-sheet-filter/botton-sheet-filter.component';
-import { ActivatedRoute, Router, UrlTree } from '@angular/router';
+import { ActivatedRoute, Params, Router, UrlTree } from '@angular/router';
 import { Platform } from '@angular/cdk/platform';
 import { isPlatformBrowser } from '@angular/common';
 import { scrollToTop } from 'src/app/utils/functions';
@@ -34,13 +34,15 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
 
+    let queryParamss: Params;
+
     if( isPlatformBrowser( this.plataformID ) ){
       scrollToTop();
     }
     
     this.$activatedRoute = this.activatedRoute.queryParams.subscribe( 
       queryParams => {
-
+        queryParamss = queryParams;
         if( queryParams['filter'] ){
   
           if( queryParams['filter'] === "categoria" ){
@@ -57,7 +59,16 @@ export class ProductsComponent implements OnInit, OnDestroy{
 
     this.$transferDataLocal = this.transferDataLocalService.queryPaginate.subscribe(
       query => {
-        this.getPrendasPaginate( query.page, query.limit );
+
+        if( queryParamss['filter'] ){
+          if( queryParamss['filter'] === "categoria" ){
+
+            this.getPrendasPaginate( query.page, query.limit, undefined, { categoria: queryParamss['value'] } );
+          }
+        }else{
+          this.getPrendasPaginate( query.page, query.limit );
+        }
+
       }
     )
 
