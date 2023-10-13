@@ -11,7 +11,7 @@ import { Iprenda2 } from 'src/app/interfaces/shared/prenda.interface';
 import { Subscription } from 'rxjs';
 import { DialogsService } from 'src/app/shared/services/dialogs.service';
 import { CartService } from 'src/app/cart/services/cart.service';
-import { AddCart } from 'src/app/cart/interfaces/cart.interface';
+import { AddCart, ProductoCart } from 'src/app/cart/interfaces/cart.interface';
 
 @Component({
   selector: 'app-details',
@@ -205,12 +205,16 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   addToCart(){
-    
-    // this.cartService.addCart( { productos: this.productForm.value } ).subscribe(
-    //   res => {
-    //     console.log(res)
-    //   }
-    // )
+    this.dialogsService.openSpinner();
+
+    const product = this.productForm.value as ProductoCart
+
+    this.cartService.addCart( { productos: product } ).subscribe(
+      res => {
+        this.dialogsService.close()
+        this.snackBarService.openSnackBar( res.message || "" );
+      }
+    )
   }
 
 }

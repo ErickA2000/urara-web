@@ -57,10 +57,14 @@ interface colores {
 
 
 export interface AddCart {
-    productos: productos
+    productos: ProductoCart
 }
 
-interface productos {
+export interface UpdateCart {
+    productos: ProductoCart[]
+}
+
+export interface ProductoCart {
     productID: string;
     descuento: number,
     tallasCantidadPrecio: tallaCantidadPrecio

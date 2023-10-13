@@ -1,9 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ICart, ProductID } from '../../interfaces/cart.interface';
+import { ICart, ProductID, UpdateCart } from '../../interfaces/cart.interface';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-local.service';
 import { ItransferDataOrderSummary } from 'src/app/shared/interfaces/transfer-data';
+import { CartService } from '../../services/cart.service';
+import { DialogsService } from 'src/app/shared/services/dialogs.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -16,7 +19,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   minQuantity: number = 1;
   maxQuantity: number = 100;
 
-  constructor(private fb: FormBuilder, private snackBarService: SnackBarService, private transferDataLocalService: TransferDataLocalService ) { }
+  constructor(private fb: FormBuilder, private snackBarService: SnackBarService, private transferDataLocalService: TransferDataLocalService,
+    private cartService: CartService, private dialogService: DialogsService ) { }
 
   private productForm!: FormGroup;
 
@@ -24,9 +28,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
     productos: this.fb.array([])
   });
 
-  timer: any;
-  delayValue = 500;
-  timer2: any;
+  private timer: any;
+  private delayValue = 500;
+  private timer2: any;
+  private timer3: any;
 
   get getProduct(): FormArray {
     return this.productsForm.controls["productos"] as FormArray;
@@ -76,9 +81,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
       clearTimeout(this.timer);
       clearTimeout(this.timer2);
+      clearTimeout(this.timer3);
   }
 
-  addProduct(product: IaddProduct) {
+  private addProduct(product: IaddProduct) {
     let price: number = 0;
     if( product.descuento != 0 ){
       const valorAdescontar = product.tempProduct.precio * (product.descuento/100);
@@ -127,8 +133,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
             } else {
               control.get('tallasCantidadPrecio.cantidad')?.setValue(valueQuantity);
 
-              //Realizar enviar datos al componete de order summary y llamado a la api
+              //Realizar enviar datos al componete de order summary
               this.transferData();
+              
             }
 
           } else {
@@ -139,6 +146,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
       }
       indiceRecorrido++;
     }
+
+    this.sendDataBackEnd();
+
   }
 
   removeQuantity(index: number) {
@@ -171,6 +181,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
       }
       indiceRecorrido++;
     }
+
+    this.sendDataBackEnd();
   }
 
   verifyQuantityInInput( quantityStock: number, control: AbstractControl) {
@@ -218,10 +230,19 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   removeProduct( index: number ){
+    this.dialogService.openSpinner();
+
     this.getProduct.removeAt(index);
 
     //Realizar enviar datos al componete de order summary y llamado a la api
     this.transferData();
+
+    this.cartService.deleteProdcutCart( index ).subscribe(
+      res => {
+        this.snackBarService.openSnackBar( res.message || "" );
+        this.dialogService.close();
+      }
+    );
   }
 
   private transferData(){
@@ -234,6 +255,36 @@ export class ProductsComponent implements OnInit, OnDestroy {
     for( let control of this.getProduct.controls ){
       control.get("tempProduct")?.enable();
     }
+  }
+
+  private sendDataBackEnd( delayValue?: number ){
+    
+    if( !delayValue ) delayValue = 1000;
+    
+    this.timer3 = setTimeout( () => {
+      this.dialogService.openSpinner();
+
+      for( let control of this.getProduct.controls ){
+        control.get("tempProduct")?.disable();
+      }
+
+      const data = this.productsForm.value as UpdateCart
+      
+      this.cartService.updateProductCart( data ).subscribe(
+        res => {
+
+          for( let control of this.getProduct.controls ){
+            control.get("tempProduct")?.enable();
+          }
+    
+          this.dialogService.close();
+          this.snackBarService.openSnackBar( res.message || "" );
+        }
+      )
+  
+
+    }, delayValue );
+
   }
 
 }
