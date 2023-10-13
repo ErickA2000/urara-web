@@ -33,7 +33,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if( this.products ){
+    if( this.products && this.products.productos.length > 0 ){
 
       for (let product of this.products.productos) {
   

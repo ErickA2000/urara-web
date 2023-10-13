@@ -3,7 +3,8 @@
     <div class="container">
         <section>
             <h2>Carrito</h2>
-            <app-products [products]="cart"></app-products>
+            <app-products [products]="cart" *ngIf="cart"></app-products>
+            <p *ngIf="!cart">{{messageError}}</p>
         </section>
     
         <section class="order-summary">

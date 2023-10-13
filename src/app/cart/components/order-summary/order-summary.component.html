@@ -29,7 +29,7 @@
                     <h2>{{total | currency: 'COP'}}</h2>
                 </div>
 
-                <button mat-raised-button class="btn" (click)="openPayMethods()">Comprar</button>
+                <button mat-raised-button class="btn" (click)="openPayMethods()" [disabled]="products.productos.length == 0">Comprar</button>
 
             </div>
 

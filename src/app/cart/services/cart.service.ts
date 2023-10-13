@@ -22,7 +22,7 @@ export class CartService {
 
     return this.http.get<ResponseCart>( url, { headers } )
       .pipe(
-        catchError( err => of(err) )
+        catchError( err => of(err.error) )
       )
   }
 
@@ -33,7 +33,7 @@ export class CartService {
 
     return this.http.post<ResponseCart>( url, cart, { headers } )
       .pipe(
-        catchError( err => of(err) )
+        catchError( err => of(err.error) )
       )
   }
 

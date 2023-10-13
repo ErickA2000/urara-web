@@ -57,7 +57,7 @@ interface colores {
 
 
 export interface AddCart {
-    productos: productos[]
+    productos: productos
 }
 
 interface productos {

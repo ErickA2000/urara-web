@@ -10,6 +10,8 @@ import { PrendaService } from 'src/app/shared/services/prenda.service';
 import { Iprenda2 } from 'src/app/interfaces/shared/prenda.interface';
 import { Subscription } from 'rxjs';
 import { DialogsService } from 'src/app/shared/services/dialogs.service';
+import { CartService } from 'src/app/cart/services/cart.service';
+import { AddCart } from 'src/app/cart/interfaces/cart.interface';
 
 @Component({
   selector: 'app-details',
@@ -34,7 +36,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   private $activatedRoute?: Subscription;
 
   constructor( private fb: FormBuilder, private snackBarService: SnackBarService, private router: Router, @Inject(PLATFORM_ID) private plataformID: Platform,
-  private prendaService: PrendaService, private activatedRoute: ActivatedRoute, private dialogsService: DialogsService ){}
+  private prendaService: PrendaService, private activatedRoute: ActivatedRoute, private dialogsService: DialogsService, private cartService: CartService ){}
 
   productForm = this.fb.group({
     productID: [ '', [ Validators.required ] ],
@@ -203,7 +205,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   addToCart(){
-    console.log("Add a product to cart:", this.productForm.value);
+    
+    // this.cartService.addCart( { productos: this.productForm.value } ).subscribe(
+    //   res => {
+    //     console.log(res)
+    //   }
+    // )
   }
 
 }
