@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ICart, ProductID, UpdateCart } from '../../interfaces/cart.interface';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
@@ -6,12 +6,12 @@ import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-
 import { ItransferDataOrderSummary } from 'src/app/shared/interfaces/transfer-data';
 import { CartService } from '../../services/cart.service';
 import { DialogsService } from 'src/app/shared/services/dialogs.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   @Input() products?: ICart;

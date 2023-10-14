@@ -46,11 +46,30 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
   }
 
   openPayMethods(){
+    
+    let productTransfor: ItransferDataOrderSummary = {
+      productos: []
+    };
+
+    //Transformando los precios a entero
+    for( let product of this.products.productos ){
+      productTransfor.productos.push({
+        productID: product.productID,
+        descuento: product.descuento,
+        tallasCantidadPrecio: {
+          cantidad: product.tallasCantidadPrecio.cantidad,
+          talla: product.tallasCantidadPrecio.talla,
+          precio: Math.trunc(product.tallasCantidadPrecio.precio),
+          idColor: product.tallasCantidadPrecio.idColor
+        }
+      });
+    }
+
     this.dialogsService.open( PayMethodsComponent, 
       {
-        data: { ...this.products, 
-          subtotal: this.subtotal,
-          total: this.total
+        data: { ...productTransfor, 
+          subtotal: Math.trunc(this.subtotal),
+          total: Math.trunc(this.total)
         }
       }   
     )
