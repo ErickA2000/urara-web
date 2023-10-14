@@ -17,7 +17,7 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
   products!: ItransferDataOrderSummary;
   subtotal: number = 0;
   total: number = 0;
-  iva: number = 19;
+  iva: number = 0;
   ivaValor: number = 0;
 
   $transferDataService!: Subscription; 
@@ -55,6 +55,7 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
     for( let product of this.products.productos ){
       productTransfor.productos.push({
         productID: product.productID,
+        tempProduct: product.tempProduct,
         descuento: product.descuento,
         tallasCantidadPrecio: {
           cantidad: product.tallasCantidadPrecio.cantidad,
@@ -69,7 +70,9 @@ export class OrderSummaryComponent implements OnInit, OnDestroy {
       {
         data: { ...productTransfor, 
           subtotal: Math.trunc(this.subtotal),
-          total: Math.trunc(this.total)
+          total: Math.trunc(this.total),
+          iva: this.iva,
+          iva_moneda: this.ivaValor
         }
       }   
     )

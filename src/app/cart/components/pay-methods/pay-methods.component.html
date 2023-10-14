@@ -5,7 +5,7 @@
     <div class="content">
         <section class="pay-method">
 
-            <div class="pay-method__img">
+            <div class="pay-method__img" (click)="createPayment('mercadopago')">
                 <img [src]="logoMercadoPago" alt="Mercado Pago">
             </div>
             <p>Tarjetas de crédito y débito, PSE y efectivo</p>
@@ -13,7 +13,7 @@
     
         <section class="pay-method">
             
-            <div class="pay-method__img">
+            <div class="pay-method__img" (click)="createPayment('paypal')">
                 <img [src]="logoPaypal" alt="PayPal">
             </div>
             <p>PayPal</p>

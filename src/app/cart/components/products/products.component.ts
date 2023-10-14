@@ -246,15 +246,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   private transferData(){
-    for( let control of this.getProduct.controls ){
-      control.get("tempProduct")?.disable();
-    }
+    // for( let control of this.getProduct.controls ){
+    //   control.get("tempProduct")?.disable();
+    // }
     
     this.transferDataLocalService.transferDataOrderSummary.emit(this.productsForm.value as ItransferDataOrderSummary);
 
-    for( let control of this.getProduct.controls ){
-      control.get("tempProduct")?.enable();
-    }
+    // for( let control of this.getProduct.controls ){
+    //   control.get("tempProduct")?.enable();
+    // }
   }
 
   private sendDataBackEnd( delayValue?: number ){
