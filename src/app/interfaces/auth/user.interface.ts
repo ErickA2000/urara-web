@@ -8,7 +8,7 @@ export interface IdataUser{
     emailverified: boolean,
     roles: [Iroles],
     verify2fa: Iverify2fa,
-    direcciones: [Idireccion]
+    direcciones: Idireccion[]
     createdAt?: string,
     updatedAt?: string
 }
@@ -29,7 +29,7 @@ export interface IDataUserOptional{
     username?: string,
     clave?: string,
     verify2fa?: Iverify2fa
-    direcciones?: [Idireccion];
+    direcciones?: Idireccion[];
 }
 
 interface Iroles{

@@ -20,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ChangePasswordComponent } from './components/security/change-password/change-password.component';
 import { OneDeviceComponent } from './components/security/one-device/one-device.component';
 import { SharedModule } from '../shared/shared.module';
+import { UpdateAddressComponent } from './components/personalInfo/update-address/update-address.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { SharedModule } from '../shared/shared.module';
     BuysComponent,
     PurchaseDetailComponent,
     ChangePasswordComponent,
-    OneDeviceComponent
+    OneDeviceComponent,
+    UpdateAddressComponent
   ],
   imports: [
     CommonModule,

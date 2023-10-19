@@ -9,5 +9,6 @@ export const environment = {
         TOKEN: import.meta.env.NG_APP_IPINFO_TOKEN
     },
 
-    ID_SELLER: import.meta.env.NG_APP_ID_SELLER_WEB
+    ID_SELLER: import.meta.env.NG_APP_ID_SELLER_WEB,
+    URL_DATOS_COLOMBIA: import.meta.env.NG_APP_URL_DATOS_COLOMBIA
 };

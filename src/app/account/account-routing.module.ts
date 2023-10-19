@@ -13,6 +13,7 @@ import { DevicesComponent } from './components/security/devices/devices.componen
 import { MyBuysComponent } from './components/myBuys/my-buys/my-buys.component';
 import { PurchaseDetailComponent } from './components/myBuys/purchase-detail/purchase-detail.component';
 import { OneDeviceComponent } from './components/security/one-device/one-device.component';
+import { UpdateAddressComponent } from './components/personalInfo/update-address/update-address.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,14 @@ const routes: Routes = [
           {
             path: "update-contact-info",
             component: UpdateContactInfoComponent
+          },
+          {
+            path: "add-address",
+            component: UpdateAddressComponent
+          },
+          {
+            path: "edit-address/:position",
+            component: UpdateAddressComponent
           }
         ]
       },

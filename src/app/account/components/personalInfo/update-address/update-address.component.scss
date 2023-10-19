@@ -1,0 +1,28 @@
+.numero-2{
+    span{
+        padding-left: 15px;
+    }
+}
+
+.type-address{
+    display: flex;
+    gap: 2rem;
+}
+
+.direccion{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+    gap: 2rem;
+
+    .direccion-datos{
+        mat-form-field{
+            width: 100%;
+        }
+    }
+}
+
+.references{
+    mat-form-field{
+        width: 100%;
+    }
+}

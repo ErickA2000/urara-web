@@ -1,0 +1,113 @@
+<div class="content-right-account">
+
+    <section class="content-title">
+        <button mat-icon-button (click)="back()">
+            <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <h2>Agregar dirección</h2>
+    </section>
+
+    <section class="vh-100">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Dirección</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+                <form class="form-update-in-account" >
+
+                    <section class="type-address">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Tipo de dirección</mat-label>
+                            <mat-select>
+                                <mat-option *ngFor="let typeAddress of typesAddress"  [value]="typeAddress"
+                                (click)="selectTypeAddress(typeAddress)">{{typeAddress | titlecase}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <ng-container *ngIf="typeAddressSelected == 'otro'">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nombre</mat-label>
+                                <input type="text" matInput>
+                            </mat-form-field>
+                        </ng-container>
+
+                    </section>
+
+                    <section class="direccion">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Pais</mat-label>
+                            <mat-select>
+                                <mat-option>Casa</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline">
+                            <mat-label>Departamento</mat-label>
+                            <mat-select>
+                                <mat-option>Casa</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline">
+                            <mat-label>Ciudad, Municipio, Capital o Localidad</mat-label>
+                            <mat-select>
+                                <mat-option>Casa</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline">
+                            <mat-label>Barrio</mat-label>
+                            <input type="text" matInput >
+                        </mat-form-field>
+
+                        <section class="direccion-datos">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Tipo de calle</mat-label>
+                                <mat-select>
+                                    <mat-option>Casa</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+        
+                            <mat-form-field appearance="outline">
+                                <mat-label>Manzana</mat-label>
+                                <input type="text" matInput placeholder="Completa solo con el nombre y el prefijo. Ej: 22 Sur.">
+                            </mat-form-field>
+                        </section>
+
+                        <section class="direccion-datos">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Número</mat-label>
+                                <input type="text" matInput >
+                            </mat-form-field>
+        
+                            <mat-form-field appearance="outline" class="numero-2">
+                                <span matPrefix>-</span>
+                                <input type="text" matInput >
+                            </mat-form-field>
+                        </section>
+
+                    </section>
+
+                    <section class="references">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Referencias adicionales</mat-label>
+                            <textarea matInput placeholder="Descripción de la fachada, puntos de referencia para encontrarla, indicaciones de seguridad, etc."></textarea>
+                        </mat-form-field>
+                    </section>
+
+                </form>
+
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+                <button mat-raised-button color="primary">
+                    <mat-icon>save</mat-icon>
+                    Guardar
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </section>
+
+</div>

@@ -65,4 +65,44 @@
         </mat-card>
 
     </section>
+
+    <section class="vh-100 mb-2">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Direcciones</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+                <ng-container *ngIf="dataUser?.direcciones?.length != 0">
+
+                    <div *ngFor="let direccion of dataUser?.direcciones">
+    
+                        <div class="info-card">
+                            <p class="title">{{direccion.titulo | titlecase}}</p>
+                            <p class="value">
+                                <span>{{direccion.direccion}}</span>
+                                <span>{{direccion.pais | titlecase}}, {{direccion.departamento | titlecase}}, {{direccion.ciudad}}</span>
+                            </p>
+                        </div>
+        
+                        <mat-divider></mat-divider>
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="dataUser?.direcciones?.length == 0">
+                    <p>Sin direcciones</p>
+                </ng-container>
+
+
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+                <button mat-raised-button color="primary" routerLink="/site/account/personal-info/add-address">
+                    Agregar dirección
+                </button>
+            </mat-card-actions>
+        </mat-card>
+
+    </section>
 </div>
