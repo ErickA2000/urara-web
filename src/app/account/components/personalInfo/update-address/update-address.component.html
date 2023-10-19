@@ -39,21 +39,25 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Pais</mat-label>
                             <mat-select>
-                                <mat-option>Casa</mat-option>
+                                <mat-option *ngFor="let country of countries" [value]="country" (click)="searchDepartments(country)">
+                                    {{country | titlecase}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
     
                         <mat-form-field appearance="outline">
                             <mat-label>Departamento</mat-label>
                             <mat-select>
-                                <mat-option>Casa</mat-option>
+                                <mat-option *ngFor="let department of departments" [value]="department" (click)="searchCitiesOrMunicipalities(department)">
+                                    {{department}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
     
                         <mat-form-field appearance="outline">
                             <mat-label>Ciudad, Municipio, Capital o Localidad</mat-label>
                             <mat-select>
-                                <mat-option>Casa</mat-option>
+                                <mat-option *ngFor="let city of citiesOrMunicipalities" [value]="city">{{city}}</mat-option>
                             </mat-select>
                         </mat-form-field>
     
