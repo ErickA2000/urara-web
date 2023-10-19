@@ -29,6 +29,7 @@ export interface IDataUserOptional{
     username?: string,
     clave?: string,
     verify2fa?: Iverify2fa
+    direcciones?: [Idireccion];
 }
 
 interface Iroles{

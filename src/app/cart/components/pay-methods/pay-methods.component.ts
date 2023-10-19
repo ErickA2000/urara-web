@@ -4,6 +4,8 @@ import { ItransferDataOrderSummary } from 'src/app/shared/interfaces/transfer-da
 import { environment } from 'src/environments/environment';
 import { ProductInPayment, RequestPayment } from '../../interfaces/payment.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { PaymentService } from '../../services/payment.service';
+import alertSwal from 'src/app/utils/alertSwal';
 
 @Component({
   selector: 'app-pay-methods',
@@ -14,7 +16,7 @@ export class PayMethodsComponent implements OnInit {
 
   private id_seller = environment.ID_SELLER;
 
-  constructor( @Inject(MAT_DIALOG_DATA) public payData: ItransferDataOrderSummary, private authService: AuthService) { }
+  constructor( @Inject(MAT_DIALOG_DATA) public payData: ItransferDataOrderSummary, private authService: AuthService, private paymentService: PaymentService) { }
 
   logoMercadoPago = "assets/img/logos/mercado-pago.webp";
   logoPaypal = "assets/img/logos/paypal.png";
@@ -59,6 +61,16 @@ export class PayMethodsComponent implements OnInit {
       total: this.payData.total || 0
     };
 
-    console.log(reqBody)
+    if( reqBody.direccionFacturacion === undefined ){
+      alertSwal.messageError("Falta agregar al menos una dirección");
+
+      
+    }
+
+    // this.paymentService.createPayment( reqBody ).subscribe(
+    //   res => {
+    //     console.log(res)
+    //   }
+    // )
   }
 }
