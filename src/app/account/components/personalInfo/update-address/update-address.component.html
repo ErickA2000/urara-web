@@ -15,89 +15,96 @@
 
             <mat-card-content>
 
-                <form class="form-update-in-account" >
+                <form class="form-update-in-account" [formGroup]="addressForm">
 
                     <section class="type-address">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" >
                             <mat-label>Tipo de dirección</mat-label>
-                            <mat-select>
+                            <mat-select formControlName="titulo">
                                 <mat-option *ngFor="let typeAddress of typesAddress"  [value]="typeAddress"
                                 (click)="selectTypeAddress(typeAddress)">{{typeAddress | titlecase}}</mat-option>
                             </mat-select>
                         </mat-form-field>
 
                         <ng-container *ngIf="typeAddressSelected == 'otro'">
-                            <mat-form-field appearance="outline">
+                            <mat-form-field appearance="outline" >
                                 <mat-label>Nombre</mat-label>
-                                <input type="text" matInput>
+                                <input type="text" matInput formControlName="tituloOtro">
                             </mat-form-field>
                         </ng-container>
 
                     </section>
 
                     <section class="direccion">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" >
                             <mat-label>Pais</mat-label>
-                            <mat-select>
+                            <mat-select formControlName="pais">
                                 <mat-option *ngFor="let country of countries" [value]="country" (click)="searchDepartments(country)">
                                     {{country | titlecase}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
     
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" >
                             <mat-label>Departamento</mat-label>
-                            <mat-select>
+                            <mat-select formControlName="departamento">
                                 <mat-option *ngFor="let department of departments" [value]="department" (click)="searchCitiesOrMunicipalities(department)">
                                     {{department}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
     
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" >
                             <mat-label>Ciudad, Municipio, Capital o Localidad</mat-label>
-                            <mat-select>
+                            <mat-select formControlName="ciudad">
                                 <mat-option *ngFor="let city of citiesOrMunicipalities" [value]="city">{{city}}</mat-option>
                             </mat-select>
                         </mat-form-field>
     
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" >
                             <mat-label>Barrio</mat-label>
-                            <input type="text" matInput >
+                            <input type="text" matInput formControlName="barrio">
                         </mat-form-field>
-
-                        <section class="direccion-datos">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Tipo de calle</mat-label>
-                                <mat-select>
-                                    <mat-option>Casa</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-        
-                            <mat-form-field appearance="outline">
-                                <mat-label>Manzana</mat-label>
-                                <input type="text" matInput placeholder="Completa solo con el nombre y el prefijo. Ej: 22 Sur.">
-                            </mat-form-field>
-                        </section>
-
-                        <section class="direccion-datos">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Número</mat-label>
-                                <input type="text" matInput >
-                            </mat-form-field>
-        
-                            <mat-form-field appearance="outline" class="numero-2">
-                                <span matPrefix>-</span>
-                                <input type="text" matInput >
-                            </mat-form-field>
-                        </section>
 
                     </section>
 
+                    <section class="direccion-datos">
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Tipo de calle</mat-label>
+                            <mat-select formControlName="tipocalle">
+                                <mat-option *ngFor="let typeStreet of typesStreet" [value]="typeStreet" (click)="selectTypeStreet(typeStreet)">
+                                    {{typeStreet | titlecase}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline" >
+                            <mat-label>{{typeStreetSelected | titlecase}}</mat-label>
+                            <input type="text" matInput placeholder="Completa solo con el nombre y el prefijo. Ej: 22 Sur."
+                            formControlName="callenumero">
+                            <mat-hint>Completa solo con el nombre y el prefijo. Ej: 22 Sur.</mat-hint>
+                        </mat-form-field>
+
+                        <div class="direccion-datos__number">
+                            <mat-form-field appearance="outline" class="numero" >
+                                <mat-label>Número</mat-label>
+                                <span matPrefix>#</span>
+                                <input type="text" matInput formControlName="numero1">
+                            </mat-form-field>
+        
+                            <mat-form-field appearance="outline" class="numero" >
+                                <span matPrefix>-</span>
+                                <input type="text" matInput formControlName="numero2">
+                            </mat-form-field>
+
+                        </div>
+                    </section>
+
                     <section class="references">
-                        <mat-form-field appearance="outline">
+                        <mat-form-field appearance="outline" >
                             <mat-label>Referencias adicionales</mat-label>
-                            <textarea matInput placeholder="Descripción de la fachada, puntos de referencia para encontrarla, indicaciones de seguridad, etc."></textarea>
+                            <textarea matInput placeholder="Descripción de la fachada, puntos de referencia para encontrarla, indicaciones de seguridad, etc."
+                            formControlName="especificacionOpcional"></textarea>
                         </mat-form-field>
                     </section>
 
@@ -106,7 +113,7 @@
             </mat-card-content>
 
             <mat-card-actions align="end">
-                <button mat-raised-button color="primary">
+                <button mat-raised-button color="primary" [disabled]="!addressForm.valid" (click)="save()">
                     <mat-icon>save</mat-icon>
                     Guardar
                 </button>

@@ -1,4 +1,4 @@
-.numero-2{
+.numero{
     span{
         padding-left: 15px;
     }
@@ -14,14 +14,31 @@
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
     gap: 2rem;
 
-    .direccion-datos{
-        mat-form-field{
-            width: 100%;
-        }
+    
+}
+
+.direccion-datos{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+    gap: 2rem;
+
+    mat-form-field{
+        width: 100%;
+    }
+}
+
+.direccion-datos__number{
+    display: flex;
+    gap: 2rem;
+
+    mat-form-field{
+        width: 50%;
     }
 }
 
 .references{
+    margin-top: 2rem;
+    
     mat-form-field{
         width: 100%;
     }

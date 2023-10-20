@@ -76,14 +76,22 @@
 
                 <ng-container *ngIf="dataUser?.direcciones?.length != 0">
 
-                    <div *ngFor="let direccion of dataUser?.direcciones">
+                    <div *ngFor="let direccion of dataUser?.direcciones;let i = index">
     
                         <div class="info-card">
                             <p class="title">{{direccion.titulo | titlecase}}</p>
                             <p class="value">
-                                <span>{{direccion.direccion}}</span>
-                                <span>{{direccion.pais | titlecase}}, {{direccion.departamento | titlecase}}, {{direccion.ciudad}}</span>
+                                <span>{{direccion.direccion | titlecase}}</span>
+                                <span> {{direccion.pais | titlecase}}, {{direccion.departamento | titlecase}}, {{direccion.ciudad | titlecase}}</span>
                             </p>
+
+                            <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item>Editar</button>
+                                <button mat-menu-item>Eliminar</button>
+                            </mat-menu>
                         </div>
         
                         <mat-divider></mat-divider>
