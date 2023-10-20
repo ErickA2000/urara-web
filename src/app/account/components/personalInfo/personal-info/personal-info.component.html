@@ -79,7 +79,10 @@
                     <div *ngFor="let direccion of dataUser?.direcciones;let i = index">
     
                         <div class="info-card">
-                            <p class="title">{{direccion.titulo | titlecase}}</p>
+                            <p class="title address">
+                                {{direccion.titulo | titlecase}} 
+                                <mat-icon *ngIf="direccion.forInvoice">local_shipping</mat-icon>
+                            </p>
                             <p class="value">
                                 <span>Barrio {{direccion.barrio | titlecase}} {{direccion.tipocalle | titlecase}} {{direccion.callenumero}} #{{direccion.numero1}}-{{direccion.numero2}}</span>
                                 <span> {{direccion.pais | titlecase}}, {{direccion.departamento | titlecase}}, {{direccion.ciudad | titlecase}}</span>
@@ -90,6 +93,7 @@
                             </button>
                             <mat-menu #menu="matMenu">
                                 <button mat-menu-item routerLink="/site/account/personal-info/edit-address/{{i}}">Editar</button>
+                                <button mat-menu-item (click)="prediterminedAddress(i)">Usar como predeterminada de envíos</button>
                                 <button mat-menu-item (click)="deleteAddress(i)">Eliminar</button>
                             </mat-menu>
                         </div>

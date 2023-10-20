@@ -40,7 +40,8 @@ export class UpdateAddressComponent implements OnInit {
     callenumero: ['', [ Validators.required ]],
     numero1: ['', [ Validators.minLength(1) ]],
     numero2: ['', [ Validators.minLength(1) ]],
-    especificacionOpcional: ['', [ Validators.minLength(5) ]]
+    especificacionOpcional: ['', [ Validators.minLength(5) ]],
+    forInvoice: [ false ]
   });
 
   ngOnInit(): void {
@@ -60,7 +61,8 @@ export class UpdateAddressComponent implements OnInit {
       callenumero: this.addressForm.get('callenumero')?.value!,
       numero1: this.addressForm.get('numero1')?.value!,
       numero2: this.addressForm.get('numero2')?.value!,
-      especificacionOpcional: ''
+      especificacionOpcional: '',
+      forInvoice: this.addressForm.get('forInvoice')?.value!
     };
 
     let direcciones = this.authService.user.direcciones;

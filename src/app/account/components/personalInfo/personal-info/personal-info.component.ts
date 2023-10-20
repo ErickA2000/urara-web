@@ -3,6 +3,7 @@ import { UserService } from 'src/app/account/services/user.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { IdataUser } from 'src/app/interfaces/auth/user.interface';
 import { DialogsService } from 'src/app/shared/services/dialogs.service';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import alertSwal from 'src/app/utils/alertSwal';
 
 @Component({
@@ -12,7 +13,8 @@ import alertSwal from 'src/app/utils/alertSwal';
 })
 export class PersonalInfoComponent implements OnInit {
 
-  constructor( private authService: AuthService, private userService: UserService, private dialogService: DialogsService ){}
+  constructor( private authService: AuthService, private userService: UserService, private dialogService: DialogsService,
+    private snackBarService: SnackBarService ){}
 
   public dataUser?: IdataUser;
 
@@ -37,6 +39,33 @@ export class PersonalInfoComponent implements OnInit {
 
       }
     )
+  }
+
+  prediterminedAddress( index: number ){
+    this.dialogService.openSpinner();
+    let direcciones = this.dataUser?.direcciones!;
+
+    for( let direccion of direcciones ){
+      direccion.forInvoice = false;
+    }
+
+    direcciones[index].forInvoice = true;
+    
+    this.userService.updateData( { direcciones } ).subscribe(
+      res => {
+
+        if( res.success ){
+          this.dialogService.close();
+          this.snackBarService.openSnackBar( "Cambiada dirección de envío" );
+
+        }else{
+          this.dialogService.close();
+          this.snackBarService.openSnackBar( res.message || "" );
+        }
+
+      }
+    )
+
   }
 
 }
