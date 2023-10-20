@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/account/services/user.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Idireccion } from 'src/app/interfaces/auth/user.interface';
@@ -13,7 +15,7 @@ import alertSwal from 'src/app/utils/alertSwal';
   templateUrl: './update-address.component.html',
   styleUrls: ['./update-address.component.scss']
 })
-export class UpdateAddressComponent implements OnInit {
+export class UpdateAddressComponent implements OnInit, OnDestroy {
 
   public typesAddress: string[] = [ "casa", "trabajo", "otro" ];
   public typeAddressSelected: string = "";
@@ -26,8 +28,13 @@ export class UpdateAddressComponent implements OnInit {
   public departments: string[] = [];
   public citiesOrMunicipalities: string[] = [];
 
+  private $activatedRoute!: Subscription;
+
+  private positionAddress?: string | null;
+
   constructor( private sharedMethodsService: SharedMethodsService, private locationsColombia: LocationsInColombiaService, 
-    private dialogsService: DialogsService, private fb: FormBuilder, private authService: AuthService, private userService: UserService ){}
+    private dialogsService: DialogsService, private fb: FormBuilder, private authService: AuthService, private userService: UserService,
+    private activatedRoute: ActivatedRoute ){}
 
   addressForm = this.fb.group({
     titulo: ['', [Validators.required]],
@@ -46,7 +53,40 @@ export class UpdateAddressComponent implements OnInit {
 
   ngOnInit(): void {
 
-      
+    this.$activatedRoute = this.activatedRoute.paramMap.subscribe(
+      params => {
+        this.positionAddress = params.get('position');
+      }
+    );
+    
+    if( this.positionAddress ){
+      let direccion = this.authService.user.direcciones[parseInt(this.positionAddress)];
+
+      if( direccion.titulo?.toLowerCase() != "casa" || direccion.titulo.toLowerCase() != "trabajo" ){
+        this.addressForm.get('titulo')?.setValue('otro');
+        this.addressForm.get('tituloOtro')?.setValue(direccion.titulo!);
+      }else{
+        this.addressForm.get('titulo')?.setValue(direccion.titulo);
+      }
+
+      this.addressForm.get('pais')?.setValue(direccion.pais);
+      this.addressForm.get('departamento')?.setValue(direccion.departamento);
+      this.addressForm.get('ciudad')?.setValue(direccion.ciudad);
+      this.addressForm.get('barrio')?.setValue(direccion.barrio);
+      this.addressForm.get('tipocalle')?.setValue(direccion.tipocalle);
+      this.addressForm.get('callenumero')?.setValue(direccion.callenumero);
+      this.addressForm.get('numero1')?.setValue(direccion.numero1);
+      this.addressForm.get('numero2')?.setValue(direccion.numero2);
+      this.addressForm.get('especificacionOpcional')?.setValue(direccion.especificacionOpcional);
+      this.addressForm.get('forInvoice')?.setValue(direccion.forInvoice);
+
+      this.searchDepartments( direccion.pais );
+      this.searchCitiesOrMunicipalities( direccion.departamento );
+    }
+  }
+
+  ngOnDestroy(): void {
+      this.$activatedRoute.unsubscribe();
   }
 
   save(){
@@ -75,7 +115,11 @@ export class UpdateAddressComponent implements OnInit {
 
     tempDireccion.especificacionOpcional = this.addressForm.get('especificacionOpcional')?.value!;
 
-    direcciones.push(tempDireccion);
+    if( this.positionAddress ){
+      direcciones[parseInt(this.positionAddress)] = tempDireccion;
+    }else{
+      direcciones.push(tempDireccion);
+    }
 
     this.userService.updateData( { direcciones } ).subscribe(
       res => {
