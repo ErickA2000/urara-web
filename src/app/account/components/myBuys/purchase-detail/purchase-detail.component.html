@@ -38,7 +38,9 @@
                     <section class="envio mb-2">
                         <p class="state">{{ purchase?.idEnvio?.estado | titlecase }}</p>
                         <!-- <p>Llegó el 10 de agosto</p> -->
-                        <p>Se entrego en {{ purchase?.direccionFacturacion?.direccion | titlecase}}, {{ purchase?.direccionFacturacion?.ciudad | titlecase}},
+                        <p>Se entrego en Barrio {{ purchase?.direccionFacturacion?.barrio | titlecase}}, {{purchase?.direccionFacturacion?.tipocalle | titlecase}},
+                            {{purchase?.direccionFacturacion?.callenumero}} #{{purchase?.direccionFacturacion?.numero1}} - {{purchase?.direccionFacturacion?.numero2}}
+                            {{ purchase?.direccionFacturacion?.ciudad | titlecase}},
                             {{ purchase?.direccionFacturacion?.departamento | titlecase}}, {{ purchase?.direccionFacturacion?.pais | titlecase}}
                         </p>
                     </section>
@@ -116,7 +118,8 @@
                                             </section>
 
                                             <section class="data">
-                                                <p>{{ purchase?.direccionFacturacion?.direccion }}</p>
+                                                <p>{{ purchase?.direccionFacturacion?.barrio | titlecase}}, {{purchase?.direccionFacturacion?.tipocalle | titlecase}},
+                                                    {{purchase?.direccionFacturacion?.callenumero}} #{{purchase?.direccionFacturacion?.numero1}} - {{purchase?.direccionFacturacion?.numero2}}</p>
                                                 <p class="opasity"> {{ purchase?.direccionFacturacion?.ciudad | titlecase }}, 
                                                     {{ purchase?.direccionFacturacion?.departamento | titlecase }}, 
                                                     {{ purchase?.direccionFacturacion?.pais | titlecase }}

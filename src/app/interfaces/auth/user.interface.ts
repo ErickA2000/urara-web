@@ -18,7 +18,11 @@ export interface Idireccion{
     pais: string,
     departamento: string,
     ciudad: string,
-    direccion: string,
+    barrio: string,
+    tipocalle: string,
+    callenumero: string,
+    numero1: string,
+    numero2: string,
     especificacionOpcional: string
 }
 

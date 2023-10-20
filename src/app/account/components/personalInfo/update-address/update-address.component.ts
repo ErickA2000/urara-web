@@ -55,7 +55,11 @@ export class UpdateAddressComponent implements OnInit {
       pais: this.addressForm.get('pais')?.value!,
       departamento: this.addressForm.get('departamento')?.value!,
       ciudad: this.addressForm.get('ciudad')?.value!,
-      direccion: '',
+      barrio: this.addressForm.get('barrio')?.value!,
+      tipocalle: this.addressForm.get('tipocalle')?.value!,
+      callenumero: this.addressForm.get('callenumero')?.value!,
+      numero1: this.addressForm.get('numero1')?.value!,
+      numero2: this.addressForm.get('numero2')?.value!,
       especificacionOpcional: ''
     };
 
@@ -67,8 +71,6 @@ export class UpdateAddressComponent implements OnInit {
       tempDireccion.titulo = this.addressForm.get('tituloOtro')?.value!;
     }
 
-    tempDireccion.direccion = `Barrio ${this.addressForm.get('barrio')?.value} ${this.addressForm.get('tipocalle')?.value} ${this.addressForm.get('callenumero')?.value} #${this.addressForm.get('numero1')?.value} - ${this.addressForm.get('numero2')?.value}`;
-
     tempDireccion.especificacionOpcional = this.addressForm.get('especificacionOpcional')?.value!;
 
     direcciones.push(tempDireccion);
@@ -79,6 +81,7 @@ export class UpdateAddressComponent implements OnInit {
         if( res.success ){
           this.dialogsService.close();
           alertSwal.messageSuccess( "Agregada dirección", "" );
+          this.sharedMethodsService.changeRoute('/site/account/personal-info');
 
         }else{
           this.dialogsService.close();

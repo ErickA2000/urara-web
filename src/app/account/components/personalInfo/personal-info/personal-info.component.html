@@ -81,7 +81,7 @@
                         <div class="info-card">
                             <p class="title">{{direccion.titulo | titlecase}}</p>
                             <p class="value">
-                                <span>{{direccion.direccion | titlecase}}</span>
+                                <span>Barrio {{direccion.barrio | titlecase}} {{direccion.tipocalle | titlecase}} {{direccion.callenumero}} #{{direccion.numero1}}-{{direccion.numero2}}</span>
                                 <span> {{direccion.pais | titlecase}}, {{direccion.departamento | titlecase}}, {{direccion.ciudad | titlecase}}</span>
                             </p>
 
@@ -89,8 +89,8 @@
                                 <mat-icon>more_vert</mat-icon>
                             </button>
                             <mat-menu #menu="matMenu">
-                                <button mat-menu-item>Editar</button>
-                                <button mat-menu-item>Eliminar</button>
+                                <button mat-menu-item routerLink="/site/account/personal-info/edit-address/{{i}}">Editar</button>
+                                <button mat-menu-item (click)="deleteAddress(i)">Eliminar</button>
                             </mat-menu>
                         </div>
         
