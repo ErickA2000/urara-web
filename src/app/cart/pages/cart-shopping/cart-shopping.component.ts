@@ -26,7 +26,7 @@ export class CartShoppingComponent implements OnInit {
       res => {
 
         if( res.success ){
-          this.cart = res.data;
+          this.cart = res.data?.cart;
         }else{
           
           this.messageError = "Carrito vacio";

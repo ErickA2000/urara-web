@@ -2,7 +2,9 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { CartService } from 'src/app/cart/services/cart.service';
 import alertSwal from 'src/app/utils/alertSwal';
+import { TransferDataLocalService } from '../../services/transfer-data-local.service';
 
 @Component({
   selector: 'app-header',
@@ -11,12 +13,16 @@ import alertSwal from 'src/app/utils/alertSwal';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   
-  constructor( @Inject(DOCUMENT) private document: Document, private authService: AuthService ){}
+  constructor( @Inject(DOCUMENT) private document: Document, private authService: AuthService, private cartService: CartService,
+  private transferDataLocalService: TransferDataLocalService ){}
 
   isDarkMode: boolean = false;
   inSesion: boolean = false;
 
+  cartQuantity: number = 0;
+  
   private $inLogin?: Subscription;
+  private $transferDataLocal?: Subscription;
 
   ngOnInit(): void {
       if(localStorage.getItem('dark-mode') == 'true'){
@@ -41,11 +47,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.inSesion = value;
         }
       )
+
+      this.cartService.getCart().subscribe(
+        res => {
+          
+        }
+      )
+
+      this.$transferDataLocal = this.transferDataLocalService.cartQuantity.subscribe(
+        quantity => this.cartQuantity = quantity
+      );
       
   }
 
   ngOnDestroy(): void {
       this.$inLogin?.unsubscribe();
+      this.$transferDataLocal?.unsubscribe();
   }
 
   changeMode( newValue: boolean ): void{
@@ -63,7 +80,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     
       if( !res.success ){
         alertSwal.messageError( res.message || "Error al cerrar sesión" );
+      }else{
+        this.transferDataLocalService.cartQuantity.emit(0);
       }
+
 
     } );
   }

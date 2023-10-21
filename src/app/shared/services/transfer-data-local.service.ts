@@ -13,6 +13,7 @@ export class TransferDataLocalService {
   @Output() dataUser: EventEmitter<IdataUser> = new EventEmitter();
   @Output() paginateOptions: EventEmitter<IPaginate> = new EventEmitter();
   @Output() queryPaginate: EventEmitter<IPaginateQuery> = new EventEmitter();
+  @Output() cartQuantity: EventEmitter<number> = new EventEmitter();
 
   public token?: string;
   public devices?: ISortDevices;

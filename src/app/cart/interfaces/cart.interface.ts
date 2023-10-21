@@ -1,7 +1,10 @@
 import { IRES } from "src/app/interfaces/global.interface";
 
 export interface ResponseCart extends IRES {
-    data?: ICart
+    data?: {
+        cart: ICart,
+        quantity: number
+    }
 }
 
 export interface ICart {
