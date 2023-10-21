@@ -6,6 +6,8 @@ import { ProductInPayment, RequestPayment } from '../../interfaces/payment.inter
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { PaymentService } from '../../services/payment.service';
 import alertSwal from 'src/app/utils/alertSwal';
+import { SharedMethodsService } from 'src/app/shared/services/shared-methods.service';
+import { Idireccion } from 'src/app/interfaces/auth/user.interface';
 
 @Component({
   selector: 'app-pay-methods',
@@ -16,7 +18,8 @@ export class PayMethodsComponent implements OnInit {
 
   private id_seller = environment.ID_SELLER;
 
-  constructor( @Inject(MAT_DIALOG_DATA) public payData: ItransferDataOrderSummary, private authService: AuthService, private paymentService: PaymentService) { }
+  constructor( @Inject(MAT_DIALOG_DATA) public payData: ItransferDataOrderSummary, private authService: AuthService, private paymentService: PaymentService,
+  private sharedMethodsService: SharedMethodsService) { }
 
   logoMercadoPago = "assets/img/logos/mercado-pago.webp";
   logoPaypal = "assets/img/logos/paypal.png";
@@ -27,6 +30,19 @@ export class PayMethodsComponent implements OnInit {
 
   createPayment( paymentService: "mercadopago" | "paypal" ){
     let productPayment: ProductInPayment[] = [];
+    const dataUser = this.authService.user;
+    let direccionFactu: Idireccion = {
+      titulo: '',
+      pais: '',
+      departamento: '',
+      ciudad: '',
+      barrio: '',
+      tipocalle: '',
+      callenumero: '',
+      numero1: '',
+      numero2: '',
+      especificacionOpcional: ''
+    };
 
     //calcular valor descuento
     let valorDescuento: number = 0;
@@ -47,13 +63,56 @@ export class PayMethodsComponent implements OnInit {
 
     }
 
+    if( dataUser.direcciones === undefined || dataUser.direcciones.length == 0 ){
+      alertSwal.messageError("Falta agregar al menos una dirección");
+
+      this.sharedMethodsService.changeRoute('/site/account/personal-info/add-address');
+      return;
+    }
+
+    if( dataUser.direcciones.length > 1 ){
+
+      for( let direccion of dataUser.direcciones ){
+
+        if( direccion.forInvoice ){
+          direccionFactu = {
+            titulo: direccion.titulo,
+            pais: direccion.pais,
+            departamento: direccion.departamento,
+            ciudad: direccion.ciudad,
+            barrio: direccion.barrio,
+            tipocalle: direccion.tipocalle,
+            callenumero: direccion.callenumero,
+            numero1: direccion.numero1,
+            numero2: direccion.numero2,
+            especificacionOpcional: direccion.especificacionOpcional
+          };
+
+        }
+      } 
+
+    }else{
+      direccionFactu = {
+        titulo: dataUser.direcciones[0].titulo,
+        pais: dataUser.direcciones[0].pais,
+        departamento: dataUser.direcciones[0].departamento,
+        ciudad: dataUser.direcciones[0].ciudad,
+        barrio: dataUser.direcciones[0].barrio,
+        tipocalle: dataUser.direcciones[0].tipocalle,
+        callenumero: dataUser.direcciones[0].callenumero,
+        numero1: dataUser.direcciones[0].numero1,
+        numero2: dataUser.direcciones[0].numero2,
+        especificacionOpcional: dataUser.direcciones[0].especificacionOpcional
+      };
+    }
+
     const reqBody: RequestPayment = {
       payservice: paymentService,
       vendedor: this.id_seller,
       telefono: this.authService.user.telefono,
       products: productPayment,
       productos: this.payData.productos,
-      direccionFacturacion: this.authService.user.direcciones[0],
+      direccionFacturacion: direccionFactu,
       subtotal: this.payData.subtotal || 0,
       descuento: valorDescuento,
       iva: this.payData.iva || 0,
@@ -61,12 +120,8 @@ export class PayMethodsComponent implements OnInit {
       total: this.payData.total || 0
     };
 
-    if( reqBody.direccionFacturacion === undefined ){
-      alertSwal.messageError("Falta agregar al menos una dirección");
-
-      
-    }
-
+    
+    console.log(reqBody)
     // this.paymentService.createPayment( reqBody ).subscribe(
     //   res => {
     //     console.log(res)

@@ -81,7 +81,7 @@
                         <div class="info-card">
                             <p class="title address">
                                 {{direccion.titulo | titlecase}} 
-                                <mat-icon *ngIf="direccion.forInvoice">local_shipping</mat-icon>
+                                <mat-icon *ngIf="direccion.forInvoice" matTooltip="Dirección de facturación">local_shipping</mat-icon>
                             </p>
                             <p class="value">
                                 <span>Barrio {{direccion.barrio | titlecase}} {{direccion.tipocalle | titlecase}} {{direccion.callenumero}} #{{direccion.numero1}}-{{direccion.numero2}}</span>

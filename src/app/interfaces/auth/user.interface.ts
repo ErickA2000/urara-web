@@ -24,7 +24,7 @@ export interface Idireccion{
     numero1: string,
     numero2: string,
     especificacionOpcional: string;
-    forInvoice: boolean;
+    forInvoice?: boolean;
 }
 
 export interface IDataUserOptional{

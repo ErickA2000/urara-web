@@ -78,7 +78,7 @@ export class UpdateAddressComponent implements OnInit, OnDestroy {
       this.addressForm.get('numero1')?.setValue(direccion.numero1);
       this.addressForm.get('numero2')?.setValue(direccion.numero2);
       this.addressForm.get('especificacionOpcional')?.setValue(direccion.especificacionOpcional);
-      this.addressForm.get('forInvoice')?.setValue(direccion.forInvoice);
+      this.addressForm.get('forInvoice')?.setValue(direccion.forInvoice!);
 
       this.searchDepartments( direccion.pais );
       this.searchCitiesOrMunicipalities( direccion.departamento );
