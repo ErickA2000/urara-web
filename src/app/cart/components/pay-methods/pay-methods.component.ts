@@ -8,6 +8,7 @@ import { PaymentService } from '../../services/payment.service';
 import alertSwal from 'src/app/utils/alertSwal';
 import { SharedMethodsService } from 'src/app/shared/services/shared-methods.service';
 import { Idireccion } from 'src/app/interfaces/auth/user.interface';
+import { DialogsService } from 'src/app/shared/services/dialogs.service';
 
 @Component({
   selector: 'app-pay-methods',
@@ -19,7 +20,7 @@ export class PayMethodsComponent implements OnInit {
   private id_seller = environment.ID_SELLER;
 
   constructor( @Inject(MAT_DIALOG_DATA) public payData: ItransferDataOrderSummary, private authService: AuthService, private paymentService: PaymentService,
-  private sharedMethodsService: SharedMethodsService) { }
+  private sharedMethodsService: SharedMethodsService, private dialogsService: DialogsService) { }
 
   logoMercadoPago = "assets/img/logos/mercado-pago.webp";
   logoPaypal = "assets/img/logos/paypal.png";
@@ -29,6 +30,9 @@ export class PayMethodsComponent implements OnInit {
   }
 
   createPayment( paymentService: "mercadopago" | "paypal" ){
+
+    this.dialogsService.openSpinner();
+
     let productPayment: ProductInPayment[] = [];
     const dataUser = this.authService.user;
     let direccionFactu: Idireccion = {
@@ -121,11 +125,18 @@ export class PayMethodsComponent implements OnInit {
     };
 
     
-    console.log(reqBody)
-    // this.paymentService.createPayment( reqBody ).subscribe(
-    //   res => {
-    //     console.log(res)
-    //   }
-    // )
+    this.paymentService.createPayment( reqBody ).subscribe(
+      res => {
+        
+        if( res.success ){
+          this.dialogsService.close();
+          window.open( res.data?.payUrl, "_self" );
+        }else{
+          alertSwal.messageError( res.message || "" );
+          this.dialogsService.close();
+        }
+
+      }
+    )
   }
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { RequestPayment } from '../interfaces/payment.interface';
+import { RequestPayment, ResponsePayment } from '../interfaces/payment.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -14,12 +14,12 @@ export class PaymentService {
 
   constructor( private http: HttpClient ) { }
 
-  createPayment( buy: RequestPayment ){
+  createPayment( buy: RequestPayment ): Observable<ResponsePayment>{
     const url = `${this.baseUrl}/payment/create-order`;
 
     const headers = new HttpHeaders().set('token', localStorage.getItem('token') || "");
 
-    return this.http.post( url, buy, { headers } )
+    return this.http.post<ResponsePayment>( url, buy, { headers } )
       .pipe(
         catchError( err => of(err.error) )
       )
