@@ -21,3 +21,10 @@ export const PAYMENT_METHODS = {
         es: "pse"
     }
 };
+
+export const PAYMENT_STATUS = {
+    APPROVED: "approved",
+    REJECTED: "rejected",
+    IN_PROCESS: "in_process",
+    PENDING: "pending"
+}

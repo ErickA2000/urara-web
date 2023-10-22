@@ -7,6 +7,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PayMethodsComponent } from './components/pay-methods/pay-methods.component';
+import { StatePaymentComponent } from './pages/state-payment/state-payment.component';
 
 
 
@@ -15,7 +16,8 @@ import { PayMethodsComponent } from './components/pay-methods/pay-methods.compon
     CartShoppingComponent,
     OrderSummaryComponent,
     ProductsComponent,
-    PayMethodsComponent
+    PayMethodsComponent,
+    StatePaymentComponent
   ],
   imports: [
     CommonModule,
