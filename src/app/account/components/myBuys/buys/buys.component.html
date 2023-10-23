@@ -24,6 +24,11 @@
     </mat-card-content>
 
     <mat-card-actions align="end">
+
+        <button mat-raised-button color="primary" (click)="donwloadPDF()" [disabled]="shopping?.idEnvio == undefined">
+            Descargar factura
+        </button>
+
         <button mat-raised-button color="primary" routerLink="/site/account/my-buys/purchase-detail/{{shopping?._id}}">
             Ver compra
         </button>

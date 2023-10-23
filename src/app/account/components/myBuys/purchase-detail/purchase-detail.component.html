@@ -36,9 +36,9 @@
                 <div class="purchase-detail">
 
                     <section class="envio mb-2">
-                        <p class="state">{{ purchase?.idEnvio?.estado | titlecase }}</p>
+                        <p class="state">Estado del envío: {{ purchase?.idEnvio?.estado | titlecase }}</p>
                         <!-- <p>Llegó el 10 de agosto</p> -->
-                        <p>Se entrego en Barrio {{ purchase?.direccionFacturacion?.barrio | titlecase}}, {{purchase?.direccionFacturacion?.tipocalle | titlecase}},
+                        <p>Se entrega en Barrio {{ purchase?.direccionFacturacion?.barrio | titlecase}}, {{purchase?.direccionFacturacion?.tipocalle | titlecase}},
                             {{purchase?.direccionFacturacion?.callenumero}} #{{purchase?.direccionFacturacion?.numero1}} - {{purchase?.direccionFacturacion?.numero2}}
                             {{ purchase?.direccionFacturacion?.ciudad | titlecase}},
                             {{ purchase?.direccionFacturacion?.departamento | titlecase}}, {{ purchase?.direccionFacturacion?.pais | titlecase}}

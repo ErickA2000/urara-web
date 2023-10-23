@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from "rxjs/operators";
-import { IResponse } from 'src/app/interfaces/global.interface';
+import { IRES, IResponse } from 'src/app/interfaces/global.interface';
 import encryptAndDecrypt from 'src/app/utils/encryptAndDecrypt';
 import { environment } from 'src/environments/environment';
 
@@ -59,4 +59,17 @@ export class ShoppingService {
         catchError( err => of(err.error) )
       )
   }
+
+  public getBillPDF( compraId: string ){
+
+    const url = `${this.bateUrl}/compra/factura-pdf/${compraId}`;
+
+    const headers = new HttpHeaders().set('token', localStorage.getItem('token') || "");
+
+    return this.http.get( url, { headers, responseType: 'blob', observe: 'response'  } )
+    .pipe(
+      catchError( err => of(err) )
+    )
+  }
+
 }
