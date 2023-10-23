@@ -95,6 +95,13 @@ export class PayMethodsComponent implements OnInit {
         }
       } 
 
+      if( direccionFactu.titulo === "" ){
+        this.dialogsService.close();
+        alertSwal.messageError( "No hay dirección de facturacion asignada" );
+        this.sharedMethodsService.changeRoute('/site/account');
+        return;
+      } 
+
     }else{
       direccionFactu = {
         titulo: dataUser.direcciones[0].titulo,
