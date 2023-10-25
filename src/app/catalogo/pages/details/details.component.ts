@@ -75,9 +75,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
       if( res.success ){
 
         this.prenda = res.data!;
-
+        
         this.productForm.get('productID')?.setValue( res.data?._id || "" );
-        this.productForm.get('descuento')?.setValue( res.data?.descuento || 1 );
+        this.productForm.get('descuento')?.setValue( res.data?.descuento || 0 );
 
         this.actiImg = this.prenda.imagenUrl[0];
         this.productForm.get("tallasCantidadPrecio.precio")?.setValue( this.prenda.tallasCantidadPrecio[0].precio );
@@ -207,7 +207,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   addToCart(){
     this.dialogsService.openSpinner();
 
-    const product = this.productForm.value as ProductoCart
+    const product = this.productForm.value as ProductoCart;
 
     this.cartService.addCart( { productos: product } ).subscribe(
       res => {

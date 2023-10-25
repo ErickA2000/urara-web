@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { CartService } from 'src/app/cart/services/cart.service';
 import alertSwal from 'src/app/utils/alertSwal';
 import { TransferDataLocalService } from '../../services/transfer-data-local.service';
+import { DialogsService } from '../../services/dialogs.service';
 
 @Component({
   selector: 'app-header',
@@ -12,9 +13,11 @@ import { TransferDataLocalService } from '../../services/transfer-data-local.ser
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+
+  logoUrara = "assets/img/logo_urara.png";
   
   constructor( @Inject(DOCUMENT) private document: Document, private authService: AuthService, private cartService: CartService,
-  private transferDataLocalService: TransferDataLocalService ){}
+  private transferDataLocalService: TransferDataLocalService, private dialogsService: DialogsService ){}
 
   isDarkMode: boolean = false;
   inSesion: boolean = false;
@@ -76,6 +79,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logout(){
+    this.dialogsService.openSpinner();
+
     this.authService.logout().subscribe( res => {
     
       if( !res.success ){
@@ -83,7 +88,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }else{
         this.transferDataLocalService.cartQuantity.emit(0);
       }
-
+      this.dialogsService.close();
 
     } );
   }

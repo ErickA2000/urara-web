@@ -27,6 +27,10 @@
                         <section class="state" *ngIf="statusPayment == allStatusPayment.PENDING">
                             <h4>Pago Pendiente</h4>
                         </section>
+
+                        <section class="state" *ngIf="statusPayment == 'null'">
+                            <h4>No se a realizado el pago</h4>
+                        </section>
                     </div>
 
                 </mat-card-content>

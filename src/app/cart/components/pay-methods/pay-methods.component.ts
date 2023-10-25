@@ -71,6 +71,7 @@ export class PayMethodsComponent implements OnInit {
       alertSwal.messageError("Falta agregar al menos una dirección");
 
       this.sharedMethodsService.changeRoute('/site/account/personal-info/add-address');
+      this.dialogsService.close();
       return;
     }
 

@@ -39,7 +39,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if( this.products && this.products.productos.length > 0 ){
-
+      
       for (let product of this.products.productos) {
   
         let stockColor: number = 0;
@@ -53,7 +53,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
             }
           }
         }
-  
+        
         this.addProduct({
           productID: product.productID._id,
           tempProduct: { ...product.productID, precio: product.tallasCantidadPrecio.precio },
@@ -68,7 +68,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
             nombre: product.tallasCantidadPrecio.idColor?.nombre || '',
             cantidad: stockColor
           }
-        })
+        });
+        
       }
     }
 
@@ -86,10 +87,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   private addProduct(product: IaddProduct) {
     let price: number = 0;
-    if( product.descuento != 0 ){
+    
+    if( product.descuento > 0 ){
       const valorAdescontar = product.tempProduct.precio * (product.descuento/100);
       price = product.tempProduct.precio - valorAdescontar;
-
     }else{
       price = product.tempProduct.precio;
     }
