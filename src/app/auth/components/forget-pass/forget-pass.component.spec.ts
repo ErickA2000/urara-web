@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ForgetPassComponent } from './forget-pass.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('ForgetPassComponent', () => {
   let component: ForgetPassComponent;
@@ -8,7 +11,12 @@ describe('ForgetPassComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ForgetPassComponent ]
+      declarations: [ ForgetPassComponent ],
+      imports: [
+        MaterialModule,
+        ReactiveFormsModule,
+    
+      ]
     })
     .compileComponents();
 

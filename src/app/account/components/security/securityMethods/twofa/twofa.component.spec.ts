@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TwofaComponent } from './twofa.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('TwofaComponent', () => {
   let component: TwofaComponent;
@@ -8,7 +10,11 @@ describe('TwofaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TwofaComponent ]
+      declarations: [ TwofaComponent ],
+      imports: [
+        MaterialModule,
+        ReactiveFormsModule
+      ]
     })
     .compileComponents();
 

@@ -10,7 +10,9 @@ describe('MyBuysComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ MyBuysComponent ],
-      imports: [ MaterialModule ]
+      imports: [ 
+        MaterialModule, 
+      ]
     })
     .compileComponents();
 

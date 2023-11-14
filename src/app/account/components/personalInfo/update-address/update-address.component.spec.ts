@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UpdateAddressComponent } from './update-address.component';
+import { MaterialModule } from 'src/app/material/material.module';
 
 describe('UpdateAddressComponent', () => {
   let component: UpdateAddressComponent;
@@ -8,7 +9,10 @@ describe('UpdateAddressComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UpdateAddressComponent]
+      declarations: [UpdateAddressComponent],
+      imports: [
+        MaterialModule
+      ]
     });
     fixture = TestBed.createComponent(UpdateAddressComponent);
     component = fixture.componentInstance;

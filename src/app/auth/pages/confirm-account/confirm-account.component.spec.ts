@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConfirmAccountComponent } from './confirm-account.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ConfirmAccountComponent', () => {
   let component: ConfirmAccountComponent;
@@ -8,7 +10,11 @@ describe('ConfirmAccountComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConfirmAccountComponent ]
+      declarations: [ ConfirmAccountComponent ],
+      imports: [
+        MaterialModule,
+        RouterTestingModule
+      ]
     })
     .compileComponents();
 

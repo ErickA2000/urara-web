@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PayMethodsComponent } from './pay-methods.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('PayMethodsComponent', () => {
   let component: PayMethodsComponent;
@@ -8,7 +10,15 @@ describe('PayMethodsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PayMethodsComponent ]
+      declarations: [ PayMethodsComponent ],
+      imports: [
+        MaterialModule,
+      ],
+      providers: [
+        {
+          provide: MAT_DIALOG_DATA, useValue: {}
+        }
+      ]
     })
     .compileComponents();
 

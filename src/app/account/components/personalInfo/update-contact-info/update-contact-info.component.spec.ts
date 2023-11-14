@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UpdateContactInfoComponent } from './update-contact-info.component';
+import { MaterialModule } from 'src/app/material/material.module';
 
 describe('UpdateContactInfoComponent', () => {
   let component: UpdateContactInfoComponent;
@@ -8,7 +9,10 @@ describe('UpdateContactInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UpdateContactInfoComponent ]
+      declarations: [ UpdateContactInfoComponent ],
+      imports: [
+        MaterialModule
+      ]
     })
     .compileComponents();
 

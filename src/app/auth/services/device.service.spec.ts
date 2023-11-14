@@ -6,7 +6,11 @@ describe('DeviceService', () => {
   let service: DeviceService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        
+      ]
+    });
     service = TestBed.inject(DeviceService);
   });
 

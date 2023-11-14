@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CartShoppingComponent } from './cart-shopping.component';
+import { MaterialModule } from 'src/app/material/material.module';
 
 describe('CartShoppingComponent', () => {
   let component: CartShoppingComponent;
@@ -8,7 +9,10 @@ describe('CartShoppingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CartShoppingComponent ]
+      declarations: [ CartShoppingComponent ],
+      imports: [
+        MaterialModule
+      ]
     })
     .compileComponents();
 

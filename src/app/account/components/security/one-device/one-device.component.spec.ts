@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OneDeviceComponent } from './one-device.component';
+import { MaterialModule } from 'src/app/material/material.module';
 
 describe('OneDeviceComponent', () => {
   let component: OneDeviceComponent;
@@ -8,7 +9,10 @@ describe('OneDeviceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OneDeviceComponent ]
+      declarations: [ OneDeviceComponent ],
+      imports: [
+        MaterialModule
+      ]
     })
     .compileComponents();
 

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BottonSheetFilterComponent } from './botton-sheet-filter.component';
+import { MaterialModule } from 'src/app/material/material.module';
 
 describe('BottonSheetFilterComponent', () => {
   let component: BottonSheetFilterComponent;
@@ -8,7 +9,10 @@ describe('BottonSheetFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BottonSheetFilterComponent ]
+      declarations: [ BottonSheetFilterComponent ],
+      imports: [
+        MaterialModule
+      ]
     })
     .compileComponents();
 

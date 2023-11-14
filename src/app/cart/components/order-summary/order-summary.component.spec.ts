@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrderSummaryComponent } from './order-summary.component';
+import { MaterialModule } from 'src/app/material/material.module';
 
 describe('OrderSummaryComponent', () => {
   let component: OrderSummaryComponent;
@@ -8,7 +9,10 @@ describe('OrderSummaryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OrderSummaryComponent ]
+      declarations: [ OrderSummaryComponent ],
+      imports: [
+        MaterialModule
+      ]
     })
     .compileComponents();
 
