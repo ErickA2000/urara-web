@@ -13,7 +13,7 @@ describe('SnackBarComponent', () => {
       declarations: [ SnackBarComponent ],
       providers: [
         { provide: MAT_SNACK_BAR_DATA, useValue: {} },
-        MatSnackBarRef
+        { provide: MatSnackBarRef, useValue: MatSnackBarRef }
       ],
       imports: [
         MaterialModule

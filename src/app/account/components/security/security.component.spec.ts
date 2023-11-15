@@ -18,6 +18,31 @@ describe('SecurityComponent', () => {
 
     fixture = TestBed.createComponent(SecurityComponent);
     component = fixture.componentInstance;
+
+    component.dataUser = {
+      _id: "string",
+      nombre: "string",
+      telefono: {
+        codigo_area: "",
+        numero: ""
+      },
+      email: "string",
+      username: "string",
+      emailverified: true,
+      roles: [
+        {
+          _id: "",
+          nombre: ""
+        }
+      ],
+      verify2fa: {
+        estado: false,
+        metodos: [],
+        code_access: ""
+      },
+      direcciones: []
+    }
+
     fixture.detectChanges();
   });
 

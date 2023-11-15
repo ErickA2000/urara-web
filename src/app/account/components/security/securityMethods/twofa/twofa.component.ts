@@ -14,7 +14,7 @@ import alertSwal from 'src/app/utils/alertSwal';
 })
 export class TwofaComponent implements OnInit, OnDestroy {
 
-  private dataUser?: IdataUser;
+  dataUser?: IdataUser;
 
   constructor( private sharedMethodsServi: SharedMethodsService, private authService: AuthService, private userService: UserService,
     private dialogosService: DialogsService, private fb: FormBuilder ) { 

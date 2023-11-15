@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PurchaseDetailComponent } from './purchase-detail.component';
 import { MaterialModule } from 'src/app/material/material.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('PurchaseDetailComponent', () => {
   let component: PurchaseDetailComponent;
@@ -10,7 +11,10 @@ describe('PurchaseDetailComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ PurchaseDetailComponent ],
-      imports: [ MaterialModule ]
+      imports: [ 
+        MaterialModule,
+        RouterTestingModule 
+      ]
     })
     .compileComponents();
 

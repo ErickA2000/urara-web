@@ -6,6 +6,7 @@ import { DeviceService } from 'src/app/auth/services/device.service';
 import { IDevice, IDeviceView, ISortDevices } from 'src/app/interfaces/auth/device.interface';
 import alertSwal from 'src/app/utils/alertSwal';
 import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-local.service';
+import { IdataUser } from 'src/app/interfaces/auth/user.interface';
 
 @Component({
   selector: 'app-security',
@@ -14,8 +15,12 @@ import { TransferDataLocalService } from 'src/app/shared/services/transfer-data-
 })
 export class SecurityComponent implements OnInit {
 
+  dataUser?: IdataUser;
+
   constructor( private dialogService: DialogsService, private authService: AuthService, private deviceService: DeviceService,
-    private transferDataLocalService: TransferDataLocalService ) { }
+    private transferDataLocalService: TransferDataLocalService ) { 
+      this.dataUser = this.authService.user;
+    }
 
   stateVerify2fa: {
     state: "activa" | "desactivado" | "",
@@ -35,7 +40,7 @@ export class SecurityComponent implements OnInit {
 
   ngOnInit(): void {
     
-    if( this.authService.user.verify2fa.estado ){
+    if( this.dataUser?.verify2fa.estado ){
       this.stateVerify2fa = {
         state: "activa",
         icon: "check_circle"

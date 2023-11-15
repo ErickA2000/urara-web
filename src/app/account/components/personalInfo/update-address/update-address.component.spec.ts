@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UpdateAddressComponent } from './update-address.component';
 import { MaterialModule } from 'src/app/material/material.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('UpdateAddressComponent', () => {
   let component: UpdateAddressComponent;
@@ -11,7 +12,8 @@ describe('UpdateAddressComponent', () => {
     TestBed.configureTestingModule({
       declarations: [UpdateAddressComponent],
       imports: [
-        MaterialModule
+        MaterialModule,
+        RouterTestingModule
       ]
     });
     fixture = TestBed.createComponent(UpdateAddressComponent);
