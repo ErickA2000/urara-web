@@ -67,7 +67,7 @@ export class PayMethodsComponent implements OnInit {
 
     }
 
-    if( dataUser.direcciones === undefined || dataUser.direcciones.length == 0 ){
+    if( !dataUser.direcciones || dataUser.direcciones.length == 0 ){
       alertSwal.messageError("Falta agregar al menos una dirección");
 
       this.sharedMethodsService.changeRoute('/site/account/personal-info/add-address');

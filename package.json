@@ -22,10 +22,10 @@
     "@angular/router": "^16.2.4",
     "@glidejs/glide": "^3.6.0",
     "bowser": "^2.11.0",
-    "crypto-js": "^4.1.1",
+    "crypto-js": "^4.2.0",
     "ngx-glide": "^15.0.0",
     "rxjs": "~7.5.0",
-    "sweetalert2": "^11.7.27",
+    "sweetalert2": "^11.10.0",
     "tslib": "^2.3.0",
     "zone.js": "^0.13.2"
   },

@@ -15,7 +15,7 @@ import { scrollToTop } from 'src/app/utils/functions';
 })
 export class HomeComponent implements OnInit {
 
-  linkBoxImg = "assets/img/home/1.png"
+  linkBoxImg = "assets/img/logo_urara.png"
 
   imgSlider: IsliderData[] = [ 
     {
@@ -23,15 +23,15 @@ export class HomeComponent implements OnInit {
       title: ""
     }, 
     {
-      link: "assets/img/1273799.png",
+      link: "assets/img/img-1.png",
       title: ""
     }, 
     {
-      link: "assets/img/1273800.png",
+      link: "assets/img/img-2.png",
       title: ""
     }, 
     {
-      link: "assets/img/1273802.png",
+      link: "assets/img/img-3.png",
       title: ""
     }
   ];
